@@ -1,3 +1,4 @@
+const loadLevel=require('./level_routes.cjs');
 /* Actual Web-export tests. The only game bridge is read-only QA telemetry.
    Course traversal uses mouse motion plus W/Space; no position setters or teleports. */
 const { chromium } = require('playwright');
@@ -27,9 +28,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Title starts with the mouse released');
   await shot('01-title.png');
   await click(200,437);await page.keyboard.type('Pip',{delay:80});await sleep(180);check((await read()).player_name==='Pip','Optional name accepts ordinary typed characters');
-  await click(220,490);check((await read()).hoodie==='e58f76','Coral hoodie updates the character');await shot('07-customization.png');
-  await click(340,490);check((await read()).hoodie==='91b4d2','Sky hoodie updates the character');
-  await click(100,490);check((await read()).hoodie==='f3cc58','Sunshine hoodie restores the yellow outfit');
+  check((await read()).hoodie==='f3cc58','The default outfit is visible on the title screen');
   await click(220,565);await state('playing');await sleep(600);
   check(await page.evaluate(()=>!!document.pointerLockElement),'Play captures the mouse from a deliberate click');
   await shot('02-gameplay.png');
@@ -59,7 +58,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await restart();check((await read()).falls===0&&(await read()).pad===0,'R resets failures and progress');
   // Aim the camera at each center, then traverse using ordinary input.
   let mx=640,my=360;await page.mouse.move(mx,my);await sleep(180);
-  const route=[[0,-5.35],[1.5,-9.8],[3.8,-14.4],[4.3,-19.3],[2,-23.8],[-.2,-28.4],[1.7,-33.1],[4.3,-37.5],[5.5,-43.8]];
+  const level=loadLevel('sunlit_lagoon'),route=[...level.pads.slice(1),level.flag];
   for(let index=0;index<route.length;index++){
    const target=route[index];s=await read();assert.equal(s.state,'playing');
    const dx=target[0]-s.position[0],dz=target[1]-s.position[2],distance=Math.hypot(dx,dz),angle=Math.atan2(-dx,-dz);
@@ -67,10 +66,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
    for(let i=0;i<steps;i++){mx+=pixels/steps;await page.mouse.move(mx,my);await sleep(18)}
    await sleep(150);await page.keyboard.down('w');await sleep(Math.max(60,(distance-4.3)/5.4*1000));await page.keyboard.press('Space');await sleep(750);await page.keyboard.up('w');await sleep(260);
    s=await read();landings.push({target:index+1,...s});check(s.falls===0&&s.grounded,'Normal-input landing '+(index+1)+' succeeds');
-   if(index<8)check(s.pad===index+1,'HUD correctly identifies pad '+(index+1));
+   if(index<level.pads.length-1)check(s.pad===index+1,'HUD correctly identifies pad '+(index+1));
    if(index===0)await shot('03-first-landing.png');if(index===1)await shot('04-pad-two.png');if(index===4)await shot('05-mid-course.png');
   }
-  await state('won');s=await read();check(s.victories===1&&s.jumps===9&&s.falls===0,'Nine-jump course completes with zero falls');check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Victory releases the mouse');await shot('06-victory.png');
+  await state('won');s=await read();check(s.victories===1&&s.jumps===route.length&&s.falls===0,'Extended course completes with zero falls');check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Victory releases the mouse');await shot('06-victory.png');
   const won=await read();await page.keyboard.press('Space');await sleep(250);s=await read();check(s.victories===1&&JSON.stringify(s.position)===JSON.stringify(won.position),'Victory fires once and freezes gameplay');
   await click(640,350);await state('playing');await sleep(350);s=await read();check(s.level===2&&s.has_bat&&s.frogs_remaining===6&&s.swings===0,'Next level button starts Frog river with the bat and six frogs');
   check(s.player_name==='Pip'&&s.hoodie==='f3cc58','Next level preserves the customized adventurer');

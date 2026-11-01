@@ -1,3 +1,4 @@
+const loadLevel=require('./level_routes.cjs');
 /* Real random outcomes, normal input only; no seed override or game-state setters. */
 const {chromium}=require('playwright');
 const fs=require('node:fs/promises');
@@ -29,14 +30,16 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  };
  try{
   await page.goto(process.env.GAME_URL||'http://127.0.0.1:8765/?qa');await page.waitForSelector('#loading',{state:'detached'});await state('title');
-  await click(1110,638);let s=await read();check(s.level===3&&s.chance_pads.length===2,'Third title option selects Lucky lagoon');await shot('28-lucky-title.png');
+  await click(1110,638);let s=await read();check(s.level===3&&s.chance_pads.length===7,'Third title option selects Lucky lagoon');await shot('28-lucky-title.png');
   await click(220,565);await state('playing');await sleep(550);await page.mouse.move(mx,my);await sleep(250);await shot('29-yellow-frog-spawn.png');
   check((await read()).chance_rolls===0,'Yellow pads remain unresolved until contact');
   // Complete the permanent route using ordinary controls, before sampling luck.
   // Telemetry is read-only; no seeds, forced outcomes, or teleports in the browser.
-  s=await read();check(s.bypass_pads.length===6,'Six smaller permanent pads offer a path around both yellow frogs');
+  s=await read();check(s.bypass_pads.length===16,'Small permanent pads offer a path around every yellow frog');
   const bypass=s.bypass_pads.map(p=>[p.position[0],p.position[2]]);
-  const skillRoute=[...bypass.slice(0,3),[1.8,-11.2],...bypass.slice(3),[2,-22.2],[2,-28.7]];
+  const level=loadLevel('lucky_lagoon');
+  const safeTail=[];for(let branch=0;branch<5;branch++){safeTail.push(...bypass.slice(6+branch*2,8+branch*2));const next=6+branch*2;if(next<level.pads.length)safeTail.push(level.pads[next]);}
+  const skillRoute=[...bypass.slice(0,3),level.pads[2],...bypass.slice(3,6),level.pads[4],...safeTail,level.flag];
   for(let i=0;i<skillRoute.length;i++){
    await precisionJumpTo(skillRoute[i]);s=await read();skillLandings.push(s);
    check(s.grounded&&s.falls===0&&Math.hypot(s.position[0]-skillRoute[i][0],s.position[2]-skillRoute[i][1])<1.4,'Skill-route landing '+(i+1)+' reaches solid ground without a retry');
@@ -44,18 +47,18 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    if(i===1){await shot('49-skill-route-small-pads.png');await page.keyboard.press('Escape');await state('paused');const before=(await read()).position;await sleep(500);check(JSON.stringify((await read()).position)===JSON.stringify(before),'Pause holds the player on a small precision pad');await click(640,350);await state('playing');await sleep(500)}
    if(i===4)await shot('50-skill-route-second-branch.png');
   }
-  check(s.state==='won'&&s.victories===1&&s.chance_rolls===0&&s.falls===0,'A full nine-jump crossing wins with zero random rolls and zero falls');
+  check(s.state==='won'&&s.victories===1&&s.chance_rolls===0&&s.falls===0,'A full extended solid crossing wins with zero random rolls and zero falls');
   await shot('51-skill-route-victory.png');
   await click(640,350);await state('playing');await sleep(550);
-  const route=[[0,-5.7],[1.8,-11.2],[.2,-16.7],[2,-22.2],[2,-28.7]];
+  const route=[...level.pads.slice(1,5),...safeTail,level.flag];
   for(let attempt=1;attempt<=24&&!won;attempt++){
    const before=await read();const log={attempt,landings:[]};attempts.push(log);
    for(let i=0;i<route.length;i++){
-    await jumpTo(route[i]);s=await read();log.landings.push(s);
+    await precisionJumpTo(route[i]);s=await read();log.landings.push(s);
     if(s.falling_through||s.falls>before.falls||s.state==='splash'){
      await state('splash');s=await read();
      sawSink=true;check(s.chance_sinks===before.chance_sinks+1&&s.falls===before.falls+1,'An unlucky yellow landing causes one water fall');await shot('30-unlucky-pad.png');
-     await state('playing');await sleep(350);s=await read();check(s.chance_pads.every(p=>!p.resolved&&!p.collapsed),'Retry resets both yellow pads for fresh rolls');break;
+     await state('playing');await sleep(350);s=await read();check(s.chance_pads.every(p=>!p.resolved&&!p.collapsed),'Retry resets all yellow pads for fresh rolls');break;
     }
     check(s.grounded&&s.health===100&&!s.poisoned,'Level 3 landing '+(i+1)+' is supported and never poisonous');
     if(i===0||i===2){
@@ -65,16 +68,16 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
     if(s.state==='won'){won=true;break}
    }
   }
-  check(won,'A complete five-gap Lucky lagoon crossing succeeds with real random rolls');
-  await shot('32-lucky-victory.png');s=await read();check(s.victories===1&&s.chance_pads.every(p=>p.resolved&&!p.collapsed),'Victory follows two held yellow pads');
-  await click(640,350);await state('playing');await sleep(350);s=await read();check(s.level===3&&s.chance_rolls===0&&s.chance_pads.every(p=>!p.resolved),'Final-level replay resets both outcomes and counters');
+  check(won,'A complete extended shortcut Lucky lagoon crossing succeeds with real random rolls');
+  await shot('32-lucky-victory.png');s=await read();check(s.victories===1&&s.chance_pads.filter(p=>p.pad===1||p.pad===3).every(p=>p.resolved&&!p.collapsed),'Victory follows both held shortcut pads');
+  await click(640,350);await state('playing');await sleep(350);s=await read();check(s.level===3&&s.chance_rolls===0&&s.chance_pads.every(p=>!p.resolved),'Final-level replay resets all outcomes and counters');
   // A first-try win is valid. Sample fresh attempts to also exercise browser sinking.
   for(let probe=0;probe<12&&!sawSink;probe++){
    sinkProbes++;const before=await read();await jumpTo(route[0]);s=await read();
    if(s.falling_through||s.falls>before.falls||s.state==='splash'){
     await state('splash');s=await read();sawSink=true;
     check(s.chance_sinks===before.chance_sinks+1&&s.falls===before.falls+1,'An unlucky yellow landing causes one water fall');await shot('30-unlucky-pad.png');
-    await state('playing');await sleep(350);s=await read();check(s.chance_pads.every(p=>!p.resolved&&!p.collapsed),'Retry resets both yellow pads for fresh rolls');
+    await state('playing');await sleep(350);s=await read();check(s.chance_pads.every(p=>!p.resolved&&!p.collapsed),'Retry resets all yellow pads for fresh rolls');
    }else{check(s.grounded&&s.chance_pads[0].resolved&&!s.chance_pads[0].collapsed,'A fresh yellow-pad roll may also stay solid');await page.keyboard.press('r');await sleep(400)}
   }
   await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.setViewportSize({width:1024,height:640});await sleep(250);await shot('33-three-levels-small.png');

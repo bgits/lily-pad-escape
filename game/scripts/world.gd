@@ -191,8 +191,11 @@ func build(data: LilyLevel) -> void:
 			var center := Vector3(side * rng.randf_range(18, 27), 0, 12 - i * 9)
 			make_scenic_island(center, rng.randf_range(3, 6), rng.randf_range(2, 5))
 	for i in 10:
-		var center := Vector3(-44 + i * 10, 0, -82 - rng.randf_range(0, 12))
+		var center := Vector3(-44 + i * 10, 0, minf(-82, level.island_center.z - 30) - rng.randf_range(0, 12))
 		make_scenic_island(center, rng.randf_range(5, 9), rng.randf_range(5, 11))
+	# Foreground collision must not shift when route pads are added or resized.
+	var scenery_state := rng.state
+	rng.seed = 8142
 	# Foreground rock/reed groups frame the starting pad without blocking it.
 	for center in [Vector3(-8, 0, 0), Vector3(8, 0, 3), Vector3(-8, 0, -12), Vector3(12, 0, -23)]:
 		for j in 5:
@@ -206,6 +209,7 @@ func build(data: LilyLevel) -> void:
 			else:
 				block(scenery,rock_center,rock_size,rock_color)
 			reeds(pos + Vector3(0.5, 0, 0.5), 4)
+	rng.state = scenery_state
 	for i in 20:
 		var center := Vector3(rng.randf_range(-80,80), rng.randf_range(22,32), rng.randf_range(-100,-20))
 		for j in 4:

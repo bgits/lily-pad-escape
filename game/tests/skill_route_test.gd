@@ -54,15 +54,15 @@ func run() -> void:
 	game.select_level(2)
 	game.start_run()
 	await frames(12)
-	check(game.world.bypass_pads.size() == 6,"Lucky Lagoon has six permanent precision platforms")
+	check(game.world.bypass_pads.size() == 16,"Lucky Lagoon has sixteen permanent precision platforms")
 	check(not game.ui.objective_label.visible,"HUD does not require completing yellow pads")
-	# Worst-case fixture: both random supports have already sunk. No RNG override
+	# Worst-case fixture: all random supports have already sunk. No RNG override
 	# or rescue is used during the crossing, and falling would reset this fixture.
 	for pad in game.world.chance_pads:
 		pad.resolved = true
 		pad.collapse()
 	await frames(36)
-	check(game.world.chance_pads.all(func(pad): return pad.collapsed and not pad.visible and pad.collision_layer == 0),"Both yellow pads are absent before the first jump")
+	check(game.world.chance_pads.all(func(pad): return pad.collapsed and not pad.visible and pad.collision_layer == 0),"All yellow pads are absent before the first jump")
 	var route: Array[Vector2] = []
 	for p in game.level.bypass_pads.slice(0,3):
 		route.append(Vector2(p.x,p.y))
@@ -72,6 +72,15 @@ func run() -> void:
 		route.append(Vector2(p.x,p.y))
 	rest = game.level.pads[4]
 	route.append(Vector2(rest.x,rest.y))
+	for branch in 5:
+		for p in game.level.bypass_pads.slice(6 + branch*2,8 + branch*2):
+			route.append(Vector2(p.x,p.y))
+		var next_index := 6 + branch*2
+		if next_index < game.level.pads.size():
+			var p: Vector3 = game.level.pads[next_index]
+			route.append(Vector2(p.x,p.y))
+	var shore: Vector3 = game.level.fireflies[2]
+	route.append(Vector2(shore.x,shore.z))
 	route.append(Vector2(game.level.flag_position.x,game.level.flag_position.z))
 	for i in route.size():
 		await jump_to(route[i])
@@ -85,9 +94,10 @@ func run() -> void:
 			await frames(30)
 			check(player.position.is_equal_approx(before),"A small bypass pad supports a paused player")
 			game.resume()
-	check(game.state == "won" and game.victories == 1,"The entire nine-jump skill route wins with both yellow pads missing")
+	check(game.profile.has_firefly(2,2),"The relocated Lucky Lagoon shore firefly is reachable")
+	check(game.state == "won" and game.victories == 1,"The entire extended skill route wins with all yellow pads missing")
 	check(game.chance_rolls == 0 and game.falls == 0,"Winning the skill route needs no favorable rolls or retries")
-	check(game.world.chance_pads.all(func(pad): return pad.collapsed),"Neither yellow support was restored during the winning run")
+	check(game.world.chance_pads.all(func(pad): return pad.collapsed),"No yellow support was restored during the winning run")
 	check(game.health == 100 and not game.poisoned,"The new route does not introduce poison or health damage")
 	game.start_run()
 	await frames(10)

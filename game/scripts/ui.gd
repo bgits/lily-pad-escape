@@ -27,7 +27,6 @@ var progress_label: Label
 var toast: Label
 var victory_detail: Label
 var mute_button: Button
-var swatches: Array[Button] = []
 var muted := false
 var panels: Array[Control] = []
 var level_label: Label
@@ -177,25 +176,7 @@ func make_start() -> void:
 	customize_button = button(adventurer_row,"Customize",func():customize_requested.emit())
 	customize_button.custom_minimum_size = Vector2(142,46)
 	customize_button.add_theme_font_size_override("font_size",16)
-	var colors := HBoxContainer.new()
-	colors.add_theme_constant_override("separation",10)
-	stack.add_child(colors)
-	for i in 3:
-		var color: Color = [GOLD,Color("e58f76"),Color("91b4d2")][i]
-		var b := Button.new()
-		b.text = ["Sunshine", "Coral", "Sky"][i]
-		b.custom_minimum_size = Vector2(110,36)
-		b.add_theme_font_size_override("font_size",14)
-		b.add_theme_color_override("font_color",INK)
-		b.add_theme_color_override("font_hover_color",INK)
-		b.add_theme_color_override("font_pressed_color",INK)
-		b.add_theme_stylebox_override("normal",style(color,7,INK if i == 0 else Color.TRANSPARENT))
-		b.add_theme_stylebox_override("hover",style(color.lightened(0.14),7,INK))
-		b.add_theme_stylebox_override("focus",style(Color.TRANSPARENT,7,INK))
-		b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		b.pressed.connect(func(): select_color(i))
-		colors.add_child(b)
-		swatches.append(b)
+	gap(stack,36)
 	gap(stack,13)
 	button(stack,"Let's hop!",func(): play_requested.emit(),true)
 	gap(stack,13)
@@ -265,9 +246,6 @@ func select_color(index: int) -> void:
 func sync_outfit(outfit: Dictionary) -> void:
 	var index: int = outfit.top_color
 	selected_color = index
-	var palette := [GOLD,Color("e58f76"),Color("91b4d2"),MOONFLOWER]
-	for i in 3:
-		swatches[i].add_theme_stylebox_override("normal",style(palette[i],7,INK if i == index else Color.TRANSPARENT))
 	secret_equip.text = "Moonflower · equipped" if index == 3 else "Wear Moonflower hoodie"
 	secret_equip.add_theme_stylebox_override("normal",style(MOONFLOWER,7,INK if index == 3 else Color.TRANSPARENT))
 

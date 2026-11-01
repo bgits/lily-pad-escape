@@ -7,11 +7,30 @@ script = ExtResource("1")
 drift_pad = Vector3(3.9, -5.35, 1.2)
 drift_travel = Vector3(3.2, 0, 0)
 exploration_pads = Array[Vector3]([Vector3(-2.2, -12.3, 1.15)])
-fireflies = Array[Vector3]([Vector3(3.9, 1.35, -5.35), Vector3(-2.2, 1.35, -12.3), Vector3(7.8, 1.35, -42.6)])
-pads = Array[Vector3]([Vector3(0, 0, 2.7), Vector3(0, -5.35, 1.9), Vector3(1.5, -9.8, 1.85), Vector3(3.8, -14.4, 1.85), Vector3(4.3, -19.3, 1.8), Vector3(2, -23.8, 1.85), Vector3(-0.2, -28.4, 1.8), Vector3(1.7, -33.1, 1.85), Vector3(4.3, -37.5, 1.9)])
+fireflies = Array[Vector3]([Vector3(3.9, 1.35, -5.35), Vector3(-2.2, 1.35, -12.3), Vector3(7.8, 1.35, -84.3)])
+pads = Array[Vector3]([
+	Vector3(0, 0, 2.7),
+	Vector3(0, -5.35, 1.9),
+	Vector3(1.5, -9.8, 1.85),
+	Vector3(3.8, -14.4, 1.85),
+	Vector3(4.3, -19.3, 1.8),
+	Vector3(2, -23.8, 1.85),
+	Vector3(-0.2, -28.4, 1.8),
+	Vector3(1.7, -33.1, 1.85),
+	Vector3(4.3, -37.5, 1.9),
+	Vector3(5.5, -42.2, 1.95),
+	Vector3(3.8, -46.9, 1.9),
+	Vector3(1.2, -51.3, 1.85),
+	Vector3(-1, -55.9, 1.9),
+	Vector3(-2, -60.7, 1.85),
+	Vector3(0, -65.3, 1.9),
+	Vector3(2.4, -69.8, 1.85),
+	Vector3(4.5, -74.4, 1.9),
+	Vector3(5.5, -79.2, 2.05)
+])
 spawn = Vector3(0, 0.68, 0.55)
-island_center = Vector3(5.5, 0, -43.5)
+island_center = Vector3(5.5, 0, -85.2)
 island_radius = 3.35
-flag_position = Vector3(5.5, 0.6, -43.8)
+flag_position = Vector3(5.5, 0.6, -85.5)
 water_height = 0.04
 surface_height = 0.6

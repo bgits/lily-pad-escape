@@ -8,12 +8,31 @@ title = "Frog river"
 drift_pad = Vector3(-4, -5.7, 1.2)
 drift_travel = Vector3(-3.2, 0, 0)
 exploration_pads = Array[Vector3]([Vector3(5.3, -15.7, 1.15)])
-fireflies = Array[Vector3]([Vector3(-4, 1.35, -5.7), Vector3(5.3, 1.35, -15.7), Vector3(-2.2, 1.35, -36.4)])
+fireflies = Array[Vector3]([Vector3(-4, 1.35, -5.7), Vector3(5.3, 1.35, -15.7), Vector3(-2.2, 1.35, -91.4)])
 has_bat = true
-frog_pads = Array[int]([1, 2, 3, 4, 5, 6])
-decoy_pads = Array[Vector3]([Vector3(4.8, -3.4, 1.75), Vector3(-6.4, -13, 1.8), Vector3(8.2, -22.8, 1.8), Vector3(-5.9, -29.1, 1.8)])
-pads = Array[Vector3]([Vector3(0, 0, 2.7), Vector3(0, -5.7, 2.15), Vector3(-1.8, -10.7, 2.15), Vector3(0.8, -15.7, 2.15), Vector3(3.6, -20.7, 2.15), Vector3(1.5, -25.7, 2.15), Vector3(-1, -30.7, 2.15)])
+frog_pads = Array[int]([1, 2, 6, 10, 14, 17])
+decoy_pads = Array[Vector3]([Vector3(4.8, -3.4, 1.75), Vector3(-5.5, -17, 1.8), Vector3(5.8, -48, 1.8), Vector3(-6.2, -78, 1.8)])
+pads = Array[Vector3]([
+	Vector3(0, 0, 2.7),
+	Vector3(0, -5.7, 2.15),
+	Vector3(-1.8, -10.7, 2.15),
+	Vector3(0.8, -15.7, 2.15),
+	Vector3(3.6, -20.7, 2.15),
+	Vector3(1.5, -25.7, 2.15),
+	Vector3(-1, -30.7, 2.15),
+	Vector3(0.8, -35.7, 2.15),
+	Vector3(3.2, -40.7, 2.15),
+	Vector3(1.2, -45.7, 2.15),
+	Vector3(-1.2, -50.7, 2.15),
+	Vector3(-3, -55.7, 2.15),
+	Vector3(-1.2, -60.7, 2.15),
+	Vector3(1.2, -65.7, 2.15),
+	Vector3(3.2, -70.7, 2.15),
+	Vector3(1.2, -75.7, 2.15),
+	Vector3(-1.2, -80.7, 2.15),
+	Vector3(0, -85.7, 2.15)
+])
 spawn = Vector3(0, 0.68, 0.55)
-island_center = Vector3(0, 0, -37.1)
+island_center = Vector3(0, 0, -92.1)
 island_radius = 3.35
-flag_position = Vector3(0, 0.6, -37.4)
+flag_position = Vector3(0, 0.6, -92.4)

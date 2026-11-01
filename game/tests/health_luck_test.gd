@@ -146,7 +146,7 @@ func run() -> void:
 	game.select_level(2)
 	game.start_run()
 	await frames(8)
-	check(game.world.chance_pads.size() == 2 and game.world.frogs.is_empty() and not player.has_bat,"Level 3 starts with two yellow chance markers and no combat enemies")
+	check(game.world.chance_pads.size() == 7 and game.world.frogs.is_empty() and not player.has_bat,"Level 3 starts with seven yellow chance markers and no combat enemies")
 	check(not game.ui.health_box.visible and game.health == 100 and not game.poisoned,"Entering Level 3 clears poison and hides combat-only health UI")
 	var pad: LilyDecoyPad = game.world.chance_pads[0]
 	check(pad.marker.is_chance and pad.marker.collision_layer == 0,"Yellow frogs are visible chance markers without solid footholds")
@@ -197,7 +197,7 @@ func run() -> void:
 	game.win()
 	game.next_level()
 	await frames(8)
-	check(game.level_index == 2 and game.state == "playing" and game.world.chance_pads.size() == 2,"Level 2 victory transitions into a fresh Level 3")
+	check(game.level_index == 2 and game.state == "playing" and game.world.chance_pads.size() == 7,"Level 2 victory transitions into a fresh Level 3")
 	print("RESULT: %d passed, %d failed" % [passed,failures.size()])
 	game.stop_sounds()
 	await frames(8)
