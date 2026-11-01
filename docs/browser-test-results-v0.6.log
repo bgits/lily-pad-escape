@@ -1,0 +1,204 @@
+PASS: Title starts with the mouse released
+PASS: Optional name accepts ordinary typed characters
+PASS: Coral hoodie updates the character
+PASS: Sky hoodie updates the character
+PASS: Sunshine hoodie restores the yellow outfit
+PASS: Play captures the mouse from a deliberate click
+PASS: Left click pauses without needing a keyboard
+PASS: Held Space causes one jump without automatic repeats
+PASS: Browser diagonal and straight speeds are both 5.4 m/s
+PASS: Escape freezes an airborne jump
+PASS: Pause releases the mouse
+PASS: Mute button mutes the audio bus
+PASS: Sound button restores audio
+PASS: Resume continues the jump and lands safely
+PASS: Losing focus pauses and does not leave a movement key stuck
+PASS: Losing pointer lock pauses the game
+PASS: Water fall 1 triggers exactly one failure
+PASS: Water fall 1 returns to the starting pad
+PASS: Water fall 1 retries in about one second
+PASS: Water fall 2 triggers exactly one failure
+PASS: Water fall 2 returns to the starting pad
+PASS: Water fall 2 retries in about one second
+PASS: Water fall 3 triggers exactly one failure
+PASS: Water fall 3 returns to the starting pad
+PASS: Water fall 3 retries in about one second
+PASS: R resets failures and progress
+PASS: Normal-input landing 1 succeeds
+PASS: HUD correctly identifies pad 1
+PASS: Normal-input landing 2 succeeds
+PASS: HUD correctly identifies pad 2
+PASS: Normal-input landing 3 succeeds
+PASS: HUD correctly identifies pad 3
+PASS: Normal-input landing 4 succeeds
+PASS: HUD correctly identifies pad 4
+PASS: Normal-input landing 5 succeeds
+PASS: HUD correctly identifies pad 5
+PASS: Normal-input landing 6 succeeds
+PASS: HUD correctly identifies pad 6
+PASS: Normal-input landing 7 succeeds
+PASS: HUD correctly identifies pad 7
+PASS: Normal-input landing 8 succeeds
+PASS: HUD correctly identifies pad 8
+PASS: Normal-input landing 9 succeeds
+PASS: Nine-jump course completes with zero falls
+PASS: Victory releases the mouse
+PASS: Victory fires once and freezes gameplay
+PASS: Next level button starts Frog river with the bat and six frogs
+PASS: Next level preserves the customized adventurer
+PASS: Returning to the lagoon starts a fresh session
+PASS: Pause menu Start over works
+PASS: Back to title works
+PASS: Small desktop viewport has no page overflow
+PASS: Browser console has no script or engine errors
+RESULT: 53 checks passed. FPS samples: [
+  60, 60, 60, 60,
+  60, 60, 60, 60
+] Environment: {"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36","renderer":"ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)","viewport":[1280,720],"devicePixelRatio":1}
+PASS: Title shortcut selects Frog river with six frogs and a bat
+PASS: Starting Level 2 does not spend an attack
+PASS: Four red-frog decoys are visible beside the safe route
+PASS: A real arrow-key jump onto the red-frog pad collapses it
+PASS: The trap causes one water fall and cannot be escaped by jumping again
+PASS: Red-frog trap contact does not count as defeating a green frog
+PASS: Pause freezes a collapsing decoy during the splash
+PASS: Retry restores the decoys and normal movement at spawn
+PASS: Restart clears trap failures
+PASS: Holding left click produces one swing, no distant damage, and no pause
+PASS: Holding F does not automatically repeat a swing
+PASS: Escape freezes the bat swing and character
+PASS: Resume completes the frozen swing
+PASS: Landing on a green-frog pad applies poison
+PASS: Poison continuously drains the visible health percentage
+PASS: Pause freezes poison damage
+PASS: Defeating the poisoning frog fully heals and cures the character
+PASS: A different living frog can poison again
+PASS: Zero health causes a distinct poison death once
+PASS: A dead character cannot heal with a late attack
+PASS: Poison retry restores full health and preserves defeated frogs
+LANDING 1 {"arm_length":7.59999990463257,"attack_direction":[0,0,-1],"avatar_yaw":0,"camera":[0,4.79991912841797,2.3619704246521],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":true,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":true,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":true,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":true,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":true,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":6,"grounded":true,"has_bat":true,"health":95.6666666666667,"hits":0,"hoodie":"f3cc58","jumps":1,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":1,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":1,"poisoned":true,"position":[0,0.600939989089966,-4.57750558853149],"seconds":1.9,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":0,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":0}
+PASS: Frog pad 1 reached with normal movement
+PASS: Bat defeats frog 1 and updates the counter once
+PASS: Defeating frog 1 restores full health
+LANDING 2 {"arm_length":7.59999990463257,"attack_direction":[0,0,-1],"avatar_yaw":0.275599926710129,"camera":[0.437308669090271,4.79981708526611,-2.96069145202637],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":false,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":true,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":true,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":true,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":true,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":5,"grounded":true,"has_bat":true,"health":96.3333333333334,"hits":1,"hoodie":"f3cc58","jumps":2,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":2,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":2,"poisoned":true,"position":[-1.45109128952026,0.600837528705597,-9.63828659057617],"seconds":4.46666666666666,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":1,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":0.2756}
+PASS: Frog pad 2 reached with normal movement
+PASS: Bat defeats frog 2 and updates the counter once
+PASS: Defeating frog 2 restores full health
+LANDING 3 {"arm_length":7.59999990463257,"attack_direction":[-0.272124260663986,0,-0.962262094020844],"avatar_yaw":-0.343199968338013,"camera":[-1.97995376586914,4.79991245269775,-8.10744476318359],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":false,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":false,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":true,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":true,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":true,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":4,"grounded":true,"has_bat":true,"health":95.0000000000001,"hits":2,"hoodie":"f3cc58","jumps":3,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":3,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":3,"poisoned":true,"position":[0.355195015668869,0.60093355178833,-14.6422290802002],"seconds":6.91666666666665,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":2,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":-0.3432}
+PASS: Frog pad 3 reached with normal movement
+PASS: Bat defeats frog 3 and updates the counter once
+PASS: Defeating frog 3 restores full health
+LANDING 4 {"arm_length":7.59999990463257,"attack_direction":[0.33650216460228,0,-0.941682696342468],"avatar_yaw":-0.475799977779388,"camera":[-0.162283658981323,4.79981803894043,-13.6021137237549],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":false,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":false,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":false,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":true,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":true,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":3,"grounded":true,"has_bat":true,"health":96.6666666666667,"hits":3,"hoodie":"f3cc58","jumps":4,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":4,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":4,"poisoned":true,"position":[3.01634097099304,0.600837528705597,-19.7707977294922],"seconds":9.25000000000004,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":3,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":-0.4758}
+PASS: Frog pad 4 reached with normal movement
+PASS: Bat defeats frog 4 and updates the counter once
+PASS: Defeating frog 4 restores full health
+LANDING 5 {"arm_length":7.59999990463257,"attack_direction":[0.458049714565277,0,-0.888926565647125],"avatar_yaw":0.239199981093407,"camera":[3.45226693153381,4.79981660842896,-17.926305770874],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":false,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":false,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":false,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":false,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":true,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":2,"grounded":true,"has_bat":true,"health":94.6666666666667,"hits":4,"hoodie":"f3cc58","jumps":5,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":5,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":5,"poisoned":true,"position":[1.8081282377243,0.600837051868439,-24.6681995391846],"seconds":11.7000000000002,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":4,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":0.2392}
+PASS: Frog pad 5 reached with normal movement
+PASS: Bat defeats frog 5 and updates the counter once
+PASS: Defeating frog 5 restores full health
+LANDING 6 {"arm_length":7.59999990463257,"attack_direction":[-0.236925467848778,0,-0.971527814865112],"avatar_yaw":0.421199977397919,"camera":[2.34115934371948,4.79985427856445,-23.4338150024414],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[{"collapsed":false,"position":[4.80000019073486,0,-3.40000009536743],"red_frog":true},{"collapsed":false,"position":[-6.40000009536743,0,-13],"red_frog":true},{"collapsed":false,"position":[8.19999980926514,0,-22.7999992370605],"red_frog":true},{"collapsed":false,"position":[-5.90000009536743,0,-29.1000003814697],"red_frog":true}],"falling_through":false,"falls":0,"fps":60,"frogs":[{"alive":false,"pad":1,"position":[0,0.600000023841858,-5.94999980926514]},{"alive":false,"pad":2,"position":[-1.79999995231628,0.600000023841858,-10.9499998092651]},{"alive":false,"pad":3,"position":[0.800000011920929,0.600000023841858,-15.9499998092651]},{"alive":false,"pad":4,"position":[3.59999990463257,0.600000023841858,-20.9500007629395]},{"alive":false,"pad":5,"position":[1.5,0.600000023841858,-25.9500007629395]},{"alive":true,"pad":6,"position":[-1,0.600000023841858,-30.9500007629395]}],"frogs_remaining":1,"grounded":true,"has_bat":true,"health":94.6666666666667,"hits":5,"hoodie":"f3cc58","jumps":6,"level":2,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"outfit_saved":true,"pad":6,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":6,"poisoned":true,"position":[-0.496085554361343,0.600875556468964,-29.766773223877],"seconds":14.0333333333336,"secret_notice_time":0,"secret_perches":[{"position":[-8.3349142074585,1.04743501543999,-0.070649266242981]},{"position":[-7.13558673858643,0.469960004091263,-1.36506593227386]},{"position":[-7.09662055969238,0.615264028310776,1.26605534553528]},{"position":[-9.51091957092285,1.24350607395172,-1.06492733955383]},{"position":[-9.17879867553711,1.15894675254822,-0.932178378105164]}],"secret_saved":true,"secret_unlock_count":0,"secret_unlocked":false,"state":"playing","swing_remaining":0,"swings":5,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":0.4212}
+PASS: Frog pad 6 reached with normal movement
+PASS: Bat defeats frog 6 and updates the counter once
+PASS: Defeating frog 6 restores full health
+PASS: Complete river crossing defeats all six frogs without falling
+PASS: The safe route wins with every red warning frog left alone
+PASS: Level 2 victory releases the mouse
+PASS: Next level advances from Frog river into Lucky lagoon
+PASS: Title can return to the original lagoon without combat
+PASS: Level selection fits a small desktop viewport
+PASS: Combat browser run has no script or engine errors
+RESULT: 46 checks passed
+PASS: Third title option selects Lucky lagoon
+PASS: Yellow pads remain unresolved until contact
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: Level 3 landing 1 is supported and never poisonous
+PASS: Yellow pad 1 rolled solid
+PASS: Waiting and jumping again do not reroll a solid yellow pad
+PASS: Level 3 landing 2 is supported and never poisonous
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: Level 3 landing 1 is supported and never poisonous
+PASS: Yellow pad 1 rolled solid
+PASS: Level 3 landing 2 is supported and never poisonous
+PASS: Level 3 landing 3 is supported and never poisonous
+PASS: Yellow pad 3 rolled solid
+PASS: Level 3 landing 4 is supported and never poisonous
+PASS: Level 3 landing 5 is supported and never poisonous
+PASS: A complete five-gap Lucky lagoon crossing succeeds with real random rolls
+PASS: Victory follows two held yellow pads
+PASS: Final-level replay resets both outcomes and counters
+PASS: Three level choices fit the smaller desktop viewport
+PASS: Lucky lagoon has no browser or engine errors
+RESULT: 28 checks passed across 6 course attempts and 0 sink probes. Sink observed: true
+PASS: A fresh browser starts with the secret locked
+PASS: Spawning on the lily pad does not award the secret
+PILLAR LANDING: {"arm_length":7.59999990463257,"attack_direction":[0,0,-1],"avatar_yaw":1.38319993019104,"camera":[-0.804588317871094,4.9758768081665,0.380030512809753],"chance_pads":[],"chance_rolls":0,"chance_sinks":0,"decoy_trips":0,"decoys":[],"falling_through":false,"falls":0,"fps":60,"frogs":[],"frogs_remaining":0,"grounded":true,"has_bat":false,"health":100,"hits":0,"hoodie":"b69add","jumps":1,"level":1,"muted":false,"name_focused":false,"outfit":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":3,"top_style":0},"outfit_saved":true,"pad":0,"pitch":-0.42,"player_name":"","poison_deaths":0,"poison_source_pad":-1,"poisoned":false,"position":[-7.62231397628784,0.776897311210632,-0.914167046546936],"seconds":3.24999999999999,"secret_notice_time":4.68333333333333,"secret_perches":[{"position":[-7.70247793197632,0.974915951490402,0.981338500976562]},{"position":[-7.57726764678955,0.77678045630455,-0.903383433818817]},{"position":[-9.26312160491943,0.466176182031631,-1.37812089920044]},{"position":[-8.8353099822998,1.26396751403809,0.349749088287354]},{"position":[-8.81296348571777,0.962179750204086,-0.236859560012817]}],"secret_saved":true,"secret_unlock_count":1,"secret_unlocked":true,"state":"playing","swing_remaining":0,"swings":0,"velocity":[0,0,0],"victories":0,"wardrobe":{"category":"Character","controls":{},"draft":{"character":0,"hair_color":0,"hair_style":0,"pants_color":0,"pants_style":0,"shoe_color":0,"shoe_style":0,"skin":1,"top_color":0,"top_style":0},"name":"","name_focused":false,"preview_rotation":-0.25,"visible":false},"yaw":1.3832}
+PASS: A normal arrow-key jump from spawn lands on the secret pillar and earns one badge
+PASS: Unlock equips the Moonflower hoodie and shows its celebration
+PASS: Achievement saves without advancing course progress
+PASS: The pillar supports standing without repeated awards
+PASS: Pause freezes the reward celebration
+PASS: An original hoodie remains selectable after unlocking
+PASS: The earned hoodie can be re-equipped from its badge card
+PASS: Browser refresh retains the badge without awarding it again
+PASS: Saved reward remains wearable after refresh
+PASS: A genuinely earned Secret Perch badge unlocks Moonflower in the full wardrobe
+PASS: Changing levels retains the badge
+PASS: Restart retains the badge and outfit
+PASS: Badge and wardrobe fit the smaller desktop viewport
+PASS: Denied browser storage still loads a playable locked profile
+PASS: When storage is denied, a real landing still earns and equips the reward for this visit
+PASS: Secret achievement has no browser or engine errors
+RESULT: 18 secret checks passed
+PASS: Movement faces ArrowDown independently of the camera
+PASS: f swing preserves the character orientation
+PASS: f hit direction follows the character rather than camera yaw
+PASS: Recovery keeps the ArrowDown facing
+PASS: Movement faces ArrowLeft independently of the camera
+PASS: mouse swing preserves the character orientation
+PASS: mouse hit direction follows the character rather than camera yaw
+PASS: Recovery keeps the ArrowLeft facing
+PASS: Normal movement gets beyond a living frog
+PASS: Arrow Down turns back toward the frog while the camera stays forward
+PASS: Backward attack stays facing the frog through impact
+PASS: Backward-facing attack defeats the frog behind the camera
+PASS: Backward kill restores 100 percent health
+PASS: Character still faces backwards after the successful swing
+PASS: Facing regression has no browser or engine errors
+RESULT: 15 swing-facing checks passed
+
+
+> lily-pad-escape-qa@0.6.0 test:wardrobe
+> node tests/wardrobe_browser_test.cjs
+
+PASS: Customize opens a usable preview with the mouse free
+PASS: The wardrobe name field accepts ordinary typing and quoted text
+PASS: Turn buttons rotate the preview
+PASS: Dragging also rotates the character preview
+PASS: Moonflower visibly stays locked before the achievement
+PASS: Clicking the locked reward cannot equip it
+PASS: Unsaved customization leaves the actual outfit unchanged
+PASS: Character, skin, hair, top, pants, shoes, and colors can be mixed independently
+PASS: Save outfit applies the appearance and quoted name
+PASS: All outfit choices and the name survive a browser refresh
+PASS: Cancel discards preview changes
+PASS: Escape also discards changes
+PASS: Wardrobe fits a smaller desktop window
+PASS: Wardrobe category controls work at the smaller size
+PASS: The customized character enters Frog River with its bat
+PASS: Customizing from pause freezes the run
+PASS: Saving from pause changes clothes without moving or resuming the player
+PASS: Customized clothing still supports jumping and the bat animation
+PASS: Restart keeps all clothing choices
+PASS: Changing levels preserves customization
+PASS: Malformed saved data falls back to a usable default character
+PASS: Storage denial keeps the chosen outfit usable for the current visit
+PASS: Wardrobe browser session has no script or engine errors
+RESULT: 23 wardrobe checks passed

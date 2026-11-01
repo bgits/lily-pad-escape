@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "Web loading keeps valid fireflies and rejects invalid masks",
+    "Collection loading preserves the saved name, outfit, and secret reward",
+    "Malformed collection JSON falls back without damaging older saves",
+    "The browser shows a landing marker during the frog crouch",
+    "Blocked browser storage still opens a playable empty collection",
+    "A real pickup stays collected when browser storage rejects saving",
+    "An unsaved pickup survives a restart in the same visit",
+    "Storage denial does not falsely claim persistence across reload",
+    "Malformed and blocked browser storage produce no engine or browser errors"
+  ],
+  "errors": []
+}

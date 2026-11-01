@@ -1,0 +1,27 @@
+# Verification report — version 0.8 — 29 October 2026
+
+## Change
+Each of the three levels now has exactly three hidden fireflies: one on a drifting exploration pad, one on a fixed flower-pad branch, and one near the far shore. Collectibles bob, flutter, and glow; collection gives a short chime and gold particles. The HUD and title level choices show per-level counts. Every unique pickup saves immediately, survives falls/restarts/level changes/reloads, and preserves the existing wardrobe and Secret Perch data. Malformed saves are validated; unavailable storage retains pickups for the current visit and shows that saving is unavailable. Fireflies remain optional for victory. Medals, additional cosmetics, saved completion, and best times were outside this increment.
+
+Each level has one new physical drifting pad. Its deterministic eight-second cycle consists of a one-second endpoint pause, a three-second eased journey, another one-second pause, and a three-second return. The surface carries a standing player. Jumping retains the ordinary controller response without inheriting sideways platform speed. The original main routes and Level 3 solid bypasses are preserved. All nine collectibles have been reached without requiring a favorable yellow-pad outcome.
+
+Green frogs now move their actual bodies through a predictable 4.8-second cycle: watch, 0.7-second crouch, 0.7-second sideways hop, and 1.8-second grounded recovery. A gold ring indicates the landing during the crouch and hop. Defeat cancels the movement and marker. Existing poison, healing, bat-facing, and one-hit defeats remain. Red/yellow markers retain their behavior. Pause/customization freeze movement and collection. Testing identified and fixed a queued physics transform that could otherwise advance a moving pad once after pause.
+
+## Verification
+**280 native checks passed, zero failures**, using the full current suite: controller 21, combat 29, facing 20, decoys 41, health/chance 41, guaranteed skill route 21, new exploration 48, secret 25, wardrobe 34. Evidence is `native-test-results-v0.8.txt`.
+
+New exploration checks cover physical platform carry over a complete cycle, stable rider alignment, pause/customization/resume, jump detachment, restart, unique collection in all three levels, duplicate prevention, local save/reload, legacy profile preservation, malformed data, denied writes, frog phase ordering, landing telegraphs, actual horizontal/vertical body movement, grounded attack windows, healing, and canceled movement after defeat. Native contact-isolation tests may position the player on a target. The guaranteed skill-route suite separately controls the whole crossing continuously with both yellow supports removed.
+
+**123 browser checks passed, zero browser/engine errors**, against the final exported build in isolated Chrome contexts:
+
+- Exploration: 68. Ordinary mouse/keyboard inputs collect all nine fireflies, ride all three moving pads, make the optional detours and returns, defeat all six hopping frogs, and complete all three courses. Each course finishes with zero falls. Level 3 also uses zero random rolls. All nine pickups survive a real browser reload and level change. Smaller-window layout and exact pause support pass.
+- Collection storage: 9. Valid masks survive while invalid ones are rejected; malformed JSON preserves older name/outfit/secret data; a real pickup works with denied localStorage, survives an in-visit restart, and correctly disappears after reload. Includes live captures of the frog crouch and physical hop.
+- Frog River regression: 46. Complete six-frog crossing, poison/healing/death, red-pad collapse, directional attacks, pause, restart, level transition, and viewport fit.
+
+Browser gameplay uses ordinary inputs and read-only `?qa` telemetry, with no teleport or forced random results. Only isolated storage-error/migration fixtures write test localStorage. The player's browser and save data were not altered. Browser evidence is `exploration-browser-v0.8.log`, `exploration-browser-results.json`, `collection-storage-browser-v0.8.log`, `collection-storage-browser-results.json`, `combat-browser-v0.8.log`, and `combat-browser-results.json`.
+
+Reviewed real exported screenshots: `52-drifting-pad-level-1.png` through the other two level captures, `53-fireflies-title.png`–`61-firefly-saving-unavailable.png`, and the refreshed combat capture set. Fireflies, collection counts, drifting surfaces, frog warning/landing rings, and the 1024×640 letterboxed layout are visible and readable. Older release evidence remains in the archived test reports; unrelated full browser suites were not repeated.
+
+Environment: Godot 4.6 stable, Compatibility renderer, 60 Hz physics, installed Chrome through Playwright 1.62.1 on Apple M2 Max. Other browsers were not tested for this release. Platform implementation uses Godot's [AnimatableBody3D](https://docs.godotengine.org/en/stable/classes/class_animatablebody3d.html) and [CharacterBody3D platform support](https://docs.godotengine.org/en/stable/classes/class_characterbody3d.html), with physical carry verified in both native and browser runs.
+
+Reproduce with `./scripts/test-native.sh`, `npm run test:exploration`, `npm run test:collection-storage`, and `npm run test:combat` while the local server is running. Editable source, tests, documentation, and exported Web build are packaged in `LilyPadEscape-v0.8.zip`.

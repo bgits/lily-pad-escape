@@ -1,0 +1,43 @@
+
+> lily-pad-escape-qa@0.7.0 test:lucky
+> node tests/lucky_browser_test.cjs
+
+PASS: Third title option selects Lucky lagoon
+PASS: Yellow pads remain unresolved until contact
+PASS: Six smaller permanent pads offer a path around both yellow frogs
+PASS: Skill-route landing 1 reaches solid ground without a retry
+PASS: Skill-route landing 1 does not depend on a random pad
+PASS: Skill-route landing 2 reaches solid ground without a retry
+PASS: Skill-route landing 2 does not depend on a random pad
+PASS: Pause holds the player on a small precision pad
+PASS: Skill-route landing 3 reaches solid ground without a retry
+PASS: Skill-route landing 3 does not depend on a random pad
+PASS: Skill-route landing 4 reaches solid ground without a retry
+PASS: Skill-route landing 4 does not depend on a random pad
+PASS: Skill-route landing 5 reaches solid ground without a retry
+PASS: Skill-route landing 5 does not depend on a random pad
+PASS: Skill-route landing 6 reaches solid ground without a retry
+PASS: Skill-route landing 6 does not depend on a random pad
+PASS: Skill-route landing 7 reaches solid ground without a retry
+PASS: Skill-route landing 7 does not depend on a random pad
+PASS: Skill-route landing 8 reaches solid ground without a retry
+PASS: Skill-route landing 8 does not depend on a random pad
+PASS: Skill-route landing 9 reaches solid ground without a retry
+PASS: Skill-route landing 9 does not depend on a random pad
+PASS: A full nine-jump crossing wins with zero random rolls and zero falls
+PASS: Level 3 landing 1 is supported and never poisonous
+PASS: Yellow pad 1 rolled solid
+PASS: Waiting and jumping again do not reroll a solid yellow pad
+PASS: Level 3 landing 2 is supported and never poisonous
+PASS: Level 3 landing 3 is supported and never poisonous
+PASS: Yellow pad 3 rolled solid
+PASS: Level 3 landing 4 is supported and never poisonous
+PASS: Level 3 landing 5 is supported and never poisonous
+PASS: A complete five-gap Lucky lagoon crossing succeeds with real random rolls
+PASS: Victory follows two held yellow pads
+PASS: Final-level replay resets both outcomes and counters
+PASS: An unlucky yellow landing causes one water fall
+PASS: Retry resets both yellow pads for fresh rolls
+PASS: Three level choices fit the smaller desktop viewport
+PASS: Lucky lagoon has no browser or engine errors
+RESULT: 38 checks passed across one skill crossing, 1 shortcut attempts and 1 sink probes. Sink observed: true

@@ -1,0 +1,28 @@
+{
+  "checks": [
+    "Level 1: ArrowUp moves in the expected direction",
+    "Level 1: ArrowUp release stops movement",
+    "Level 1: ArrowDown moves in the expected direction",
+    "Level 1: ArrowDown release stops movement",
+    "Level 1: ArrowLeft moves in the expected direction",
+    "Level 1: ArrowLeft release stops movement",
+    "Level 1: ArrowRight moves in the expected direction",
+    "Level 1: ArrowRight release stops movement",
+    "Level 1: arrow diagonals keep the normal movement speed",
+    "Level 1: WASD still works",
+    "Level 2: ArrowUp moves in the expected direction",
+    "Level 2: ArrowUp release stops movement",
+    "Level 2: ArrowDown moves in the expected direction",
+    "Level 2: ArrowDown release stops movement",
+    "Level 2: ArrowLeft moves in the expected direction",
+    "Level 2: ArrowLeft release stops movement",
+    "Level 2: ArrowRight moves in the expected direction",
+    "Level 2: ArrowRight release stops movement",
+    "Level 2: arrow diagonals keep the normal movement speed",
+    "Level 2: WASD still works",
+    "Arrow movement works while jumping",
+    "Pause and resume do not leave arrow movement stuck",
+    "No browser or engine errors"
+  ],
+  "errors": []
+}

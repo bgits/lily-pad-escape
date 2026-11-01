@@ -1,0 +1,7 @@
+.tools/
+.godot/
+game/.godot/
+node_modules/
+.DS_Store
+LilyPadEscape-v*.zip
+docs/*test-failure*.png

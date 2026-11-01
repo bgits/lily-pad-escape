@@ -1,0 +1,51 @@
+{
+  "package_type": "implementation prompt and reference artwork; not a playable game",
+  "files": [
+    {
+      "path": "IMPLEMENTATION_PROMPT.md",
+      "bytes": 10205,
+      "sha256": "08a0eb5f719d2b4725bbf13378fefbea0f499b64af8978e38f0b0c9fa101d553"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 2613,
+      "sha256": "bde6d2066aab572cad9ca8767ee6de2c2fef8d7eced14376ab8187fd9466d0b6"
+    },
+    {
+      "path": "original-notes/01_level_sketch.jpeg",
+      "bytes": 173144,
+      "sha256": "c792bcaad33227c1a26bb708cf8f17e8a403038a4a96d0be7eac3c8cd5c06fd4",
+      "dimensions": [
+        1206,
+        1127
+      ]
+    },
+    {
+      "path": "original-notes/02_character_ideas.jpeg",
+      "bytes": 124415,
+      "sha256": "9c6318dac545e04000d1c32f0f472f95cd0112bf3858bcc202c762c737b25e51",
+      "dimensions": [
+        1206,
+        1119
+      ]
+    },
+    {
+      "path": "original-notes/03_gameplay_ideas.jpeg",
+      "bytes": 184141,
+      "sha256": "994e652ed1675ff3e21420983c21718251f3fba56a0d1a0c985f1924946ce262",
+      "dimensions": [
+        1094,
+        1211
+      ]
+    },
+    {
+      "path": "reference/01_chosen_gameplay.png",
+      "bytes": 2191842,
+      "sha256": "76bbf4ef24b5ce8434e13ee36ffe79d03ce64059cc4c5c714412333eaae7063d",
+      "dimensions": [
+        1672,
+        941
+      ]
+    }
+  ]
+}

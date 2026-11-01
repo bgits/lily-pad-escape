@@ -1,0 +1,72 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Spawn settles on visible starting surface
+PASS: Feet match platform height
+PASS: Diagonal speed equals straight-line speed
+PASS: Holding jump produces one jump and returns to ground
+PASS: Keyboard autorepeat does not trigger another jump
+PASS: Coyote jump works shortly after leaving a real pad edge
+PASS: Expired coyote time cannot create a midair jump
+PASS: Buffered press just before landing produces one new jump
+PASS: Pause freezes the character in midair
+PASS: Resume continues the frozen jump
+PASS: One splash event per fall 1
+PASS: Quick respawn returns to start 1
+PASS: One splash event per fall 2
+PASS: Quick respawn returns to start 2
+PASS: One splash event per fall 3
+PASS: Quick respawn returns to start 3
+PASS: Respawn clears velocity and buffered input
+PASS: Pad collider matches the visible notched surface
+PASS: Camera retracts before an obstacle and excludes the player
+PASS: Camera stays above water
+PASS: Restart resets all session progress
+RESULT: 21 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 2 spawns with the visible bat equipped
+PASS: Six frogs spawn with no accidental initial swing
+PASS: Distant swing cannot damage frogs
+PASS: A frog behind the attack direction is not hit
+PASS: A frog outside 2.3 m remains alive
+PASS: A swing too high above a frog cannot hit it
+PASS: Wind-up precedes the impact frame
+PASS: A forward bat impact defeats the frog exactly once
+PASS: Defeated frog immediately releases its physical obstruction
+PASS: Attack cooldown rejects repeated presses and autorepeat
+PASS: Defeat animation removes the frog after its puff
+PASS: An already defeated frog cannot be counted twice
+PASS: Left click attacks instead of pausing in Level 2
+PASS: Holding the mouse does not repeat attacks
+PASS: Pause freezes attack wind-up and frog animation
+PASS: Resumed swing delivers its pending hit once
+PASS: Water retry keeps defeated frogs cleared and the bat equipped
+PASS: Water retry clears unfinished attack state
+PASS: Restart restores all frogs and clears combat counters
+PASS: Living frog has real physical collision on its pad
+PASS: Flag cannot finish Level 2 while frogs remain
+PASS: All six frogs can be defeated through the melee input
+PASS: Cleared river finishes on the grounded flag island
+PASS: Final level offers replay without a nonexistent next level
+PASS: Replay stays in Level 2 and restores enemies
+PASS: Selecting Level 1 removes all combat equipment and enemies
+PASS: Level 1 victory offers the next level
+PASS: Next level starts a fresh Frog river run
+PASS: Level transition retains adventurer name and hoodie choice
+RESULT: 29 passed, 0 failed

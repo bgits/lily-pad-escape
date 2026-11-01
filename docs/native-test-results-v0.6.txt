@@ -1,0 +1,249 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Spawn settles on visible starting surface
+PASS: Feet match platform height
+PASS: Diagonal speed equals straight-line speed
+PASS: Holding jump produces one jump and returns to ground
+PASS: Keyboard autorepeat does not trigger another jump
+PASS: Coyote jump works shortly after leaving a real pad edge
+PASS: Expired coyote time cannot create a midair jump
+PASS: Buffered press just before landing produces one new jump
+PASS: Pause freezes the character in midair
+PASS: Resume continues the frozen jump
+PASS: One splash event per fall 1
+PASS: Quick respawn returns to start 1
+PASS: One splash event per fall 2
+PASS: Quick respawn returns to start 2
+PASS: One splash event per fall 3
+PASS: Quick respawn returns to start 3
+PASS: Respawn clears velocity and buffered input
+PASS: Pad collider matches the visible notched surface
+PASS: Camera retracts before an obstacle and excludes the player
+PASS: Camera stays above water
+PASS: Restart resets all session progress
+RESULT: 21 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 2 spawns with the visible bat equipped
+PASS: Six frogs spawn with no accidental initial swing
+PASS: Distant swing cannot damage frogs
+PASS: A frog behind the attack direction is not hit
+PASS: A frog outside 2.3 m remains alive
+PASS: A swing too high above a frog cannot hit it
+PASS: Wind-up precedes the impact frame
+PASS: A forward bat impact defeats the frog exactly once
+PASS: Defeated frog immediately releases its physical obstruction
+PASS: Attack cooldown rejects repeated presses and autorepeat
+PASS: Defeat animation removes the frog after its puff
+PASS: An already defeated frog cannot be counted twice
+PASS: Left click attacks instead of pausing in Level 2
+PASS: Holding the mouse does not repeat attacks
+PASS: Pause freezes attack wind-up and frog animation
+PASS: Resumed swing delivers its pending hit once
+PASS: Water retry keeps defeated frogs cleared and the bat equipped
+PASS: Water retry clears unfinished attack state
+PASS: Restart restores all frogs and clears combat counters
+PASS: Living frog has real physical collision on its pad
+PASS: Flag cannot finish Level 2 while frogs remain
+PASS: All six frogs can be defeated through the melee input
+PASS: Cleared river finishes on the grounded flag island
+PASS: Frog river offers the new Lucky lagoon level
+PASS: Replay stays in Level 2 and restores enemies
+PASS: Selecting Level 1 removes all combat equipment and enemies
+PASS: Level 1 victory offers the next level
+PASS: Next level starts a fresh Frog river run
+PASS: Level transition retains adventurer name and hoodie choice
+RESULT: 29 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Movement turns the character away from the camera for key 4194322
+PASS: Swing start preserves character facing for key 4194322
+PASS: Hit direction matches character facing for key 4194322
+PASS: Camera orbit does not redirect the impact for key 4194322
+PASS: Swing recovery keeps the original facing for key 4194322
+PASS: Movement turns the character away from the camera for key 4194319
+PASS: Swing start preserves character facing for key 4194319
+PASS: Hit direction matches character facing for key 4194319
+PASS: Camera orbit does not redirect the impact for key 4194319
+PASS: Swing recovery keeps the original facing for key 4194319
+PASS: Movement turns the character away from the camera for key 4194321
+PASS: Swing start preserves character facing for key 4194321
+PASS: Hit direction matches character facing for key 4194321
+PASS: Camera orbit does not redirect the impact for key 4194321
+PASS: Swing recovery keeps the original facing for key 4194321
+PASS: A live poisoning frog is behind the camera after turning back toward it
+PASS: Backward-facing swing hits the frog behind the camera
+PASS: Successful backward hit does not rotate the character
+PASS: Backward hit still restores full health and cures poison
+PASS: Movement can turn the character normally after recovery
+SWING FACING RESULT: 20 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: The introductory lagoon has no decoy hazards
+PASS: Frog river has four decoys and six required green frogs
+PASS: Decoys do not overlap safe landing surfaces
+PASS: Red warning frogs cannot be used as solid footholds
+PASS: Red markers cannot be defeated and do not change the enemy count
+PASS: A real bat swing leaves the red marker and explains the trap
+PASS: Flying above a decoy without landing does not trigger it
+PASS: Green enemies still defeat normally beside the decoy branches
+PASS: Landing triggers decoy 1 exactly once
+PASS: Decoy 1 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 1
+PASS: Pause freezes both the sinking pad and the falling character
+PASS: Decoy 1 drops the player into one water failure with a useful hint
+PASS: Collapsed pad 1 and its warning frog sink under the water
+PASS: Retry restores decoy 1 and ordinary movement
+PASS: Trap retry 1 preserves defeated green frogs
+PASS: Landing triggers decoy 2 exactly once
+PASS: Decoy 2 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 2
+PASS: Decoy 2 drops the player into one water failure with a useful hint
+PASS: Collapsed pad 2 and its warning frog sink under the water
+PASS: Retry restores decoy 2 and ordinary movement
+PASS: Trap retry 2 preserves defeated green frogs
+PASS: Landing triggers decoy 3 exactly once
+PASS: Decoy 3 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 3
+PASS: Decoy 3 drops the player into one water failure with a useful hint
+PASS: Collapsed pad 3 and its warning frog sink under the water
+PASS: Retry restores decoy 3 and ordinary movement
+PASS: Trap retry 3 preserves defeated green frogs
+PASS: Landing triggers decoy 4 exactly once
+PASS: Decoy 4 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 4
+PASS: Decoy 4 drops the player into one water failure with a useful hint
+PASS: Collapsed pad 4 and its warning frog sink under the water
+PASS: Retry restores decoy 4 and ordinary movement
+PASS: Trap retry 4 preserves defeated green frogs
+PASS: Jump controls work again after a decoy retry
+PASS: Restart during collapse resets hazards, failures, and all green enemies
+PASS: Restart during collapse returns to a supported practice pad
+PASS: Returning to Level 1 removes the decoys and their instructions
+RESULT: 41 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 1 remains healthy without a combat meter
+PASS: Frog River starts at 100 percent and the practice pad is safe
+PASS: Flying over a frog pad without contact does not poison
+PASS: Actual landing beside a living green frog begins poison damage
+PASS: Poison makes the character's purple effect visible
+PASS: Poison drains 20 health points per second without stacking contact hits
+PASS: Pause freezes poison damage and its visual effect
+PASS: Resume continues poison damage
+PASS: A missed swing does not heal or cure poison
+PASS: Jumping away does not remove an applied poison
+PASS: Applied poison continues even after reaching an empty pad
+PASS: Defeating a green frog instantly restores exactly 100 percent and cures poison
+PASS: Healing clears the poison effect and fills the health bar
+PASS: A cleared pad cannot reapply poison
+PASS: Landing on the frog itself also applies its pad's poison
+PASS: Reaching zero health causes one poison defeat
+PASS: A full health bar lasts approximately five seconds of poison
+PASS: Poison defeat is distinct from a water fall and stops control
+PASS: Attacking after death cannot heal or create a second defeat
+PASS: Pause also freezes the poison-defeat retry
+PASS: Poison retry returns to the practice pad at full health
+PASS: Poison retry preserves previously defeated green frogs
+PASS: Retry clears the poison-defeat pose
+PASS: R resets health, poison, death counters, and enemies
+PASS: A water fall takes one failure path while poisoned
+PASS: Water retry also cures poison and restores health
+PASS: Red decoys remain sinking hazards and do not apply green-frog poison
+PASS: Level 3 starts with two yellow chance markers and no combat enemies
+PASS: Entering Level 3 clears poison and hides combat-only health UI
+PASS: Yellow frogs are visible chance markers without solid footholds
+PASS: A real first landing can roll the solid outcome
+PASS: Standing and re-landing do not reroll a solid yellow pad
+PASS: A yellow frog never poisons the player
+PASS: Restart clears yellow-pad outcomes and counters
+PASS: A real first landing can instead sink the yellow pad
+PASS: Pause freezes a sinking yellow pad
+PASS: An unlucky fall retries with a fresh unresolved yellow pad
+PASS: A new attempt can produce a different yellow-pad outcome
+PASS: A 1000-roll sample is consistent with the 50/50 threshold (518 sinks)
+PASS: Level 3 victory offers replay without a nonexistent fourth level
+PASS: Level 2 victory transitions into a fresh Level 3
+RESULT: 41 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: New profile hides the secret reward
+PASS: Locked reward cannot be equipped
+PASS: Ordinary start-pad contact does not award a badge
+PASS: Existing five left-hand rocks have dedicated collision
+NEAREST SECRET PERCH: (-7.577268, 0.77678, -0.903383)
+PASS: Passing above a pillar without landing does not unlock
+PASS: Touching a pillar side does not unlock
+PASS: Actual pillar-top landing earns Secret Perch
+PASS: One award is saved successfully
+PASS: Badge celebration and wardrobe reward become available
+PASS: Moonflower hoodie equips immediately
+PASS: Secret badge does not complete the level or advance route progress
+PASS: Pillar remains a stable place to stand
+PASS: Standing on the pillar cannot repeat the award
+PASS: Pause freezes and hides the celebration
+PASS: Resume restores the celebration
+PASS: Restart keeps the badge without replaying its celebration
+PASS: Re-landing cannot award the badge a second time
+PASS: Water retry retains the unlocked reward
+PASS: Level 2 also supports its left pillar and preserves the badge
+PASS: Level 3 also supports its left pillar and preserves the badge
+PASS: Original hoodie colors remain selectable
+PASS: Unlocked hoodie can be re-equipped from the title
+PASS: A new game instance reloads the earned badge without another award
+PASS: Reloaded reward remains wearable
+PASS: Unavailable storage still grants the reward for this session
+SECRET RESULT: 25 passed; 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Starting avatar uses the validated saved outfit
+PASS: Customize opens from the title without activating gameplay
+PASS: Preview uses an independent character with the current outfit
+PASS: All ten choices update the visible preview
+PASS: Unsaved previews do not change the gameplay character or profile
+PASS: Moonflower stays locked without the badge
+PASS: Wardrobe typing and controls cannot attack, jump, or restart the level
+PASS: Cancel discards unsaved changes and returns to the title
+PASS: Reopening after Cancel restores the equipped outfit
+PASS: Save applies every choice to the actual character and closes the wardrobe
+PASS: Name and outfit save successfully
+PASS: A fresh profile reloads all choices and a quoted name
+PASS: Title color shortcuts preserve other clothing and hair choices
+PASS: Starting Frog River keeps the outfit and equips the bat
+PASS: Customizing from pause freezes movement, poison, and attack timing
+PASS: Saving from pause returns to pause without resuming play
+PASS: Changing clothes preserves position, facing, and the collision shape
+PASS: New outfit retains the equipped bat and frozen animation
+PASS: Resuming the customized character completes its pending hit and heals normally
+PASS: Restart keeps the chosen outfit
+PASS: Level changes keep the outfit and update equipment normally
+PASS: Escape cancels the wardrobe
+PASS: Hairstyle 0 builds on the animated character
+PASS: Hairstyle 1 builds on the animated character
+PASS: Hairstyle 2 builds on the animated character
+PASS: Hairstyle 3 builds on the animated character
+PASS: Hairstyle 4 builds on the animated character
+PASS: Hairstyle 5 builds on the animated character
+PASS: Old achievement-only saves keep their badge and receive default clothing
+PASS: Saving clothing preserves a legacy badge and its Moonflower choice
+PASS: Malformed or locked saved choices fall back safely while valid choices survive
+PASS: Missing outfit data loads safe defaults
+PASS: Saved names are type-checked and length-limited
+PASS: Unavailable storage keeps the chosen outfit in memory
+WARDROBE RESULT: 34 passed, 0 failed

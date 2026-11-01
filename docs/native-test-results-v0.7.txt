@@ -1,0 +1,69 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Lucky Lagoon has six permanent precision platforms
+PASS: HUD does not require completing yellow pads
+PASS: Both yellow pads are absent before the first jump
+PASS: Input-driven landing 1 reaches its solid destination with no falls
+PASS: Input-driven landing 2 reaches its solid destination with no falls
+PASS: A small bypass pad supports a paused player
+PASS: Input-driven landing 3 reaches its solid destination with no falls
+PASS: Input-driven landing 4 reaches its solid destination with no falls
+PASS: Input-driven landing 5 reaches its solid destination with no falls
+PASS: Input-driven landing 6 reaches its solid destination with no falls
+PASS: Input-driven landing 7 reaches its solid destination with no falls
+PASS: Input-driven landing 8 reaches its solid destination with no falls
+PASS: Input-driven landing 9 reaches its solid destination with no falls
+PASS: The entire nine-jump skill route wins with both yellow pads missing
+PASS: Winning the skill route needs no favorable rolls or retries
+PASS: Neither yellow support was restored during the winning run
+PASS: The new route does not introduce poison or health damage
+PASS: Restart keeps every bypass platform permanently solid
+PASS: Restart restores the optional random shortcuts
+PASS: Sunlit Lagoon does not gain unintended bypass platforms
+PASS: Frog River does not gain unintended bypass platforms
+RESULT: 21 passed, 0 failed
+
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 1 remains healthy without a combat meter
+PASS: Frog River starts at 100 percent and the practice pad is safe
+PASS: Flying over a frog pad without contact does not poison
+PASS: Actual landing beside a living green frog begins poison damage
+PASS: Poison makes the character's purple effect visible
+PASS: Poison drains 20 health points per second without stacking contact hits
+PASS: Pause freezes poison damage and its visual effect
+PASS: Resume continues poison damage
+PASS: A missed swing does not heal or cure poison
+PASS: Jumping away does not remove an applied poison
+PASS: Applied poison continues even after reaching an empty pad
+PASS: Defeating a green frog instantly restores exactly 100 percent and cures poison
+PASS: Healing clears the poison effect and fills the health bar
+PASS: A cleared pad cannot reapply poison
+PASS: Landing on the frog itself also applies its pad's poison
+PASS: Reaching zero health causes one poison defeat
+PASS: A full health bar lasts approximately five seconds of poison
+PASS: Poison defeat is distinct from a water fall and stops control
+PASS: Attacking after death cannot heal or create a second defeat
+PASS: Pause also freezes the poison-defeat retry
+PASS: Poison retry returns to the practice pad at full health
+PASS: Poison retry preserves previously defeated green frogs
+PASS: Retry clears the poison-defeat pose
+PASS: R resets health, poison, death counters, and enemies
+PASS: A water fall takes one failure path while poisoned
+PASS: Water retry also cures poison and restores health
+PASS: Red decoys remain sinking hazards and do not apply green-frog poison
+PASS: Level 3 starts with two yellow chance markers and no combat enemies
+PASS: Entering Level 3 clears poison and hides combat-only health UI
+PASS: Yellow frogs are visible chance markers without solid footholds
+PASS: A real first landing can roll the solid outcome
+PASS: Standing and re-landing do not reroll a solid yellow pad
+PASS: A yellow frog never poisons the player
+PASS: Restart clears yellow-pad outcomes and counters
+PASS: A real first landing can instead sink the yellow pad
+PASS: Pause freezes a sinking yellow pad
+PASS: An unlucky fall retries with a fresh unresolved yellow pad
+PASS: A new attempt can produce a different yellow-pad outcome
+PASS: A 1000-roll sample is consistent with the 50/50 threshold (518 sinks)
+PASS: Level 3 victory offers replay without a nonexistent fourth level
+PASS: Level 2 victory transitions into a fresh Level 3
+RESULT: 41 passed, 0 failed

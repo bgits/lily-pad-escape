@@ -1,0 +1,73 @@
+
+> lily-pad-escape-qa@0.8.0 test:exploration
+> node tests/exploration_browser_test.cjs
+
+PASS: Isolated browser starts with an empty collection
+PASS: Sunlit first pad lands safely
+PASS: Level 1 drifting-pad jump lands safely
+PASS: Level 1 firefly 1 is collected and saved
+PASS: Level 1 drifting pad carries the idle player
+PASS: Browser pause freezes the pad and rider exactly
+PASS: Return from the drifting pad lands safely
+PASS: Sunlit second pad lands safely
+PASS: Sunlit hidden flower pad lands safely
+PASS: Level 1 firefly 2 is collected and saved
+PASS: Return to Sunlit route lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit crossing lands safely
+PASS: Sunlit shore firefly lands safely
+PASS: Level 1 firefly 3 is collected and saved
+PASS: Sunlit flag lands safely
+PASS: Sunlit Lagoon completes with all three fireflies
+PASS: Frog 1 approach lands safely
+PASS: Aimed swing defeats hopping frog 1 and heals
+PASS: Level 2 drifting-pad jump lands safely
+PASS: Level 2 firefly 1 is collected and saved
+PASS: Level 2 drifting pad carries the idle player
+PASS: Return from the drifting pad lands safely
+PASS: Frog 2 approach lands safely
+PASS: Aimed swing defeats hopping frog 2 and heals
+PASS: Frog 3 approach lands safely
+PASS: Aimed swing defeats hopping frog 3 and heals
+PASS: Frog River flower branch lands safely
+PASS: Level 2 firefly 2 is collected and saved
+PASS: Return to Frog River lands safely
+PASS: Frog 4 approach lands safely
+PASS: Aimed swing defeats hopping frog 4 and heals
+PASS: Frog 5 approach lands safely
+PASS: Aimed swing defeats hopping frog 5 and heals
+PASS: Frog 6 approach lands safely
+PASS: Aimed swing defeats hopping frog 6 and heals
+PASS: Frog River shore firefly lands safely
+PASS: Level 2 firefly 3 is collected and saved
+PASS: Frog River flag lands safely
+PASS: Frog River completes with all three fireflies
+PASS: Lucky Lagoon first solid branch lands safely
+PASS: Lucky Lagoon first solid branch lands safely
+PASS: Lucky Lagoon first solid branch lands safely
+PASS: Lucky Lagoon rest pad lands safely
+PASS: Level 3 drifting-pad jump lands safely
+PASS: Level 3 firefly 1 is collected and saved
+PASS: Level 3 drifting pad carries the idle player
+PASS: Return from the drifting pad lands safely
+PASS: Lucky Lagoon second solid branch lands safely
+PASS: Lucky Lagoon second solid branch lands safely
+PASS: Lucky Lagoon second solid branch lands safely
+PASS: Lucky Lagoon hidden flower pad lands safely
+PASS: Level 3 firefly 2 is collected and saved
+PASS: Return to solid branch lands safely
+PASS: Lucky Lagoon final rest pad lands safely
+PASS: Lucky Lagoon shore firefly lands safely
+PASS: Level 3 firefly 3 is collected and saved
+PASS: Lucky Lagoon flag lands safely
+PASS: All nine fireflies are reachable with normal controls
+PASS: Lucky Lagoon collects everything and wins without random rolls or falls
+PASS: All nine pickups survive browser reload without duplicate spawns
+PASS: Changing levels restores the correct saved collection
+PASS: Collection UI fits a smaller viewport
+PASS: Exploration playthrough has no browser or engine errors
+RESULT: 68 checks passed

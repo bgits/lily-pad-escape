@@ -1,0 +1,24 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Spawn settles on visible starting surface
+PASS: Feet match platform height
+PASS: Diagonal speed equals straight-line speed
+PASS: Holding jump produces one jump and returns to ground
+PASS: Keyboard autorepeat does not trigger another jump
+PASS: Coyote jump works shortly after leaving a real pad edge
+PASS: Expired coyote time cannot create a midair jump
+PASS: Buffered press just before landing produces one new jump
+PASS: Pause freezes the character in midair
+PASS: Resume continues the frozen jump
+PASS: One splash event per fall 1
+PASS: Quick respawn returns to start 1
+PASS: One splash event per fall 2
+PASS: Quick respawn returns to start 2
+PASS: One splash event per fall 3
+PASS: Quick respawn returns to start 3
+PASS: Respawn clears velocity and buffered input
+PASS: Pad collider matches the visible notched surface
+PASS: Camera retracts before an obstacle and excludes the player
+PASS: Camera stays above water
+PASS: Restart resets all session progress
+RESULT: 21 passed, 0 failed

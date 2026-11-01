@@ -1,0 +1,52 @@
+{
+  "checks": [
+    "Customize opens a usable preview with the mouse free",
+    "The wardrobe name field accepts ordinary typing and quoted text",
+    "Turn buttons rotate the preview",
+    "Dragging also rotates the character preview",
+    "Moonflower visibly stays locked before the achievement",
+    "Clicking the locked reward cannot equip it",
+    "Unsaved customization leaves the actual outfit unchanged",
+    "Character, skin, hair, top, pants, shoes, and colors can be mixed independently",
+    "Save outfit applies the appearance and quoted name",
+    "All outfit choices and the name survive a browser refresh",
+    "Cancel discards preview changes",
+    "Escape also discards changes",
+    "Wardrobe fits a smaller desktop window",
+    "Wardrobe category controls work at the smaller size",
+    "The customized character enters Frog River with its bat",
+    "Customizing from pause freezes the run",
+    "Saving from pause changes clothes without moving or resuming the player",
+    "Customized clothing still supports jumping and the bat animation",
+    "Restart keeps all clothing choices",
+    "Changing levels preserves customization",
+    "Malformed saved data falls back to a usable default character",
+    "Storage denial keeps the chosen outfit usable for the current visit",
+    "Wardrobe browser session has no script or engine errors"
+  ],
+  "errors": [],
+  "chosen": {
+    "character": 1,
+    "hair_color": 3,
+    "hair_style": 2,
+    "pants_color": 1,
+    "pants_style": 1,
+    "shoe_color": 2,
+    "shoe_style": 1,
+    "skin": 4,
+    "top_color": 4,
+    "top_style": 1
+  },
+  "second": {
+    "character": 1,
+    "hair_color": 4,
+    "hair_style": 3,
+    "pants_color": 1,
+    "pants_style": 2,
+    "shoe_color": 3,
+    "shoe_style": 2,
+    "skin": 4,
+    "top_color": 2,
+    "top_style": 2
+  }
+}

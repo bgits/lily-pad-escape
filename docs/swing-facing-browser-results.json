@@ -1,0 +1,685 @@
+{
+  "checks": [
+    "Movement faces ArrowDown independently of the camera",
+    "f swing preserves the character orientation",
+    "f hit direction follows the character rather than camera yaw",
+    "Recovery keeps the ArrowDown facing",
+    "Movement faces ArrowLeft independently of the camera",
+    "mouse swing preserves the character orientation",
+    "mouse hit direction follows the character rather than camera yaw",
+    "Recovery keeps the ArrowLeft facing",
+    "Normal movement gets beyond a living frog",
+    "Arrow Down turns back toward the frog while the camera stays forward",
+    "Backward attack stays facing the frog through impact",
+    "Backward-facing attack defeats the frog behind the camera",
+    "Backward kill restores 100 percent health",
+    "Character still faces backwards after the successful swing",
+    "Facing regression has no browser or engine errors"
+  ],
+  "errors": [],
+  "samples": [
+    {
+      "arm_length": 7.59999990463257,
+      "attack_direction": [
+        -0.0759186670184135,
+        0,
+        0.99711400270462
+      ],
+      "avatar_yaw": 3.06560087203979,
+      "camera": [
+        0,
+        4.79912900924683,
+        8.46169185638428
+      ],
+      "chance_pads": [],
+      "chance_rolls": 0,
+      "chance_sinks": 0,
+      "decoy_trips": 0,
+      "decoys": [
+        {
+          "collapsed": false,
+          "position": [
+            4.80000019073486,
+            0,
+            -3.40000009536743
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -6.40000009536743,
+            0,
+            -13
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            8.19999980926514,
+            0,
+            -22.7999992370605
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -5.90000009536743,
+            0,
+            -29.1000003814697
+          ],
+          "red_frog": true
+        }
+      ],
+      "falling_through": false,
+      "falls": 0,
+      "fps": 51,
+      "frogs": [
+        {
+          "alive": true,
+          "pad": 1,
+          "position": [
+            0,
+            0.600000023841858,
+            -5.94999980926514
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 2,
+          "position": [
+            -1.79999995231628,
+            0.600000023841858,
+            -10.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 3,
+          "position": [
+            0.800000011920929,
+            0.600000023841858,
+            -15.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 4,
+          "position": [
+            3.59999990463257,
+            0.600000023841858,
+            -20.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 5,
+          "position": [
+            1.5,
+            0.600000023841858,
+            -25.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 6,
+          "position": [
+            -1,
+            0.600000023841858,
+            -30.9500007629395
+          ]
+        }
+      ],
+      "frogs_remaining": 6,
+      "grounded": true,
+      "has_bat": true,
+      "health": 100,
+      "hits": 0,
+      "hoodie": "f3cc58",
+      "jumps": 0,
+      "level": 2,
+      "muted": false,
+      "name_focused": false,
+      "outfit": {
+        "character": 0,
+        "hair_color": 0,
+        "hair_style": 0,
+        "pants_color": 0,
+        "pants_style": 0,
+        "shoe_color": 0,
+        "shoe_style": 0,
+        "skin": 1,
+        "top_color": 0,
+        "top_style": 0
+      },
+      "outfit_saved": true,
+      "pad": 0,
+      "pitch": -0.42,
+      "player_name": "",
+      "poison_deaths": 0,
+      "poison_source_pad": -1,
+      "poisoned": false,
+      "position": [
+        0,
+        0.600149750709534,
+        1.52221655845642
+      ],
+      "seconds": 1.28333333333333,
+      "secret_notice_time": 0,
+      "secret_perches": [
+        {
+          "position": [
+            -8.3349142074585,
+            1.04743501543999,
+            -0.070649266242981
+          ]
+        },
+        {
+          "position": [
+            -7.13558673858643,
+            0.469960004091263,
+            -1.36506593227386
+          ]
+        },
+        {
+          "position": [
+            -7.09662055969238,
+            0.615264028310776,
+            1.26605534553528
+          ]
+        },
+        {
+          "position": [
+            -9.51091957092285,
+            1.24350607395172,
+            -1.06492733955383
+          ]
+        },
+        {
+          "position": [
+            -9.17879867553711,
+            1.15894675254822,
+            -0.932178378105164
+          ]
+        }
+      ],
+      "secret_saved": true,
+      "secret_unlock_count": 0,
+      "secret_unlocked": false,
+      "state": "playing",
+      "swing_remaining": 0.43,
+      "swings": 1,
+      "velocity": [
+        0,
+        0,
+        0
+      ],
+      "victories": 0,
+      "wardrobe": {
+        "category": "Character",
+        "controls": {},
+        "draft": {
+          "character": 0,
+          "hair_color": 0,
+          "hair_style": 0,
+          "pants_color": 0,
+          "pants_style": 0,
+          "shoe_color": 0,
+          "shoe_style": 0,
+          "skin": 1,
+          "top_color": 0,
+          "top_style": 0
+        },
+        "name": "",
+        "name_focused": false,
+        "preview_rotation": -0.25,
+        "visible": false
+      },
+      "yaw": 0
+    },
+    {
+      "arm_length": 7.59999990463257,
+      "attack_direction": [
+        -0.999278247356415,
+        0,
+        -0.0379867479205132
+      ],
+      "avatar_yaw": 1.5328004360199,
+      "camera": [
+        -0.972209393978119,
+        4.79929208755493,
+        7.48947620391846
+      ],
+      "chance_pads": [],
+      "chance_rolls": 0,
+      "chance_sinks": 0,
+      "decoy_trips": 0,
+      "decoys": [
+        {
+          "collapsed": false,
+          "position": [
+            4.80000019073486,
+            0,
+            -3.40000009536743
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -6.40000009536743,
+            0,
+            -13
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            8.19999980926514,
+            0,
+            -22.7999992370605
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -5.90000009536743,
+            0,
+            -29.1000003814697
+          ],
+          "red_frog": true
+        }
+      ],
+      "falling_through": false,
+      "falls": 0,
+      "fps": 60,
+      "frogs": [
+        {
+          "alive": true,
+          "pad": 1,
+          "position": [
+            0,
+            0.600000023841858,
+            -5.94999980926514
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 2,
+          "position": [
+            -1.79999995231628,
+            0.600000023841858,
+            -10.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 3,
+          "position": [
+            0.800000011920929,
+            0.600000023841858,
+            -15.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 4,
+          "position": [
+            3.59999990463257,
+            0.600000023841858,
+            -20.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 5,
+          "position": [
+            1.5,
+            0.600000023841858,
+            -25.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 6,
+          "position": [
+            -1,
+            0.600000023841858,
+            -30.9500007629395
+          ]
+        }
+      ],
+      "frogs_remaining": 6,
+      "grounded": true,
+      "has_bat": true,
+      "health": 100,
+      "hits": 0,
+      "hoodie": "f3cc58",
+      "jumps": 0,
+      "level": 2,
+      "muted": false,
+      "name_focused": false,
+      "outfit": {
+        "character": 0,
+        "hair_color": 0,
+        "hair_style": 0,
+        "pants_color": 0,
+        "pants_style": 0,
+        "shoe_color": 0,
+        "shoe_style": 0,
+        "skin": 1,
+        "top_color": 0,
+        "top_style": 0
+      },
+      "outfit_saved": true,
+      "pad": 0,
+      "pitch": -0.42,
+      "player_name": "",
+      "poison_deaths": 0,
+      "poison_source_pad": -1,
+      "poisoned": false,
+      "position": [
+        -0.972209393978119,
+        0.600312471389771,
+        0.550000011920929
+      ],
+      "seconds": 0.900000000000001,
+      "secret_notice_time": 0,
+      "secret_perches": [
+        {
+          "position": [
+            -8.3349142074585,
+            1.04743501543999,
+            -0.070649266242981
+          ]
+        },
+        {
+          "position": [
+            -7.13558673858643,
+            0.469960004091263,
+            -1.36506593227386
+          ]
+        },
+        {
+          "position": [
+            -7.09662055969238,
+            0.615264028310776,
+            1.26605534553528
+          ]
+        },
+        {
+          "position": [
+            -9.51091957092285,
+            1.24350607395172,
+            -1.06492733955383
+          ]
+        },
+        {
+          "position": [
+            -9.17879867553711,
+            1.15894675254822,
+            -0.932178378105164
+          ]
+        }
+      ],
+      "secret_saved": true,
+      "secret_unlock_count": 0,
+      "secret_unlocked": false,
+      "state": "playing",
+      "swing_remaining": 0.396666666666667,
+      "swings": 1,
+      "velocity": [
+        0,
+        0,
+        0
+      ],
+      "victories": 0,
+      "wardrobe": {
+        "category": "Character",
+        "controls": {},
+        "draft": {
+          "character": 0,
+          "hair_color": 0,
+          "hair_style": 0,
+          "pants_color": 0,
+          "pants_style": 0,
+          "shoe_color": 0,
+          "shoe_style": 0,
+          "skin": 1,
+          "top_color": 0,
+          "top_style": 0
+        },
+        "name": "",
+        "name_focused": false,
+        "preview_rotation": -0.25,
+        "visible": false
+      },
+      "yaw": 0
+    },
+    {
+      "arm_length": 7.59999990463257,
+      "attack_direction": [
+        -0.0383489578962326,
+        0,
+        0.999264419078827
+      ],
+      "avatar_yaw": 3.10323429107666,
+      "camera": [
+        -1.86264514923096e-8,
+        4.79982805252075,
+        0.139349937438965
+      ],
+      "chance_pads": [],
+      "chance_rolls": 0,
+      "chance_sinks": 0,
+      "decoy_trips": 0,
+      "decoys": [
+        {
+          "collapsed": false,
+          "position": [
+            4.80000019073486,
+            0,
+            -3.40000009536743
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -6.40000009536743,
+            0,
+            -13
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            8.19999980926514,
+            0,
+            -22.7999992370605
+          ],
+          "red_frog": true
+        },
+        {
+          "collapsed": false,
+          "position": [
+            -5.90000009536743,
+            0,
+            -29.1000003814697
+          ],
+          "red_frog": true
+        }
+      ],
+      "falling_through": false,
+      "falls": 0,
+      "fps": 60,
+      "frogs": [
+        {
+          "alive": false,
+          "pad": 1,
+          "position": [
+            0,
+            0.600000023841858,
+            -5.94999980926514
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 2,
+          "position": [
+            -1.79999995231628,
+            0.600000023841858,
+            -10.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 3,
+          "position": [
+            0.800000011920929,
+            0.600000023841858,
+            -15.9499998092651
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 4,
+          "position": [
+            3.59999990463257,
+            0.600000023841858,
+            -20.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 5,
+          "position": [
+            1.5,
+            0.600000023841858,
+            -25.9500007629395
+          ]
+        },
+        {
+          "alive": true,
+          "pad": 6,
+          "position": [
+            -1,
+            0.600000023841858,
+            -30.9500007629395
+          ]
+        }
+      ],
+      "frogs_remaining": 5,
+      "grounded": true,
+      "has_bat": true,
+      "health": 100,
+      "hits": 1,
+      "hoodie": "f3cc58",
+      "jumps": 1,
+      "level": 2,
+      "muted": false,
+      "name_focused": false,
+      "outfit": {
+        "character": 0,
+        "hair_color": 0,
+        "hair_style": 0,
+        "pants_color": 0,
+        "pants_style": 0,
+        "shoe_color": 0,
+        "shoe_style": 0,
+        "skin": 1,
+        "top_color": 0,
+        "top_style": 0
+      },
+      "outfit_saved": true,
+      "pad": 1,
+      "pitch": -0.42,
+      "player_name": "",
+      "poison_deaths": 0,
+      "poison_source_pad": -1,
+      "poisoned": false,
+      "position": [
+        -1.86264514923096e-8,
+        0.600848376750946,
+        -6.80012655258179
+      ],
+      "seconds": 4.06666666666666,
+      "secret_notice_time": 0,
+      "secret_perches": [
+        {
+          "position": [
+            -8.3349142074585,
+            1.04743501543999,
+            -0.070649266242981
+          ]
+        },
+        {
+          "position": [
+            -7.13558673858643,
+            0.469960004091263,
+            -1.36506593227386
+          ]
+        },
+        {
+          "position": [
+            -7.09662055969238,
+            0.615264028310776,
+            1.26605534553528
+          ]
+        },
+        {
+          "position": [
+            -9.51091957092285,
+            1.24350607395172,
+            -1.06492733955383
+          ]
+        },
+        {
+          "position": [
+            -9.17879867553711,
+            1.15894675254822,
+            -0.932178378105164
+          ]
+        }
+      ],
+      "secret_saved": true,
+      "secret_unlock_count": 0,
+      "secret_unlocked": false,
+      "state": "playing",
+      "swing_remaining": 0.246666666666667,
+      "swings": 1,
+      "velocity": [
+        0,
+        0,
+        0
+      ],
+      "victories": 0,
+      "wardrobe": {
+        "category": "Character",
+        "controls": {},
+        "draft": {
+          "character": 0,
+          "hair_color": 0,
+          "hair_style": 0,
+          "pants_color": 0,
+          "pants_style": 0,
+          "shoe_color": 0,
+          "shoe_style": 0,
+          "skin": 1,
+          "top_color": 0,
+          "top_style": 0
+        },
+        "name": "",
+        "name_focused": false,
+        "preview_rotation": -0.25,
+        "visible": false
+      },
+      "yaw": 0
+    }
+  ]
+}

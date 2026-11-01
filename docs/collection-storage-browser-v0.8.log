@@ -1,0 +1,14 @@
+
+> lily-pad-escape-qa@0.8.0 test:collection-storage
+> node tests/collection_storage_browser_test.cjs
+
+PASS: Web loading keeps valid fireflies and rejects invalid masks
+PASS: Collection loading preserves the saved name, outfit, and secret reward
+PASS: Malformed collection JSON falls back without damaging older saves
+PASS: The browser shows a landing marker during the frog crouch
+PASS: Blocked browser storage still opens a playable empty collection
+PASS: A real pickup stays collected when browser storage rejects saving
+PASS: An unsaved pickup survives a restart in the same visit
+PASS: Storage denial does not falsely claim persistence across reload
+PASS: Malformed and blocked browser storage produce no engine or browser errors
+RESULT: 9 checks passed

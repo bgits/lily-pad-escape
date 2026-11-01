@@ -1,0 +1,20 @@
+
+> lily-pad-escape-qa@0.5.1 test:facing
+> node tests/swing_facing_browser_test.cjs
+
+PASS: Movement faces ArrowDown independently of the camera
+PASS: f swing preserves the character orientation
+PASS: f hit direction follows the character rather than camera yaw
+PASS: Recovery keeps the ArrowDown facing
+PASS: Movement faces ArrowLeft independently of the camera
+PASS: mouse swing preserves the character orientation
+PASS: mouse hit direction follows the character rather than camera yaw
+PASS: Recovery keeps the ArrowLeft facing
+PASS: Normal movement gets beyond a living frog
+PASS: Arrow Down turns back toward the frog while the camera stays forward
+PASS: Backward attack stays facing the frog through impact
+PASS: Backward-facing attack defeats the frog behind the camera
+PASS: Backward kill restores 100 percent health
+PASS: Character still faces backwards after the successful swing
+PASS: Facing regression has no browser or engine errors
+RESULT: 15 swing-facing checks passed
