@@ -4,6 +4,7 @@ cd "$(dirname "$0")/.."
 LILY_GODOT_BIN="${GODOT_BIN:-$PWD/.tools/Godot.app/Contents/MacOS/Godot}"
 "$LILY_GODOT_BIN" --headless --path game --editor --import --quit
 # Advance at the game's 60 Hz timestep without waiting for wall-clock frames.
+"$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/music_test.gd
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/controller_test.gd
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/combat_test.gd
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/swing_facing_test.gd

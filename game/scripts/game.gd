@@ -21,6 +21,8 @@ var furthest_pad := 0
 var falls := 0
 var victories := 0
 var sounds: Dictionary = {}
+var level_music: AudioStreamPlayer
+var level_music_tracks: Array[AudioStreamMP3] = []
 var ready_to_pause := false
 var run_seconds := 0.0
 var telemetry_enabled := false
@@ -149,6 +151,14 @@ func _ready() -> void:
 		sound.volume_db = -12.0
 		add_child(sound)
 		sounds[sound_name] = sound
+	level_music = AudioStreamPlayer.new()
+	for music_path in ["res://assets/audio/platformer_rush.mp3", "res://assets/audio/bouncing_beat_pt2.mp3", "res://assets/audio/lily_pad_rush.mp3"]:
+		var music_stream: AudioStreamMP3 = load(music_path).duplicate()
+		music_stream.loop = true
+		level_music_tracks.append(music_stream)
+	level_music.stream = level_music_tracks[0]
+	level_music.volume_db = -12.0
+	add_child(level_music)
 	if OS.has_feature("web"):
 		telemetry_enabled = bool(JavaScriptBridge.eval("new URLSearchParams(location.search).has('qa')"))
 	ready_to_pause = DisplayServer.get_name() != "headless"
@@ -244,6 +254,11 @@ func start_run() -> void:
 	profile.player_name = ui.name_input.text
 	outfit_saved = profile.save_customization()
 	stop_sounds()
+	level_music.stop()
+	level_music.stream_paused = false
+	if level_index < level_music_tracks.size():
+		level_music.stream = level_music_tracks[level_index]
+		level_music.play()
 	player.respawn(level.spawn)
 	player.jump_count = 0
 	player.swing_count = 0
@@ -283,6 +298,7 @@ func capture_mouse() -> void:
 
 func show_title() -> void:
 	stop_sounds()
+	level_music.stop()
 	state = "title"
 	world.set_motion_paused(false)
 	player.active = false
@@ -300,6 +316,7 @@ func pause() -> void:
 		return
 	previous_state = state
 	state = "paused"
+	level_music.stream_paused = true
 	world.set_motion_paused(true)
 	player.active = false
 	player.clear_input()
@@ -310,6 +327,7 @@ func resume() -> void:
 	if state != "paused":
 		return
 	state = previous_state
+	level_music.stream_paused = false
 	world.set_motion_paused(false)
 	player.active = state == "playing"
 	player.clear_input()
@@ -335,6 +353,7 @@ func win() -> void:
 	if state != "playing" or world.frogs_remaining() > 0:
 		return
 	state = "won"
+	level_music.stop()
 	world.set_motion_paused(true)
 	victories += 1
 	player.active = false

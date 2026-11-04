@@ -54,6 +54,8 @@ Open **http://127.0.0.1:8765/** in desktop Chrome or Firefox. The game needs Web
 - **Escape**: pause and release the mouse (left click also pauses in Levels 1 and 3)
 - **R**: restart
 
+Level 1 plays “Platformer Rush”, Level 2 plays “Bouncing Beat pt2”, and Level 3 plays “Lily Pad Rush”; the sound control also mutes the music.
+
 Click **Let's hop!**, **Resume**, **Next level**, or **Play again** to capture the mouse. Click the sound button on the title or pause/victory panel to mute. Focus loss or mouse-lock loss pauses the game. If a browser declines mouse capture, the game pauses safely; click Resume after focusing its window.
 
 ## Edit and export
