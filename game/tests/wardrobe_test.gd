@@ -34,6 +34,7 @@ func run() -> void:
 	DirAccess.remove_absolute(LEGACY_SAVE)
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = TEST_SAVE
+	game.tide_enabled = false
 	root.add_child(game)
 	await frames(3)
 	var original: Dictionary = game.profile.outfit.duplicate()

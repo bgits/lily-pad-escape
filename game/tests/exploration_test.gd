@@ -33,6 +33,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = SAVE
 	DirAccess.remove_absolute(SAVE)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	check(game.profile.firefly_masks == [0,0,0],"A new profile has no collected fireflies")

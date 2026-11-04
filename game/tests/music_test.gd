@@ -16,6 +16,7 @@ func check(condition: bool, message: String) -> void:
 func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_music.cfg"
+	game.tide_enabled = false
 	root.add_child(game)
 	check(not game.level_music.playing, "Title screen starts without level music")
 	check(game.level_music.stream is AudioStreamMP3 and game.level_music.stream.loop, "Supplied track is configured to loop")

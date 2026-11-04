@@ -39,6 +39,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_decoy.cfg"
 	DirAccess.remove_absolute(game.profile.storage_path)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	await frames(3)
@@ -67,7 +68,7 @@ func run() -> void:
 	player.velocity.y = 8.0
 	await frames(12)
 	check(not pad.collapsed and game.decoy_trips == 0,"Flying above a decoy without landing does not trigger it")
-	# Clear one green frog first; trap retries must preserve that progress.
+	# Clear one green frog first; trap retries must restore it.
 	var green: LilyFrog = game.world.frogs[0]
 	player.respawn(green.global_position+Vector3(0,0,1.75))
 	await frames(3)
@@ -101,7 +102,7 @@ func run() -> void:
 		check(not pad.visible and pad.marker.global_position.y < game.level.water_height,"Collapsed pad %d and its warning frog sink under the water" % (i+1))
 		await frames(50)
 		check(game.state == "playing" and not pad.collapsed and pad.visible and pad.collision_layer == 1 and not player.falling_through,"Retry restores decoy %d and ordinary movement" % (i+1))
-		check(game.hit_count == 1 and game.world.frogs_remaining() == 5,"Trap retry %d preserves defeated green frogs" % (i+1))
+		check(game.hit_count == 0 and game.world.frogs_remaining() == 6,"Trap retry %d restores all green frogs" % (i+1))
 	key(KEY_SPACE)
 	await frames(4)
 	key(KEY_SPACE,false)

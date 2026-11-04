@@ -9,7 +9,7 @@ Green frogs have physical collision, idle hops, and a cartoony flip-and-puff def
 
 **Yellow frogs** are chance markers on Level 3. Each yellow pad draws one independent random result on its first landing in an attempt: 50% sink, 50% solid. A solid result lasts for that attempt, including re-landings. Retry/restart resets all yellow pads for fresh rolls. Yellow markers do not poison and are not enemies. Seven yellow pads sit along the main route, all the way to the final island. Smaller, permanently solid pads form bypasses around every yellow pad. You can mix the risky main route and the safer bypasses; the level remains completable without any lucky rolls.
 
-Missing a landing or choosing a sinking pad gives you a splash and a quick retry. Defeated green frogs stay cleared after a fall; fake pads reset for the next try. Restart or replay restores all enemies and traps. Name, hoodie color, sound/mute, pause/resume, and replay work in all three levels.
+Missing a landing or choosing a sinking pad gives you a splash and a quick retry. All green frogs reappear after any death or water fall; fake pads reset for the next try. Restart or replay restores all enemies and traps. Name, hoodie color, sound/mute, pause/resume, and replay work in all three levels.
 
 **Secret Perch achievement:** jump onto a stone pillar just left of the starting lily pad. Landing on its top awards a badge and immediately equips the purple **Moonflower** hoodie. The badge card on the title screen lets you wear it again. The unlock survives restarts, level changes, and browser refreshes on the same browser/origin; clearing site data removes it. If storage is unavailable, it remains earned for the current visit. The pillar stays solid, and earning the badge does not finish the course.
 
@@ -34,6 +34,8 @@ Click **Customize** beside the name field on the title screen, or in the top-rig
 - **Shoes:** Sneakers, Boots, or High-tops; six colors.
 
 Mix any hairstyle and outfit with any character option. **Save outfit** equips your choices and stores them locally; **Cancel** or Escape discards the preview. Saving from pause returns to pause with your position and run intact. Names and clothing survive refreshes on the same browser/origin. Clearing site data clears those choices. If storage is unavailable, the outfit remains usable for the current visit. Existing Secret Perch saves are preserved. Clothing does not change movement, jumping, or hitboxes.
+
+A wave chases you through every level after a six-second head start. A rear-view window shows the taller foaming wave behind you. It speeds up smoothly when you get far ahead, then slows to its normal pace nearby. Watch the distance in the HUD and keep moving: the advancing front catches you even on a lily pad. Pause freezes the wave; retry resets it and brings every defeated frog back. Frog River gives you a slower wave to allow time for combat.
 
 ## Play now
 

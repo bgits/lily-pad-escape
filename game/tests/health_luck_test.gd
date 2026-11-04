@@ -51,6 +51,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_health_luck.cfg"
 	DirAccess.remove_absolute(game.profile.storage_path)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	game.start_run()
@@ -126,9 +127,9 @@ func run() -> void:
 	game.resume()
 	await frames(85)
 	check(game.state == "playing" and game.health == 100 and not game.poisoned and player.is_on_floor(),"Poison retry returns to the practice pad at full health")
-	check(game.world.frogs_remaining() == 5 and game.hit_count == 1,"Poison retry preserves previously defeated green frogs")
+	check(game.world.frogs_remaining() == 6 and game.hit_count == 0,"Poison retry restores all green frogs and clears hits")
 	check(player.avatar.rotation.is_equal_approx(Vector3.ZERO),"Retry clears the poison-defeat pose")
-	await stand_by(frog)
+	await stand_by(game.world.frogs[1])
 	key(KEY_R)
 	await frames(8)
 	key(KEY_R,false)

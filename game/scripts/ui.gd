@@ -59,6 +59,7 @@ var customize_button: Button
 var pause_customize_button: Button
 var profile_note: Label
 var pause_detail: Label
+var tide_label: Label
 var firefly_label: Label
 
 func _ready() -> void:
@@ -156,7 +157,7 @@ func make_start() -> void:
 	gap(stack,7)
 	label(stack,"A little leap. A big adventure.",20)
 	gap(stack,6)
-	start_detail = label(stack,"Hop across the lagoon.\nFind your way to the yellow flag.",17,MUTED)
+	start_detail = label(stack,"Hop across the lagoon.\nStay ahead of the chasing water.",17,MUTED)
 	gap(stack,16)
 	label(stack,"YOUR ADVENTURER",12,MUTED)
 	var adventurer_row := HBoxContainer.new()
@@ -322,6 +323,7 @@ func make_hud() -> void:
 	level_label = label(info,"LEVEL 1",23)
 	progress_label = label(info,"Sunlit lagoon  ·  Reach the flag",13,MUTED)
 	firefly_label = label(info,"Fireflies  0 / 3",15,INK)
+	tide_label = label(info,"Water moves in 6…",15,INK)
 	objective_label = label(info,"",17)
 	objective_label.visible = false
 	frog_legend = label(info,"",13,MUTED)
@@ -461,9 +463,9 @@ func configure_level(index: int, data: LilyLevel) -> void:
 	frog_legend.visible = lucky
 	frog_legend.text = "Yellow: 50% sink  ·  50% stay" if lucky else ""
 	hints.text = "WASD / Arrows  Move    SPACE  Jump    MOUSE  Look    CLICK / F  Swing bat    ESC  Pause    R  Restart" if combat else "WASD / Arrows  Move     SPACE  Jump     MOUSE  Look     CLICK/ESC  Pause     R  Restart"
-	start_detail.text = "Find a way across the river.\nReach the yellow flag." if combat else "Hop across the lagoon.\nFind your way to the yellow flag."
+	start_detail.text = "Clear the frogs. Reach the flag.\nStay ahead of the chasing water." if combat else "Hop across the lagoon.\nStay ahead of the chasing water."
 	if lucky:
-		start_detail.text = "A winding route. A tempting shortcut.\nFind your way to the yellow flag."
+		start_detail.text = "Risk the frogs or take the tiny pads.\nStay ahead of the chasing water."
 	for i in level_buttons.size():
 		level_buttons[i].add_theme_stylebox_override("normal",style(GOLD if i == index else CREAM))
 		level_buttons[i].add_theme_stylebox_override("hover",style(Color("ffe18a") if i == index else Color("d5e2c9")))

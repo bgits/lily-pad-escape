@@ -91,7 +91,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await shot('26-poison-defeat.png');
   await page.keyboard.press('f');await sleep(180);s=await read();check(s.health===0&&s.frogs_remaining===5,'A dead character cannot heal with a late attack');
   await state('playing');await sleep(250);s=await read();
-  check(s.health===100&&!s.poisoned&&s.grounded&&s.frogs_remaining===5,'Poison retry restores full health and preserves defeated frogs');
+  check(s.health===100&&!s.poisoned&&s.grounded&&s.frogs_remaining===6,'Poison retry restores full health and all frogs');
   await shot('27-healthy-retry.png');
   await page.keyboard.press('r');await sleep(500);
   // Cross via normal jumps, land near each frog, face it, and swing.

@@ -6,6 +6,8 @@ const PlayerScript = preload("res://scripts/player.gd")
 const UIScript = preload("res://scripts/ui.gd")
 const ProfileScript = preload("res://scripts/profile.gd")
 const LEVELS := ["res://levels/sunlit_lagoon.tres","res://levels/frog_river.tres","res://levels/lucky_lagoon.tres"]
+var tide: ChasingWater
+var tide_enabled := true
 var level_index := 0
 var level: LilyLevel
 var world: LilyWorld
@@ -161,6 +163,10 @@ func _ready() -> void:
 	add_child(level_music)
 	if OS.has_feature("web"):
 		telemetry_enabled = bool(JavaScriptBridge.eval("new URLSearchParams(location.search).has('qa')"))
+	tide = ChasingWater.new()
+	add_child(tide)
+	tide.make_rear_view(ui.hud)
+	tide.visible = false
 	ready_to_pause = DisplayServer.get_name() != "headless"
 
 func quick_color(color: Color) -> void:
@@ -254,6 +260,9 @@ func start_run() -> void:
 	profile.player_name = ui.name_input.text
 	outfit_saved = profile.save_customization()
 	stop_sounds()
+	tide.reset()
+	tide.speed = 1.35 if level_index == 1 else 1.8
+	tide.visible = tide_enabled
 	level_music.stop()
 	level_music.stream_paused = false
 	if level_index < level_music_tracks.size():
@@ -297,6 +306,7 @@ func capture_mouse() -> void:
 	get_viewport().gui_release_focus()
 
 func show_title() -> void:
+	tide.visible = false
 	stop_sounds()
 	level_music.stop()
 	state = "title"
@@ -353,6 +363,7 @@ func win() -> void:
 	if state != "playing" or world.frogs_remaining() > 0:
 		return
 	state = "won"
+	tide.visible = false
 	level_music.stop()
 	world.set_motion_paused(true)
 	victories += 1
@@ -386,6 +397,14 @@ func _on_player_stepped(delta: float) -> void:
 	if state != "playing":
 		return
 	run_seconds += delta
+	if tide_enabled:
+		tide.advance(delta,player.position)
+		tide.update_rear_view(player.position)
+		ui.tide_label.text = "Water moves in %d…" % ceili(tide.grace) if tide.grace > 0 else "Chasing water  ·  %d m behind" % maxi(0,ceili(tide.front_z-player.position.z))
+		if tide.has_caught(player.position):
+			fail()
+			ui.toast.text = "The water caught you! Keep moving."
+			return
 	if player.global_position.y < level.water_height - 0.18 or player.global_position.y < -10 or Vector2(player.position.x,player.position.z).length() > 120:
 		fail()
 		return
@@ -505,6 +524,9 @@ func _physics_process(delta: float) -> void:
 	if state in ["splash","poison_defeat"]:
 		retry_timer -= delta
 		if retry_timer <= 0:
+			world.reset_frogs()
+			hit_count = 0
+			tide.reset()
 			world.reset_decoys()
 			world.reset_motion()
 			player.respawn(level.spawn)
@@ -567,4 +589,4 @@ func debug_snapshot() -> Dictionary:
 		decoy_data.append({"position":[pad.position.x,pad.position.y,pad.position.z],"collapsed":pad.collapsed,"red_frog":pad.marker.is_decoy})
 	for frog in world.frogs:
 		frog_data.append({"pad":frog.pad_index,"alive":frog.alive,"behavior":frog.behavior,"clock":frog.clock,"telegraph":is_instance_valid(frog.landing_marker) and frog.landing_marker.visible,"position":[frog.position.x,frog.position.y,frog.position.z]})
-	return {"fireflies":firefly_data,"firefly_masks":profile.firefly_masks,"fireflies_saved":fireflies_saved,"drifting_pads":drift_data,"bypass_pads":bypass_data,"outfit":profile.outfit,"outfit_saved":outfit_saved,"wardrobe":ui.wardrobe.debug_snapshot(),"secret_unlocked":profile.secret_perch,"secret_unlock_count":secret_unlock_count,"secret_saved":secret_saved,"secret_notice_time":secret_notice_time,"secret_perches":perch_data,"state":state,"chance_pads":chance_data,"chance_rolls":chance_rolls,"chance_sinks":chance_sinks,"health":health,"poisoned":poisoned,"poison_source_pad":poison_source_pad,"poison_deaths":poison_deaths,"level":level_index+1,"has_bat":player.has_bat,"swings":player.swing_count,"hits":hit_count,"frogs_remaining":world.frogs_remaining(),"frogs":frog_data,"decoys":decoy_data,"decoy_trips":decoy_trips,"falling_through":player.falling_through,"swing_remaining":player.swing_remaining,"position":[player.position.x,player.position.y,player.position.z],"velocity":[player.velocity.x,player.velocity.y,player.velocity.z],"grounded":player.is_on_floor(),"pad":furthest_pad,"falls":falls,"victories":victories,"jumps":player.jump_count,"yaw":player.yaw,"avatar_yaw":player.avatar.rotation.y,"attack_direction":[player.attack_direction.x,player.attack_direction.y,player.attack_direction.z],"pitch":player.pitch,"camera":[player.camera.global_position.x,player.camera.global_position.y,player.camera.global_position.z],"arm_length":player.arm.get_hit_length(),"fps":Engine.get_frames_per_second(),"seconds":run_seconds,"muted":AudioServer.is_bus_mute(0),"player_name":ui.name_input.text,"name_focused":ui.name_input.has_focus(),"hoodie":player.avatar.hoodie.albedo_color.to_html(false)}
+	return {"tide_front":tide.front_z,"tide_grace":tide.grace,"fireflies":firefly_data,"firefly_masks":profile.firefly_masks,"fireflies_saved":fireflies_saved,"drifting_pads":drift_data,"bypass_pads":bypass_data,"outfit":profile.outfit,"outfit_saved":outfit_saved,"wardrobe":ui.wardrobe.debug_snapshot(),"secret_unlocked":profile.secret_perch,"secret_unlock_count":secret_unlock_count,"secret_saved":secret_saved,"secret_notice_time":secret_notice_time,"secret_perches":perch_data,"state":state,"chance_pads":chance_data,"chance_rolls":chance_rolls,"chance_sinks":chance_sinks,"health":health,"poisoned":poisoned,"poison_source_pad":poison_source_pad,"poison_deaths":poison_deaths,"level":level_index+1,"has_bat":player.has_bat,"swings":player.swing_count,"hits":hit_count,"frogs_remaining":world.frogs_remaining(),"frogs":frog_data,"decoys":decoy_data,"decoy_trips":decoy_trips,"falling_through":player.falling_through,"swing_remaining":player.swing_remaining,"position":[player.position.x,player.position.y,player.position.z],"velocity":[player.velocity.x,player.velocity.y,player.velocity.z],"grounded":player.is_on_floor(),"pad":furthest_pad,"falls":falls,"victories":victories,"jumps":player.jump_count,"yaw":player.yaw,"avatar_yaw":player.avatar.rotation.y,"attack_direction":[player.attack_direction.x,player.attack_direction.y,player.attack_direction.z],"pitch":player.pitch,"camera":[player.camera.global_position.x,player.camera.global_position.y,player.camera.global_position.z],"arm_length":player.arm.get_hit_length(),"fps":Engine.get_frames_per_second(),"seconds":run_seconds,"muted":AudioServer.is_bus_mute(0),"player_name":ui.name_input.text,"name_focused":ui.name_input.has_focus(),"hoodie":player.avatar.hoodie.albedo_color.to_html(false)}
