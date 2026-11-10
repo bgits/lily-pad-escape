@@ -1,0 +1,550 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (3 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | RiverRapids[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Title hides the chasing wave
+PASS: A fresh attempt gives a head start
+PASS: Pause freezes the head-start countdown
+PASS: The wardrobe keeps the wave frozen
+PASS: The wave advances after the head start
+PASS: Pause freezes an advancing wave
+PASS: The advancing water catches a stationary player on a pad
+PASS: Retry restores a safe head start
+PASS: Fixture clears two frogs before being caught
+PASS: Chasing water also catches the player in Frog River
+PASS: Death restores both defeated frogs and resets combat progress
+PASS: Retry restores full health
+PASS: Victory ends the chase
+PASS: Returning home hides the wave
+PASS: The wave keeps a visible, escapable gap behind a running player
+PASS: Catch-up advances smoothly without teleporting
+PASS: Rear view renders the actual game world
+PASS: The pursuing crest is inside the rear camera view
+CHASE RESULT: 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Title screen starts without level music
+PASS: Supplied track is configured to loop
+PASS: First level starts its own track
+PASS: Pause freezes the track
+PASS: Wardrobe opened from pause keeps the track paused
+PASS: Resume continues the track
+PASS: Sound switch mutes music on the master bus
+PASS: Sound switch restores audio
+PASS: Victory stops the track
+PASS: Next level plays its own background track
+PASS: Second-level track loops
+PASS: Second-level music pauses
+PASS: Second-level music resumes
+PASS: Third level plays its own background track
+PASS: Third-level track loops
+PASS: Third-level music pauses
+PASS: Third-level music resumes
+PASS: Selecting level one does not play music on the title
+PASS: Replaying level one starts music again
+PASS: Returning home stops the track
+MUSIC RESULT: 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Spawn settles on visible starting surface
+PASS: Feet match platform height
+PASS: Diagonal speed equals straight-line speed
+PASS: Holding jump produces one jump and returns to ground
+PASS: Keyboard autorepeat does not trigger another jump
+PASS: Coyote jump works shortly after leaving a real pad edge
+PASS: Expired coyote time cannot create a midair jump
+PASS: Buffered press just before landing produces one new jump
+PASS: Pause freezes the character in midair
+PASS: Resume continues the frozen jump
+PASS: One splash event per fall 1
+PASS: Quick respawn returns to start 1
+PASS: One splash event per fall 2
+PASS: Quick respawn returns to start 2
+PASS: One splash event per fall 3
+PASS: Quick respawn returns to start 3
+PASS: Respawn clears velocity and buffered input
+PASS: Pad collider matches the visible notched surface
+PASS: Camera retracts before an obstacle and excludes the player
+PASS: Camera stays above water
+PASS: Restart resets all session progress
+RESULT: 21 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 2 spawns with the visible bat equipped
+PASS: Six frogs spawn with no accidental initial swing
+PASS: Distant swing cannot damage frogs
+PASS: A frog behind the attack direction is not hit
+PASS: A frog outside 2.3 m remains alive
+PASS: A swing too high above a frog cannot hit it
+PASS: Wind-up precedes the impact frame
+PASS: A forward bat impact defeats the frog exactly once
+PASS: Defeated frog immediately releases its physical obstruction
+PASS: Attack cooldown rejects repeated presses and autorepeat
+PASS: Defeat animation removes the frog after its puff
+PASS: An already defeated frog cannot be counted twice
+PASS: Left click attacks instead of pausing in Level 2
+PASS: Holding the mouse does not repeat attacks
+PASS: Pause freezes attack wind-up and frog animation
+PASS: Resumed swing delivers its pending hit once
+PASS: Water retry restores all frogs and keeps the bat equipped
+PASS: Water retry clears unfinished attack state
+PASS: Restart restores all frogs and clears combat counters
+PASS: Living frog has real physical collision on its pad
+PASS: Flag cannot finish Level 2 while frogs remain
+PASS: All six frogs can be defeated through the melee input
+PASS: Cleared river finishes on the grounded flag island
+PASS: Frog river offers the new Lucky lagoon level
+PASS: Replay stays in Level 2 and restores enemies
+PASS: Selecting Level 1 removes all combat equipment and enemies
+PASS: Level 1 victory offers the next level
+PASS: Next level starts a fresh Frog river run
+PASS: Level transition retains adventurer name and hoodie choice
+RESULT: 29 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Movement turns the character away from the camera for key 4194322
+PASS: Swing start preserves character facing for key 4194322
+PASS: Hit direction matches character facing for key 4194322
+PASS: Camera orbit does not redirect the impact for key 4194322
+PASS: Swing recovery keeps the original facing for key 4194322
+PASS: Movement turns the character away from the camera for key 4194319
+PASS: Swing start preserves character facing for key 4194319
+PASS: Hit direction matches character facing for key 4194319
+PASS: Camera orbit does not redirect the impact for key 4194319
+PASS: Swing recovery keeps the original facing for key 4194319
+PASS: Movement turns the character away from the camera for key 4194321
+PASS: Swing start preserves character facing for key 4194321
+PASS: Hit direction matches character facing for key 4194321
+PASS: Camera orbit does not redirect the impact for key 4194321
+PASS: Swing recovery keeps the original facing for key 4194321
+PASS: A live poisoning frog is behind the camera after turning back toward it
+PASS: Backward-facing swing hits the frog behind the camera
+PASS: Successful backward hit does not rotate the character
+PASS: Backward hit still restores full health and cures poison
+PASS: Movement can turn the character normally after recovery
+SWING FACING RESULT: 20 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: The introductory lagoon has no decoy hazards
+PASS: Frog river has four decoys and six required green frogs
+PASS: Decoys do not overlap safe landing surfaces
+PASS: Red warning frogs cannot be used as solid footholds
+PASS: Red markers cannot be defeated and do not change the enemy count
+PASS: A real bat swing leaves the red marker with ordinary miss feedback
+PASS: Flying above a decoy without landing does not trigger it
+PASS: Green enemies still defeat normally beside the decoy branches
+PASS: Landing triggers decoy 1 exactly once
+PASS: Decoy 1 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 1
+PASS: Pause freezes both the sinking pad and the falling character
+PASS: Decoy 1 drops the player into one water failure with ordinary splash feedback
+PASS: Collapsed pad 1 and its warning frog sink under the water
+PASS: Retry restores decoy 1 and ordinary movement
+PASS: Trap retry 1 restores all green frogs
+PASS: Landing triggers decoy 2 exactly once
+PASS: Decoy 2 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 2
+PASS: Decoy 2 drops the player into one water failure with ordinary splash feedback
+PASS: Collapsed pad 2 and its warning frog sink under the water
+PASS: Retry restores decoy 2 and ordinary movement
+PASS: Trap retry 2 restores all green frogs
+PASS: Landing triggers decoy 3 exactly once
+PASS: Decoy 3 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 3
+PASS: Decoy 3 drops the player into one water failure with ordinary splash feedback
+PASS: Collapsed pad 3 and its warning frog sink under the water
+PASS: Retry restores decoy 3 and ordinary movement
+PASS: Trap retry 3 restores all green frogs
+PASS: Landing triggers decoy 4 exactly once
+PASS: Decoy 4 removes support without advancing route progress
+PASS: A late jump cannot rescue a collapsed pad 4
+PASS: Decoy 4 drops the player into one water failure with ordinary splash feedback
+PASS: Collapsed pad 4 and its warning frog sink under the water
+PASS: Retry restores decoy 4 and ordinary movement
+PASS: Trap retry 4 restores all green frogs
+PASS: Jump controls work again after a decoy retry
+PASS: Restart during collapse resets hazards, failures, and all green enemies
+PASS: Restart during collapse returns to a supported practice pad
+PASS: Returning to Level 1 removes the decoys and their instructions
+RESULT: 41 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Level 1 remains healthy without a combat meter
+PASS: Frog River starts at 100 percent and the practice pad is safe
+PASS: Flying over a frog pad without contact does not poison
+PASS: Actual landing beside a living green frog begins poison damage
+PASS: Poison makes the character's purple effect visible
+PASS: Poison drains 20 health points per second without stacking contact hits
+PASS: Pause freezes poison damage and its visual effect
+PASS: Resume continues poison damage
+PASS: A missed swing does not heal or cure poison
+PASS: Jumping away does not remove an applied poison
+PASS: Applied poison continues even after reaching an empty pad
+PASS: Defeating a green frog instantly restores exactly 100 percent and cures poison
+PASS: Healing clears the poison effect and fills the health bar
+PASS: A cleared pad cannot reapply poison
+PASS: Landing on the frog itself also applies its pad's poison
+PASS: Reaching zero health causes one poison defeat
+PASS: A full health bar lasts approximately five seconds of poison
+PASS: Poison defeat is distinct from a water fall and stops control
+PASS: Attacking after death cannot heal or create a second defeat
+PASS: Pause also freezes the poison-defeat retry
+PASS: Poison retry returns to the practice pad at full health
+PASS: Poison retry restores all green frogs and clears hits
+PASS: Retry clears the poison-defeat pose
+PASS: R resets health, poison, death counters, and enemies
+PASS: A water fall takes one failure path while poisoned
+PASS: Water retry also cures poison and restores health
+PASS: Red decoys remain sinking hazards and do not apply green-frog poison
+PASS: Level 3 starts with seven yellow chance markers and no combat enemies
+PASS: Entering Level 3 clears poison and hides combat-only health UI
+PASS: Yellow frogs are visible chance markers without solid footholds
+PASS: A real first landing can roll the solid outcome
+PASS: Standing and re-landing do not reroll a solid yellow pad
+PASS: A yellow frog never poisons the player
+PASS: Restart clears yellow-pad outcomes and counters
+PASS: A real first landing can instead sink the yellow pad
+PASS: Pause freezes a sinking yellow pad
+PASS: An unlucky fall retries with a fresh unresolved yellow pad
+PASS: A new attempt can produce a different yellow-pad outcome
+PASS: A 1000-roll sample is consistent with the 50/50 threshold (518 sinks)
+PASS: Level 3 victory offers the new River Rapids crossing
+PASS: Level 2 victory transitions into a fresh Level 3
+RESULT: 41 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: The secret pillar remains reachable from spawn with an ordinary jump
+PASS: Level 1 has 18 main-route pads
+PASS: Level 1 pad 2 is reachable with ordinary movement
+PASS: Level 1 pad 3 is reachable with ordinary movement
+PASS: Level 1 pad 4 is reachable with ordinary movement
+PASS: Level 1 pad 5 is reachable with ordinary movement
+PASS: Level 1 pad 6 is reachable with ordinary movement
+PASS: Level 1 pad 7 is reachable with ordinary movement
+PASS: Level 1 pad 8 is reachable with ordinary movement
+PASS: Level 1 pad 9 is reachable with ordinary movement
+PASS: Level 1 pad 10 is reachable with ordinary movement
+PASS: Level 1 pad 11 is reachable with ordinary movement
+PASS: Level 1 pad 12 is reachable with ordinary movement
+PASS: Level 1 pad 13 is reachable with ordinary movement
+PASS: Level 1 pad 14 is reachable with ordinary movement
+PASS: Level 1 pad 15 is reachable with ordinary movement
+PASS: Level 1 pad 16 is reachable with ordinary movement
+PASS: Level 1 pad 17 is reachable with ordinary movement
+PASS: Level 1 pad 18 is reachable with ordinary movement
+PASS: Level 1 far-shore firefly remains reachable
+PASS: Level 1 entire extended crossing wins without falls
+PASS: Level 2 has 18 main-route pads
+PASS: Level 2 pad 2 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 pad 3 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 pad 4 is reachable with ordinary movement
+PASS: Level 2 pad 5 is reachable with ordinary movement
+PASS: Level 2 pad 6 is reachable with ordinary movement
+PASS: Level 2 pad 7 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 pad 8 is reachable with ordinary movement
+PASS: Level 2 pad 9 is reachable with ordinary movement
+PASS: Level 2 pad 10 is reachable with ordinary movement
+PASS: Level 2 pad 11 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 pad 12 is reachable with ordinary movement
+PASS: Level 2 pad 13 is reachable with ordinary movement
+PASS: Level 2 pad 14 is reachable with ordinary movement
+PASS: Level 2 pad 15 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 pad 16 is reachable with ordinary movement
+PASS: Level 2 pad 17 is reachable with ordinary movement
+PASS: Level 2 pad 18 is reachable with ordinary movement
+PASS: Route combat defeats frog and heals without teleporting
+PASS: Level 2 far-shore firefly remains reachable
+PASS: Level 2 entire extended crossing wins without falls
+RESULT: 47 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 5 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Lucky Lagoon has sixteen permanent precision platforms
+PASS: HUD does not require completing yellow pads
+PASS: All yellow pads are absent before the first jump
+PASS: Input-driven landing 1 reaches its solid destination with no falls
+PASS: Input-driven landing 2 reaches its solid destination with no falls
+PASS: A small bypass pad supports a paused player
+PASS: Input-driven landing 3 reaches its solid destination with no falls
+PASS: Input-driven landing 4 reaches its solid destination with no falls
+PASS: Input-driven landing 5 reaches its solid destination with no falls
+PASS: Input-driven landing 6 reaches its solid destination with no falls
+PASS: Input-driven landing 7 reaches its solid destination with no falls
+PASS: Input-driven landing 8 reaches its solid destination with no falls
+PASS: Input-driven landing 9 reaches its solid destination with no falls
+PASS: Input-driven landing 10 reaches its solid destination with no falls
+PASS: Input-driven landing 11 reaches its solid destination with no falls
+PASS: Input-driven landing 12 reaches its solid destination with no falls
+PASS: Input-driven landing 13 reaches its solid destination with no falls
+PASS: Input-driven landing 14 reaches its solid destination with no falls
+PASS: Input-driven landing 15 reaches its solid destination with no falls
+PASS: Input-driven landing 16 reaches its solid destination with no falls
+PASS: Input-driven landing 17 reaches its solid destination with no falls
+PASS: Input-driven landing 18 reaches its solid destination with no falls
+PASS: Input-driven landing 19 reaches its solid destination with no falls
+PASS: Input-driven landing 20 reaches its solid destination with no falls
+PASS: Input-driven landing 21 reaches its solid destination with no falls
+PASS: Input-driven landing 22 reaches its solid destination with no falls
+PASS: Input-driven landing 23 reaches its solid destination with no falls
+PASS: Input-driven landing 24 reaches its solid destination with no falls
+PASS: The relocated Lucky Lagoon shore firefly is reachable
+PASS: The entire extended skill route wins with all yellow pads missing
+PASS: Winning the skill route needs no favorable rolls or retries
+PASS: No yellow support was restored during the winning run
+PASS: The new route does not introduce poison or health damage
+PASS: Restart keeps every bypass platform permanently solid
+PASS: Restart restores the optional random shortcuts
+PASS: Sunlit Lagoon does not gain unintended bypass platforms
+PASS: Frog River does not gain unintended bypass platforms
+RESULT: 37 passed, 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: A new profile has no collected fireflies
+PASS: A moving pad physically carries a standing player
+PASS: The rider stays aligned with the moving surface
+PASS: Contact collects the moving firefly and records its unique identity
+PASS: Pause freezes the moving pad and rider
+PASS: Customization also freezes platform motion
+PASS: Resume continues the same motion phase
+PASS: The rider survives a complete eight-second platform cycle
+PASS: Jump detaches the player from the drifting pad
+PASS: Jumping does not inherit a surprise sideways launch
+PASS: Restart returns the drifting pad to its near endpoint
+PASS: Restart preserves a previously found firefly
+PASS: Level 1 has exactly three fireflies and one drifting pad
+PASS: Paused contact does not collect Level 1 firefly 2
+PASS: Level 1 firefly 2 collects once on live contact
+PASS: Paused contact does not collect Level 1 firefly 3
+PASS: Level 1 firefly 3 collects once on live contact
+PASS: Level 1 displays its complete unique collection
+PASS: Level 2 has exactly three fireflies and one drifting pad
+PASS: Paused contact does not collect Level 2 firefly 1
+PASS: Level 2 firefly 1 collects once on live contact
+PASS: Paused contact does not collect Level 2 firefly 2
+PASS: Level 2 firefly 2 collects once on live contact
+PASS: Paused contact does not collect Level 2 firefly 3
+PASS: Level 2 firefly 3 collects once on live contact
+PASS: Level 2 displays its complete unique collection
+PASS: Level 3 has exactly three fireflies and one drifting pad
+PASS: Paused contact does not collect Level 3 firefly 1
+PASS: Level 3 firefly 1 collects once on live contact
+PASS: Paused contact does not collect Level 3 firefly 2
+PASS: Level 3 firefly 2 collects once on live contact
+PASS: Paused contact does not collect Level 3 firefly 3
+PASS: Level 3 firefly 3 collects once on live contact
+PASS: Level 3 displays its complete unique collection
+PASS: All nine collectible identities remain independent
+PASS: Saving clothing and the secret preserves collections across reload
+PASS: Invalid collection masks are rejected
+PASS: Only valid integral masks load from JSON
+PASS: Malformed collection shapes fall back safely
+PASS: A failed save retains the firefly for this visit
+PASS: Crouch telegraphs the landing before the physical hop
+PASS: Pause freezes a frog's telegraph and movement
+PASS: Frog phases follow watch, crouch, hop, recovery in order
+PASS: The frog's actual body follows its visible sideways hop
+PASS: Recovery is grounded and clears the landing marker
+PASS: A recovery-window bat hit defeats the frog and fully heals
+PASS: Defeat cancels future hops and the telegraph
+PASS: Red markers do not acquire enemy movement
+RESULT: 48 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: New profile hides the secret reward
+PASS: Locked reward cannot be equipped
+PASS: Ordinary start-pad contact does not award a badge
+PASS: Existing five left-hand rocks have dedicated collision
+NEAREST SECRET PERCH: (-6.218784, 0.744375, -1.247733)
+PASS: Passing above a pillar without landing does not unlock
+PASS: Touching a pillar side does not unlock
+PASS: Actual pillar-top landing earns Secret Perch
+PASS: One award is saved successfully
+PASS: Badge celebration and wardrobe reward become available
+PASS: Moonflower hoodie equips immediately
+PASS: Secret badge does not complete the level or advance route progress
+PASS: Pillar remains a stable place to stand
+PASS: Standing on the pillar cannot repeat the award
+PASS: Pause freezes and hides the celebration
+PASS: Resume restores the celebration
+PASS: Restart keeps the badge without replaying its celebration
+PASS: Re-landing cannot award the badge a second time
+PASS: Water retry retains the unlocked reward
+PASS: Level 2 also supports its left pillar and preserves the badge
+PASS: Level 3 also supports its left pillar and preserves the badge
+PASS: Original hoodie colors remain selectable
+PASS: Unlocked hoodie can be re-equipped from the title
+PASS: A new game instance reloads the earned badge without another award
+PASS: Reloaded reward remains wearable
+PASS: Unavailable storage still grants the reward for this session
+SECRET RESULT: 25 passed; 0 failed
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Starting avatar uses the validated saved outfit
+PASS: Customize opens from the title without activating gameplay
+PASS: Preview uses an independent character with the current outfit
+PASS: All ten choices update the visible preview
+PASS: Unsaved previews do not change the gameplay character or profile
+PASS: Moonflower stays locked without the badge
+PASS: Wardrobe typing and controls cannot attack, jump, or restart the level
+PASS: Cancel discards unsaved changes and returns to the title
+PASS: Reopening after Cancel restores the equipped outfit
+PASS: Save applies every choice to the actual character and closes the wardrobe
+PASS: Name and outfit save successfully
+PASS: A fresh profile reloads all choices and a quoted name
+PASS: Title color shortcuts preserve other clothing and hair choices
+PASS: Starting Frog River keeps the outfit and equips the bat
+PASS: Customizing from pause freezes movement, poison, and attack timing
+PASS: Saving from pause returns to pause without resuming play
+PASS: Changing clothes preserves position, facing, and the collision shape
+PASS: New outfit retains the equipped bat and frozen animation
+PASS: Resuming the customized character completes its pending hit and heals normally
+PASS: Restart keeps the chosen outfit
+PASS: Level changes keep the outfit and update equipment normally
+PASS: Escape cancels the wardrobe
+PASS: Hairstyle 0 builds on the animated character
+PASS: Hairstyle 1 builds on the animated character
+PASS: Hairstyle 2 builds on the animated character
+PASS: Hairstyle 3 builds on the animated character
+PASS: Hairstyle 4 builds on the animated character
+PASS: Hairstyle 5 builds on the animated character
+PASS: Old achievement-only saves keep their badge and receive default clothing
+PASS: Saving clothing preserves a legacy badge and its Moonflower choice
+PASS: Malformed or locked saved choices fall back safely while valid choices survive
+PASS: Missing outfit data loads safe defaults
+PASS: Saved names are type-checked and length-limited
+PASS: Unavailable storage keeps the chosen outfit in memory
+WARDROBE RESULT: 34 passed, 0 failed
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Hoverboard is equipped only in River Rapids
+PASS: Board camera is independent of the walking SpringArm
+PASS: Course is substantially longer than the original 290 m
+PASS: Split branches remain visibly separated with no overlapping decks
+PASS: Loop, spiral, ramps, and ordinary track join at matching endpoints
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=12.0500000000002 lateral=-0.00090980529785 position=(29.99909, 10.48804, -270.3993) speed=24.9926209278405
+LEG 2 time=12.7500000000002 lateral=-0.00090980529785 position=(30.001, 10.42514, -287.6899) speed=25.0
+LEG 3 time=17.2833333333336 lateral=0.05101203918457 position=(30.05171, 8.555575, -400.3867) speed=25.0
+LEG 4 time=22.8666666666666 lateral=0.0 position=(47.99958, 8.549996, -400.3541) speed=25.0005688696168
+LEG 5 time=28.5499999999997 lateral=2.63213348388672 position=(67.63213, 12.55, -540.0186) speed=25.0
+LEG 6 time=29.3499999999996 lateral=-1.55333709716797 position=(71.44449, 12.55027, -560.0081) speed=25.0
+LEG 7 time=36.5666666666659 lateral=8.0 position=(72.98072, 12.55, -690.6061) speed=25.0
+LEG 8 time=41.1166666666656 lateral=0.002197265625 position=(99.99517, 10.55, -795.3579) speed=25.0
+LEG 9 time=56.2999999999981 lateral=0.0462703704834 position=(19.95666, 46.54435, -794.8657) speed=24.9999993125075
+LEG 10 time=69.366666666664 lateral=0.0 position=(-100.0, 17.5084, -920.2212) speed=24.9863669902086
+LEG 11 time=70.3999999999973 lateral=0.0 position=(-100.0, 14.13383, -945.5714) speed=25.0
+LEG 12 time=79.9166666666634 lateral=0.00148010253906 position=(-99.99852, 10.53721, -1150.12) speed=24.9886999517679
+LEG 13 time=80.83333333333 lateral=0.00148010253906 position=(-100.003, 8.682786, -1172.625) speed=25.0
+PASS: Wide route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT false seconds=85.9666666666631 peak=26.4468059539795
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=12.0500000000002 lateral=-0.00090980529785 position=(29.99909, 10.48804, -270.3993) speed=24.9926209278405
+LEG 2 time=12.7500000000002 lateral=-0.00090980529785 position=(30.001, 10.42514, -287.6899) speed=25.0
+LEG 3 time=17.2833333333336 lateral=0.05101203918457 position=(30.05171, 8.555575, -400.3867) speed=25.0
+LEG 4 time=22.8666666666666 lateral=0.0 position=(47.99958, 8.549996, -400.3541) speed=25.0005688696168
+LEG 5 time=28.5499999999997 lateral=-2.64137268066406 position=(62.35863, 12.55, -540.0186) speed=25.0
+LEG 6 time=29.3499999999996 lateral=1.55189514160156 position=(58.55306, 12.55023, -560.0128) speed=25.0
+LEG 7 time=34.8333333333326 lateral=-7.99996566772461 position=(56.99825, 12.55, -689.9895) speed=25.0
+LEG 8 time=39.3833333333324 lateral=-0.002197265625 position=(99.99523, 10.54999, -795.1309) speed=25.0
+LEG 9 time=54.5833333333315 lateral=0.04473495483398 position=(19.96338, 46.53559, -794.6769) speed=24.9999997337732
+LEG 10 time=67.6499999999974 lateral=0.0 position=(-100.0, 17.45537, -920.403) speed=24.9872712433338
+LEG 11 time=68.6666666666641 lateral=0.0 position=(-100.0, 14.32166, -945.3481) speed=25.0
+LEG 12 time=78.1999999999968 lateral=0.00148010253906 position=(-99.99852, 10.5138, -1150.249) speed=24.9885834649205
+LEG 13 time=79.1166666666635 lateral=0.00148010253906 position=(-100.003, 8.659374, -1172.754) speed=25.0
+PASS: Fast route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT true seconds=84.2333333333298 peak=26.4083003997803
+PASS: Narrow branch rewards skill with a faster finish
+PASS: Fast full run has substantially more sustained play
+PASS: New-course personal best persists separately from walking records
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=11.6833333333335 lateral=-0.00185775756836 position=(29.99814, 10.53148, -270.1531) speed=32.9948553305119
+LEG 2 time=12.2000000000002 lateral=-0.00185775756836 position=(30.00077, 11.5007, -288.1318) speed=33.0
+LEG 3 time=16.3500000000004 lateral=0.05058670043945 position=(30.05085, 8.552097, -400.144) speed=25.0
+LEG 4 time=21.9333333333334 lateral=0.0 position=(47.99987, 8.549999, -400.105) speed=25.0028339099139
+LEG 5 time=27.633333333333 lateral=-2.64137649536133 position=(62.35862, 12.55, -540.1861) speed=25.0
+LEG 6 time=28.433333333333 lateral=1.55189514160156 position=(58.56264, 12.55235, -560.1283) speed=25.0
+LEG 7 time=33.916666666666 lateral=-7.99996566772461 position=(56.99479, 12.55, -689.9487) speed=25.0
+LEG 8 time=38.4666666666658 lateral=-0.002197265625 position=(99.99194, 10.54998, -795.2983) speed=25.0
+LEG 9 time=53.6499999999982 lateral=0.04621124267578 position=(19.95509, 46.54711, -794.925) speed=24.9999991800983
+LEG 10 time=66.3666666666642 lateral=0.0 position=(-100.0, 17.39647, -920.605) speed=32.9876392908394
+LEG 11 time=67.0999999999975 lateral=0.0 position=(-100.0, 17.15703, -946.5657) speed=33.0
+LEG 12 time=75.799999999997 lateral=0.00302124023438 position=(-99.99698, 10.51999, -1150.215) speed=32.9887332446873
+LEG 13 time=76.4499999999969 lateral=0.00302124023438 position=(-100.0027, 11.10446, -1173.069) speed=33.0
+PASS: Fast route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT true seconds=81.2166666666633 peak=34.0
+PASS: Well-timed boosts clear every gap and improve the finish time
+PASS: A timed hop physically clears a coral block and lands
+PASS: Holding hop does not cause automatic repeated jumps
+PASS: Staying on the brake lets the course-following wave catch the rider
+PASS: Boost spends energy and produces a real speed increase
+PASS: Pause freezes rider, wave, and boost energy
+PASS: Braking lowers speed substantially
+PASS: Steering off an edge causes a real fall and retry
+PASS: Coral blocks require steering or jumping
+PASS: Original levels retain the walking controller and no board
+RESULT: 36 checks, 0 failures
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)

@@ -16,3 +16,7 @@ LILY_GODOT_BIN="${GODOT_BIN:-$PWD/.tools/Godot.app/Contents/MacOS/Godot}"
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/exploration_test.gd
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/secret_test.gd
 "$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/wardrobe_test.gd
+
+"$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/rapids_test.gd
+
+"$LILY_GODOT_BIN" --headless --fixed-fps 60 --path game --script res://tests/glide_test.gd

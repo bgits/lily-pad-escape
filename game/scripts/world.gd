@@ -2,6 +2,7 @@ class_name LilyWorld
 extends Node3D
 
 var level: LilyLevel
+var rapids: RiverRapids
 var flag: Node3D
 var elapsed := 0.0
 var scenery := SurfaceTool.new()
@@ -160,14 +161,19 @@ func build(data: LilyLevel) -> void:
 	add_child(sun)
 	var water := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(350, 350)
+	plane.size = Vector2(2200, 2200) if level.river_rapids else Vector2(350, 350)
 	water.mesh = plane
 	var water_mat := ShaderMaterial.new()
 	water_mat.shader = load("res://shaders/water.gdshader")
 	water.material_override = water_mat
-	water.position = Vector3(0, level.water_height, -30)
+	water.position = Vector3(0, level.water_height, -650 if level.river_rapids else -30)
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(water)
+	if level.river_rapids:
+		rapids = RiverRapids.new()
+		add_child(rapids)
+		rapids.build(self)
+		return
 	for i in level.pads.size():
 		var p := level.pads[i]
 		if i in level.chance_pad_indices:

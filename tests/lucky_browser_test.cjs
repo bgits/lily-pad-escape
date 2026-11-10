@@ -7,7 +7,7 @@ const path=require('node:path');
 const ROOT=path.resolve(__dirname,'..');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'chrome',args:['--use-angle=metal']});
+ const browser=await chromium.launch({headless:process.env.PLAYWRIGHT_HEADLESS !== "false",channel:process.env.PLAYWRIGHT_CHANNEL || 'chrome',args:['--use-angle=metal']});
  const page=await browser.newPage({viewport:{width:1280,height:720},deviceScaleFactor:1});
  const checks=[],errors=[],attempts=[],skillLandings=[];let won=false,sawSink=false,sawHold=false,mx=640,my=360,sinkProbes=0;
  page.on('pageerror',e=>errors.push(String(e)));
@@ -29,8 +29,8 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   await page.keyboard.up('ArrowUp');await sleep(650);
  };
  try{
-  await page.goto(process.env.GAME_URL||'http://127.0.0.1:8765/?qa');await page.waitForSelector('#loading',{state:'detached'});await state('title');
-  await click(1110,638);let s=await read();check(s.level===3&&s.chance_pads.length===7,'Third title option selects Lucky lagoon');await shot('28-lucky-title.png');
+  await page.goto(process.env.GAME_URL||'http://127.0.0.1:8765/?qa');await page.waitForSelector('#loading',{state:'detached'});await state('title');await page.bringToFront();
+  await click(1110,558);let s=await read();check(s.level===3&&s.chance_pads.length===7,'Third title option selects Lucky lagoon');await shot('28-lucky-title.png');
   await click(220,565);await state('playing');await sleep(550);await page.mouse.move(mx,my);await sleep(250);await shot('29-yellow-frog-spawn.png');
   check((await read()).chance_rolls===0,'Yellow pads remain unresolved until contact');
   // Complete the permanent route using ordinary controls, before sampling luck.
@@ -49,7 +49,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   }
   check(s.state==='won'&&s.victories===1&&s.chance_rolls===0&&s.falls===0,'A full extended solid crossing wins with zero random rolls and zero falls');
   await shot('51-skill-route-victory.png');
-  await click(640,350);await state('playing');await sleep(550);
+  await click(640,413);await state('playing');await sleep(550);
   const route=[...level.pads.slice(1,5),...safeTail,level.flag];
   for(let attempt=1;attempt<=24&&!won;attempt++){
    const before=await read();const log={attempt,landings:[]};attempts.push(log);
@@ -70,7 +70,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   }
   check(won,'A complete extended shortcut Lucky lagoon crossing succeeds with real random rolls');
   await shot('32-lucky-victory.png');s=await read();check(s.victories===1&&s.chance_pads.filter(p=>p.pad===1||p.pad===3).every(p=>p.resolved&&!p.collapsed),'Victory follows both held shortcut pads');
-  await click(640,350);await state('playing');await sleep(350);s=await read();check(s.level===3&&s.chance_rolls===0&&s.chance_pads.every(p=>!p.resolved),'Final-level replay resets all outcomes and counters');
+  await click(640,413);await state('playing');await sleep(350);s=await read();check(s.level===3&&s.chance_rolls===0&&s.chance_pads.every(p=>!p.resolved),'Lucky Lagoon replay resets all outcomes and counters');
   // A first-try win is valid. Sample fresh attempts to also exercise browser sinking.
   for(let probe=0;probe<12&&!sawSink;probe++){
    sinkProbes++;const before=await read();await jumpTo(route[0]);s=await read();
@@ -80,7 +80,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
     await state('playing');await sleep(350);s=await read();check(s.chance_pads.every(p=>!p.resolved&&!p.collapsed),'Retry resets all yellow pads for fresh rolls');
    }else{check(s.grounded&&s.chance_pads[0].resolved&&!s.chance_pads[0].collapsed,'A fresh yellow-pad roll may also stay solid');await page.keyboard.press('r');await sleep(400)}
   }
-  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.setViewportSize({width:1024,height:640});await sleep(250);await shot('33-three-levels-small.png');
+  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.bringToFront();await page.setViewportSize({width:1024,height:640});await sleep(250);await shot('33-three-levels-small.png');
   const fit=await page.evaluate(()=>innerWidth===document.documentElement.scrollWidth&&innerHeight===document.documentElement.scrollHeight);check(fit,'Three level choices fit the smaller desktop viewport');check(errors.length===0,'Lucky lagoon has no browser or engine errors');
   await fs.writeFile(path.join(ROOT,'docs/lucky-browser-results.json'),JSON.stringify({checks,errors,skillLandings,sawSink,sawHold,attempts,sinkProbes},null,2));console.log('RESULT:',checks.length,'checks passed across one skill crossing,',attempts.length,'shortcut attempts and',sinkProbes,'sink probes. Sink observed:',sawSink);
  }catch(e){await shot('lucky-test-failure.png').catch(()=>{});console.error('STATE:',await read().catch(()=>null),'ERRORS:',errors);throw e}finally{await browser.close()}

@@ -189,7 +189,7 @@ func run() -> void:
 	game.start_run()
 	await frames(8)
 	game.win()
-	check(game.state == "won" and not game.ui.next_button.visible,"Level 3 victory offers replay without a nonexistent fourth level")
+	check(game.state == "won" and game.ui.next_button.visible and "River glide" in game.ui.next_button.text,"Level 3 victory offers the new River Glide crossing")
 	game.show_title()
 	game.select_level(1)
 	game.start_run()

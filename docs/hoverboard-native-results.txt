@@ -1,0 +1,85 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Hoverboard is equipped only in River Rapids
+PASS: Board camera is independent of the walking SpringArm
+PASS: Course is substantially longer than the original 290 m
+PASS: Split branches remain visibly separated with no overlapping decks
+PASS: Loop, spiral, ramps, and ordinary track join at matching endpoints
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=12.0500000000002 lateral=-0.00090980529785 position=(29.99909, 10.48804, -270.3993) speed=24.9926209278405
+LEG 2 time=12.7500000000002 lateral=-0.00090980529785 position=(30.001, 10.42514, -287.6899) speed=25.0
+LEG 3 time=17.2833333333336 lateral=0.05592155456543 position=(30.05662, 8.555575, -400.3867) speed=25.0
+LEG 4 time=22.8666666666666 lateral=0.0 position=(47.99958, 8.549996, -400.3541) speed=25.0005688696168
+LEG 5 time=28.5499999999997 lateral=2.63213348388672 position=(67.63213, 12.55, -540.0186) speed=25.0
+LEG 6 time=29.3499999999996 lateral=-1.55333709716797 position=(71.44449, 12.55027, -560.0081) speed=25.0
+LEG 7 time=36.5666666666659 lateral=8.0 position=(72.98072, 12.55, -690.6061) speed=25.0
+LEG 8 time=41.1166666666656 lateral=0.002197265625 position=(99.99517, 10.55, -795.3579) speed=25.0
+LEG 9 time=56.2999999999981 lateral=0.0462703704834 position=(19.95666, 46.54435, -794.8657) speed=24.9999993125075
+LEG 10 time=69.366666666664 lateral=0.0 position=(-100.0, 17.5084, -920.2212) speed=24.9863669902086
+LEG 11 time=70.3999999999973 lateral=0.0 position=(-100.0, 14.13383, -945.5714) speed=25.0
+LEG 12 time=79.9166666666634 lateral=0.00148010253906 position=(-99.99852, 10.53721, -1150.12) speed=24.9886999517679
+LEG 13 time=80.83333333333 lateral=0.00148010253906 position=(-100.003, 8.682786, -1172.625) speed=25.0
+PASS: Wide route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT false seconds=85.9666666666631 peak=26.4468059539795
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=12.0500000000002 lateral=-0.00090980529785 position=(29.99909, 10.48804, -270.3993) speed=24.9926209278405
+LEG 2 time=12.7500000000002 lateral=-0.00090980529785 position=(30.001, 10.42514, -287.6899) speed=25.0
+LEG 3 time=17.2833333333336 lateral=0.05592155456543 position=(30.05662, 8.555575, -400.3867) speed=25.0
+LEG 4 time=22.8666666666666 lateral=0.0 position=(47.99958, 8.549996, -400.3541) speed=25.0005688696168
+LEG 5 time=28.5499999999997 lateral=-2.64137268066406 position=(62.35863, 12.55, -540.0186) speed=25.0
+LEG 6 time=29.3499999999996 lateral=1.55189514160156 position=(58.55306, 12.55023, -560.0128) speed=25.0
+LEG 7 time=34.8333333333326 lateral=-7.94482040405273 position=(57.0534, 12.55, -689.9899) speed=25.0
+LEG 8 time=39.3833333333324 lateral=-0.00218963623047 position=(99.99524, 10.54999, -795.1309) speed=25.0
+LEG 9 time=54.5833333333315 lateral=0.04473495483398 position=(19.96338, 46.53559, -794.6769) speed=24.9999997337732
+LEG 10 time=67.6499999999974 lateral=0.0 position=(-100.0, 17.45537, -920.403) speed=24.9872712433338
+LEG 11 time=68.6666666666641 lateral=0.0 position=(-100.0, 14.32166, -945.3481) speed=25.0
+LEG 12 time=78.1999999999968 lateral=0.00148010253906 position=(-99.99852, 10.5138, -1150.249) speed=24.9885834649205
+LEG 13 time=79.1166666666635 lateral=0.00148010253906 position=(-100.003, 8.659374, -1172.754) speed=25.0
+PASS: Fast route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT true seconds=84.2333333333298 peak=26.4083003997803
+PASS: All three optional fireflies can be collected while riding
+PASS: Narrow branch rewards skill with a faster finish
+PASS: Fast full run has substantially more sustained play
+PASS: New-course personal best persists separately from walking records
+LEG 0 time=0.01666666666667 lateral=0.0 position=(0.000337, 18.55, 7.796389) speed=12.2166666666667
+LEG 1 time=11.6833333333335 lateral=-0.00185775756836 position=(29.99814, 10.53148, -270.1531) speed=32.9948553305119
+LEG 2 time=12.2000000000002 lateral=-0.00185775756836 position=(30.00077, 11.5007, -288.1318) speed=33.0
+LEG 3 time=16.3500000000004 lateral=0.05554389953613 position=(30.05581, 8.552097, -400.144) speed=25.0
+LEG 4 time=21.9333333333334 lateral=0.0 position=(47.99987, 8.549999, -400.105) speed=25.0028339099139
+LEG 5 time=27.633333333333 lateral=-2.64137649536133 position=(62.35862, 12.55, -540.1861) speed=25.0
+LEG 6 time=28.433333333333 lateral=1.55189514160156 position=(58.56264, 12.55235, -560.1283) speed=25.0
+LEG 7 time=33.916666666666 lateral=-7.94658279418945 position=(57.04815, 12.55, -689.9504) speed=25.0
+LEG 8 time=38.4666666666658 lateral=-0.00218963623047 position=(99.99195, 10.54998, -795.2983) speed=25.0
+LEG 9 time=53.6499999999982 lateral=0.04621124267578 position=(19.95509, 46.54711, -794.925) speed=24.9999991800983
+LEG 10 time=66.3666666666642 lateral=0.0 position=(-100.0, 17.39647, -920.605) speed=32.9876392908394
+LEG 11 time=67.0999999999975 lateral=0.0 position=(-100.0, 17.15703, -946.5657) speed=33.0
+LEG 12 time=75.799999999997 lateral=0.00302124023438 position=(-99.99698, 10.51999, -1150.215) speed=32.9887332446873
+LEG 13 time=76.4499999999969 lateral=0.00302124023438 position=(-100.0027, 11.10446, -1173.069) speed=33.0
+PASS: Fast route finishes without a fall
+PASS: Rider physically travels upside down through the loop
+PASS: Rider completes the full rising spiral
+PASS: Three gap launches use airborne trajectories
+PASS: Board cruises much faster than walking with bounded speed
+PASS: Lane choice selects the intended separated branch
+ROUTE RESULT true seconds=81.2166666666633 peak=34.0
+PASS: Well-timed boosts clear every gap and improve the finish time
+PASS: A timed hop physically clears a coral block and lands
+PASS: Holding hop does not cause automatic repeated jumps
+PASS: Staying on the brake lets the course-following wave catch the rider
+PASS: Boost spends energy and produces a real speed increase
+PASS: Pause freezes rider, wave, and boost energy
+PASS: Braking lowers speed substantially
+PASS: Steering off an edge causes a real fall and retry
+PASS: Coral blocks require steering or jumping
+PASS: Original levels retain the walking controller and no board
+RESULT: 37 checks, 0 failures

@@ -39,6 +39,8 @@ var health_status: Label
 var health_bar: ProgressBar
 var health_fill: StyleBoxFlat
 var start_detail: Label
+var start_controls: Label
+var start_camera_controls: Label
 var next_button: Button
 var replay_button: Button
 var level_buttons: Array[Button] = []
@@ -46,6 +48,8 @@ var level_title := "Sunlit lagoon"
 var pad_total := 8
 var combat := false
 var lucky := false
+var rapids := false
+const CROSSINGS := ["Sunlit lagoon","Frog river","Lucky lagoon","River glide","River rapids"]
 var secret_unlocked := false
 var selected_color := 0
 var secret_badge: Label
@@ -150,7 +154,7 @@ func make_start() -> void:
 	stack.size.x = 352
 	stack.add_theme_constant_override("separation",6)
 	start_screen.add_child(stack)
-	label(stack,"FIELD TRIP  /  THREE LITTLE ADVENTURES",13,MUTED)
+	label(stack,"FIELD TRIP  /  FIVE LITTLE ADVENTURES",13,MUTED)
 	gap(stack,9)
 	var title := label(stack,"LILY PAD\nESCAPE",65)
 	title.add_theme_constant_override("line_spacing",-12)
@@ -181,8 +185,8 @@ func make_start() -> void:
 	gap(stack,13)
 	button(stack,"Let's hop!",func(): play_requested.emit(),true)
 	gap(stack,13)
-	label(stack,"WASD / Arrows   Move     SPACE   Jump",14,MUTED)
-	label(stack,"MOUSE   Look      ESC   Pause      R   Restart",12,MUTED)
+	start_controls = label(stack,"WASD / Arrows   Move     SPACE   Jump",14,MUTED)
+	start_camera_controls = label(stack,"MOUSE   Look      ESC   Pause      R   Restart",12,MUTED)
 	var footer := label(start_screen,"LITTLE LEAPS.  BIG ADVENTURES.",10,MUTED)
 	profile_note = footer
 	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
@@ -201,15 +205,16 @@ func make_start() -> void:
 	choices.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	choices.offset_left = -290
 	choices.offset_right = -28
-	choices.offset_top = -251
+	choices.offset_top = -311
 	choices.offset_bottom = -28
 	choices.add_theme_constant_override("separation",8)
 	start_screen.add_child(choices)
 	var caption := label(choices,"CROSSINGS  /  FIREFLIES",13,CREAM)
 	caption.add_theme_color_override("font_shadow_color",INK)
 	caption.add_theme_constant_override("shadow_offset_y",2)
-	for i in 3:
-		var choice := button(choices,["1  ·  Sunlit lagoon","2  ·  Frog river","3  ·  Lucky lagoon"][i],func():level_selected.emit(i))
+	for i in CROSSINGS.size():
+		var choice := button(choices,"%d  ·  %s" % [i+1,CROSSINGS[i]],func():level_selected.emit(i))
+		choice.custom_minimum_size.y = 44
 		choice.add_theme_font_size_override("font_size",15)
 		level_buttons.append(choice)
 	var collection := PanelContainer.new()
@@ -450,9 +455,12 @@ func set_progress(pad_index: int) -> void:
 func set_fireflies(profile: LilyProfile, level: int, saved: bool) -> void:
 	firefly_label.text = "Fireflies  %d / 3%s" % [profile.firefly_count(level),"" if saved else "  ·  This visit"]
 	for i in level_buttons.size():
-		level_buttons[i].text = "%d · %s   %d/3" % [i+1,["Sunlit lagoon","Frog river","Lucky lagoon"][i],profile.firefly_count(i)]
+		level_buttons[i].text = "%d · %s   %d/3" % [i+1,CROSSINGS[i],profile.firefly_count(i)]
 
 func configure_level(index: int, data: LilyLevel) -> void:
+	rapids = data.river_rapids
+	start_controls.text = "A / D  Steer    W  Accelerate    S  Brake" if rapids else "WASD / Arrows   Move     SPACE   Jump"
+	start_camera_controls.text = "SPACE  Hop    SHIFT  Boost    ESC  Pause    R  Retry" if rapids else "MOUSE   Look      ESC   Pause      R   Restart"
 	level_title = data.title
 	pad_total = data.pads.size()-1
 	combat = data.has_bat
@@ -466,6 +474,10 @@ func configure_level(index: int, data: LilyLevel) -> void:
 	start_detail.text = "Clear the frogs. Reach the flag.\nStay ahead of the chasing water." if combat else "Hop across the lagoon.\nStay ahead of the chasing water."
 	if lucky:
 		start_detail.text = "Risk the frogs or take the tiny pads.\nStay ahead of the chasing water."
+	if rapids:
+		level_label.text = "LEVEL %d  /  %s" % [index+1,"RIVER GLIDE · EASY" if data.rapids_beginner else "RIVER RAPIDS · HARD"]
+		start_detail.text = "Find your flow on a hoverboard.\nWide tracks. Gentle jumps." if data.rapids_beginner else "Ready for a harder ride?\nNarrow lanes, big jumps, sky spiral."
+		hints.text = "A / D  Steer    W  Accelerate    S  Brake    SPACE  Hop    SHIFT  Boost    ESC  Pause    R  Retry"
 	for i in level_buttons.size():
 		level_buttons[i].add_theme_stylebox_override("normal",style(GOLD if i == index else CREAM))
 		level_buttons[i].add_theme_stylebox_override("hover",style(Color("ffe18a") if i == index else Color("d5e2c9")))

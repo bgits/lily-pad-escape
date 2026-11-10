@@ -1,0 +1,80 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+PASS: Fourth crossing is selectable
+PASS: The wave remains visible across the upper launch gap
+TRACE false 0 (0.0, 12.00094, 9.996944) v=(0.0, 0.0, -0.183333) launch=0
+TRACE false 180 (0.000001, 12.00094, -5.009084) v=(-0.000001, 0.0, -5.4) launch=0
+TRACE false 360 (-2.810755, 5.102535, -29.3511) v=(-2.067511, 0.0, -9.477098) launch=0
+TRACE false 540 (-0.467427, 3.285559, -51.677) v=(3.741426, 0.0, -8.949398) launch=0
+TRACE false 720 (12.03092, 4.16193, -73.758) v=(1.722159, 0.0, -5.034163) launch=0
+TRACE false 900 (13.92702, 4.517246, -88.86658) v=(-0.053426, 0.0, -5.941982) launch=1
+TRACE false 1080 (6.753788, 2.975317, -113.0501) v=(-5.52899, 0.0, -7.962582) launch=1
+TRACE false 1260 (-6.155839, 4.558547, -131.2063) v=(-2.084707, 0.0, -4.948697) launch=1
+TRACE false 1440 (-6.931656, 4.794785, -146.7149) v=(-2.355037, -2.766666, -4.964108) launch=1
+TRACE false 1620 (-25.92773, 2.003088, -164.4821) v=(-6.473131, 0.0, -7.224165) launch=1
+TRACE false 1800 (-20.96599, 2.9598, -186.5377) v=(5.984751, 0.0, -3.739075) launch=1
+TRACE false 1980 (-3.090294, 3.00084, -196.9521) v=(4.423622, 0.0, -5.289648) launch=1
+TRACE false 2160 (-0.002505, 0.845862, -219.8893) v=(0.000561, 0.0, -6.433315) launch=1
+TRACE false 2340 (-0.000815, 0.600935, -236.1573) v=(0.000561, 0.0, -5.4) launch=1
+PASS: Lower route completes with movement and jumps
+PASS: Route has no water falls or wave catches
+PASS: Designed crests launch automatically
+PASS: Downhill gains bounded momentum
+PASS: Launches and hops create actual airborne movement
+ROUTE RESULT false seconds=40.099999999999 max_speed=9.70000076293945
+TRACE true 0 (0.0, 12.00094, 9.996944) v=(0.0, 0.0, -0.183333) launch=0
+TRACE true 180 (0.000001, 12.00094, -5.009084) v=(-0.000001, 0.0, -5.4) launch=0
+TRACE true 360 (-2.810755, 5.102535, -29.3511) v=(-2.067511, 0.0, -9.477098) launch=0
+TRACE true 540 (-0.467427, 3.285559, -51.677) v=(3.741426, 0.0, -8.949398) launch=0
+TRACE true 720 (12.03092, 4.16193, -73.758) v=(1.722159, 0.0, -5.034163) launch=0
+TRACE true 900 (13.92702, 4.517246, -88.86658) v=(-0.053426, 0.0, -5.941982) launch=1
+TRACE true 1080 (6.753788, 2.975317, -113.0501) v=(-5.52899, 0.0, -7.962582) launch=1
+TRACE true 1260 (-6.155839, 4.558547, -131.2063) v=(-2.084707, 0.0, -4.948697) launch=1
+TRACE true 1440 (-4.224136, 5.179591, -146.3932) v=(2.385318, 0.0, -4.799823) launch=1
+TRACE true 1620 (1.737709, 6.992278, -160.9705) v=(0.860522, 0.0, -5.279025) launch=1
+TRACE true 1800 (1.45743, 3.597503, -178.0762) v=(-0.583026, 0.0, -7.885669) launch=2
+TRACE true 1980 (-0.001441, 2.497991, -205.8829) v=(0.004908, 0.0, -9.699999) launch=2
+TRACE true 2160 (-0.000015, 1.877607, -227.8857) v=(0.000005, 4.366665, -5.4) launch=2
+PASS: Upper route completes with movement and jumps
+PASS: Route has no water falls or wave catches
+PASS: Designed crests launch automatically
+PASS: Downhill gains bounded momentum
+PASS: Launches and hops create actual airborne movement
+ROUTE RESULT true seconds=38.6333333333324 max_speed=9.70000076293945
+PASS: Upper route provides a measurable time advantage
+TRACE true 0 (0.0, 12.00094, 9.996944) v=(0.0, 0.0, -0.183333) launch=0
+TRACE true 180 (0.000001, 12.00094, -5.009084) v=(-0.000001, 0.0, -5.4) launch=0
+TRACE true 360 (-2.810755, 5.102535, -29.3511) v=(-2.067511, 0.0, -9.477098) launch=0
+TRACE true 540 (-0.467427, 3.285559, -51.677) v=(3.741426, 0.0, -8.949398) launch=0
+TRACE true 720 (12.03092, 4.16193, -73.758) v=(1.722159, 0.0, -5.034163) launch=0
+TRACE true 900 (13.92702, 4.517246, -88.86658) v=(-0.053426, 0.0, -5.941982) launch=1
+TRACE true 1080 (6.753788, 2.975317, -113.0501) v=(-5.52899, 0.0, -7.962582) launch=1
+TRACE true 1260 (-6.155839, 4.558547, -131.2063) v=(-2.084707, 0.0, -4.948697) launch=1
+TRACE true 1440 (-4.224136, 5.179591, -146.3932) v=(2.385318, 0.0, -4.799823) launch=1
+TRACE true 1620 (1.737709, 6.992278, -160.9705) v=(0.860522, 0.0, -5.279025) launch=1
+TRACE true 1800 (2.3467, 3.659396, -177.623) v=(3.427134, 0.0, -5.632432) launch=2
+TRACE true 1980 (5.829821, 3.000831, -194.0649) v=(-2.32977, 0.0, -4.87157) launch=2
+TRACE true 2160 (0.060809, 2.097718, -209.7947) v=(-0.157914, 0.0, -7.510022) launch=2
+TRACE true 2340 (0.002168, 2.179827, -229.494) v=(-0.000807, -1.866668, -5.4) launch=2
+PASS: Upper route completes with movement and jumps
+PASS: Route has no water falls or wave catches
+PASS: Designed crests launch automatically
+PASS: Downhill gains bounded momentum
+PASS: Launches and hops create actual airborne movement
+PASS: An upper-route miss lands on the lower recovery channel
+ROUTE RESULT true seconds=41.3333333333323 max_speed=9.70000076293945
+PASS: Completion stores the fastest clean attempt
+PASS: Personal best persists on reload
+PASS: Slow ramp approach lands safely on the broad leaf
+PASS: The ramp fires once per passage
+PASS: Pause freezes movement, wave, and attempt clock
+PASS: Standing still is caught by the visible course wave
+PASS: Automatic retry resets the attempt at the hilltop
+PASS: Original levels restore ordinary movement
+PASS: Three-level saves migrate without losing collections
+PASS: Next level from Lucky Lagoon starts River Rapids
+RESULT: 29 checks, 0 failures
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2641)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:810)

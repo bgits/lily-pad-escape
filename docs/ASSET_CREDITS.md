@@ -12,3 +12,13 @@ Official engine source: https://github.com/godotengine/godot/tree/4.6-stable
 
 
 Version 0.8 adds original procedural fireflies (body, wings, glow and pickup particles), pink flowers on exploration pads, frog landing rings and crouch/hop/recovery motion, and an original synthesized firefly chime in `game/assets/audio/firefly.wav`. The generation source is `scripts/generate_audio.py`. Those additions did not introduce external artwork or audio.
+
+## River Rapids additions
+
+The curved terrain, roots, leaf veins, route markers, and wave fronts are procedural geometry authored for this project. `launch.wav`, `landing.wav`, and `rapids_wind.wav` are newly synthesized tones/noise, with no third-party samples. River Rapids reuses the existing Platformer Rush music track and its existing credit.
+
+
+Version 0.10 adds an original procedural hoverboard (deck, gold tips, light rails, thrusters), rider stance, magnetic loop and spiral track, coral obstacles, lane arrows, and a checkered finish arch. No external models, textures, or additional audio were introduced.
+
+
+Version 0.11 adds original procedural introductory-course geometry and protective rails. River Glide reuses the existing hoverboard, obstacles, synthesized effects, and Platformer Rush music credit.

@@ -8,7 +8,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const aligned=(s,yaw)=>s.attack_direction[0]*-Math.sin(yaw)+s.attack_direction[2]*-Math.cos(yaw)>.9999;
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'chrome',args:['--use-angle=metal']});
+ const browser=await chromium.launch({headless:process.env.PLAYWRIGHT_HEADLESS !== "false",channel:process.env.PLAYWRIGHT_CHANNEL || 'chrome',args:['--use-angle=metal']});
  const page=await browser.newPage({viewport:{width:1280,height:720},deviceScaleFactor:1});
  const checks=[],errors=[],samples=[];
  page.on('pageerror',e=>errors.push(String(e)));
@@ -21,8 +21,8 @@ const aligned=(s,yaw)=>s.attack_direction[0]*-Math.sin(yaw)+s.attack_direction[2
  const turn=async(key)=>{await page.keyboard.down(key);await sleep(200);await page.keyboard.up(key);await sleep(220)};
  try{
   await page.goto(process.env.GAME_URL||'http://127.0.0.1:8765/?qa');
-  await page.waitForSelector('#loading',{state:'detached'});await state('title');
-  await click(1110,578);await click(220,565);await state('playing');await sleep(550);
+  await page.waitForSelector('#loading',{state:'detached'});await state('title');await page.bringToFront();
+  await click(1110,506);await click(220,565);await state('playing');await sleep(550);
   for(const [direction,attack] of [['ArrowDown','f'],['ArrowLeft','mouse']]){
    await turn(direction);let s=await read();const facing=s.avatar_yaw;
    check(s.grounded&&Math.abs(angleDiff(facing,s.yaw))>1,'Movement faces '+direction+' independently of the camera');

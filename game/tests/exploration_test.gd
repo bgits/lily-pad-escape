@@ -36,7 +36,7 @@ func run() -> void:
 	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
-	check(game.profile.firefly_masks == [0,0,0],"A new profile has no collected fireflies")
+	check(game.profile.firefly_masks == [0,0,0,0,0],"A new profile has no collected fireflies")
 	game.start_run()
 	await frames(75)
 	var pad: LilyDriftingPad = game.world.drifting_pads[0]
@@ -90,17 +90,17 @@ func run() -> void:
 			check(fly.collected and game.profile.has_firefly(level,fly.index),"Level %d firefly %d collects once on live contact" % [level+1,fly.index+1])
 			await frames(6)
 		check(game.profile.firefly_count(level) == 3 and game.ui.firefly_label.text == "Fireflies  3 / 3","Level %d displays its complete unique collection" % (level+1))
-	check(game.profile.firefly_masks == [7,7,7],"All nine collectible identities remain independent")
+	check(game.profile.firefly_masks == [7,7,7,0,0],"All nine collectible identities remain independent")
 	game.profile.player_name = "Firefly Finder"
 	game.profile.save_customization()
 	game.profile.unlock_secret()
 	var restored := LilyProfile.new()
 	restored.storage_path = SAVE
 	restored.load_progress()
-	check(restored.firefly_masks == [7,7,7] and restored.secret_perch and restored.player_name == "Firefly Finder","Saving clothing and the secret preserves collections across reload")
-	check(LilyProfile.sanitize_fireflies([true,-1,8]) == [0,0,0],"Invalid collection masks are rejected")
-	check(LilyProfile.sanitize_fireflies([1.5,3.0,"7"]) == [0,3,0],"Only valid integral masks load from JSON")
-	check(LilyProfile.sanitize_fireflies({"0":7}) == [0,0,0],"Malformed collection shapes fall back safely")
+	check(restored.firefly_masks == [7,7,7,0,0] and restored.secret_perch and restored.player_name == "Firefly Finder","Saving clothing and the secret preserves collections across reload")
+	check(LilyProfile.sanitize_fireflies([true,-1,8]) == [0,0,0,0,0],"Invalid collection masks are rejected")
+	check(LilyProfile.sanitize_fireflies([1.5,3.0,"7"]) == [0,3,0,0,0],"Only valid integral masks load from JSON")
+	check(LilyProfile.sanitize_fireflies({"0":7}) == [0,0,0,0,0],"Malformed collection shapes fall back safely")
 	restored.storage_path = "user://missing_exploration_folder/profile.cfg"
 	check(not restored.collect_firefly(0,1) and restored.has_firefly(0,1),"A failed save retains the firefly for this visit")
 	game.show_title()
