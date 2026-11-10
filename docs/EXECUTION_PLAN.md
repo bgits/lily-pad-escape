@@ -113,3 +113,32 @@ Keep all existing stable crossing routes, including Level 3's solid bypasses. Ad
 Persist each unique firefly immediately per level in the local profile, preserving wardrobe and Secret Perch data. Validate malformed saves, prevent duplicate awards, and retain session progress with honest feedback if saving is unavailable. Do not add medals, currency, or new cosmetic rewards in this increment.
 
 Green enemies retain poison, one-hit bat defeats, and healing. Their short hops move the actual body within their own pad, with a crouch and landing marker before each jump and a long grounded recovery window. Red and yellow markers keep their existing behavior. Check collection identity/persistence, all nine locations, platform carry/pause/jump-off/repetition, telegraph ordering/reset/defeat, the complete three courses, and Level 3 with both chance supports absent.
+
+
+## River Rapids — approved expansion, 4 November 2026
+
+Build a fourth selectable crossing around a flowing descent–bowl–launch–landing sequence. Include a banked bend, fast upper root, forgiving lower channel, an upper-miss recovery channel, and familiar lily-pad transitions. Keep momentum and camera tuning scoped to this crossing. Measure success with ordinary-input completions, a faster upper route, reliable recovery joins, clear landing previews, quick retries, and persistent personal records.
+
+Implemented through `river_rapids.gd` and `river_rapids.tres`, with scoped controller/camera changes, course-distance wave fronts on both branches, fourth-level UI/music integration, backward-compatible collections, and validated record persistence. The generated running mesh is also the collision source. Terrain plateaus and branch joins remain level to prevent small seams from stopping movement; decorative skirts do not create collision walls. The normal movement yaw remains player-controlled while camera height/pitch are smoothed.
+
+Verification and playtest evidence are recorded in `TEST_REPORT-v0.9.md`. The remaining design judgment is the user's hands-on assessment of steering, camera comfort, and the desire to retry; automated completion does not establish engagement by itself.
+
+
+## Version 0.10 — hoverboard flow and clean junctions
+
+User feedback: walking is too slow, the course too short/easy, and intersecting paths look awkward. Replace the fourth crossing's walking terrain with an approximately 2.1 km hoverboard course. Keep the original three levels intact.
+
+The board auto-cruises at 21 m/s, throttles toward 25 m/s, and boosts toward 33 m/s with a regenerating energy meter. Add rolling descents, a true 360-degree magnetic loop, separated wide/fast routes, a 1.5-turn rising spiral, banked slalom, three momentum-preserving ballistic jumps, and eleven avoidable/hoppable coral blocks. Retrying remains immediate; the wave follows arc distance through every elevation and turn.
+
+Replace overlapping branches with two distinct fork portals and a single shared merge. Offset loop entry/exit, separate spiral turns vertically, taper widths and banking, and keep support posts outside the running deck. Use arrows and restrained labels to make the junction readable at speed. Move the board camera outside the walking SpringArm so loop overview and stable chase framing are actually honored. Make it automatic with no mouse capture, while preserving tab/focus-loss pause and the first three levels’ mouse-look.
+
+Validate full runs on both branches and with boosted jumps, timed obstacle hops, real falls, wave catch, pause, speed/energy limits, non-overlapping branches, persistence with a separate record version, and restoration of walking. Inspect exported browser views of the fork, merge, loop, spiral, and finish. Evidence is in `TEST_REPORT-v0.10.md`; engagement and comfort still need the user's hands-on judgment.
+
+
+## Version 0.11 — introduce hoverboarding before the hard course
+
+User feedback: the existing hoverboard course took too many attempts. Move it intact to Level 5 and add a substantially easier fourth level with the same flowing style.
+
+River Glide is a 1.16 km introduction with 12–14 m tracks, grounded edge protection, two off-centre obstacles with forgiving slowdown/nudge contact, a six-metre gap with a broad landing, a full wide loop, and a gentle half-turn spiral. Use a continuous route, moderate fast cruise, and a slower wave with eight seconds of grace. Keep River Rapids' full hard layout, obstacles, speed, and two branches as Level 5.
+
+Expand the menu and progression to five levels. Give each hoverboard course its own personal records. Preserve the existing Rapids record key, migrate old four-slot firefly arrays from [A,B,C,hard] to [A,B,C,0,hard], and treat five-slot saves as already migrated. Keep names, clothing, and the Secret Perch achievement. Validate the introductory route at normal and boosted speed, rails, forgiving contact, both original hard routes, migration/reload, and the Level 4 → Level 5 transition.

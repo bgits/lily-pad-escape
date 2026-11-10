@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const ROOT=path.resolve(__dirname,'..'),sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{
- const browser=await chromium.launch({headless:true,channel:'chrome',args:['--use-angle=metal']});
+ const browser=await chromium.launch({headless:process.env.PLAYWRIGHT_HEADLESS !== "false",channel:process.env.PLAYWRIGHT_CHANNEL || 'chrome',args:['--use-angle=metal']});
  const context=await browser.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});
  const page=await context.newPage();const checks=[],errors=[];let mx=640,my=360;
  page.on('pageerror',e=>errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
@@ -24,11 +24,11 @@ const ROOT=path.resolve(__dirname,'..'),sleep=ms=>new Promise(r=>setTimeout(r,ms
    localStorage.setItem('lily-pad-escape.fireflies.v1','[1,-2,9]');
   });
   await page.reload();await ready();let s=await read();
-  check(s.firefly_masks.join(',')==='1,0,0'&&s.fireflies[0].collected,'Web loading keeps valid fireflies and rejects invalid masks');
+  check(s.firefly_masks.join(',')==='1,0,0,0,0'&&s.fireflies[0].collected,'Web loading keeps valid fireflies and rejects invalid masks');
   check(s.secret_unlocked&&s.player_name==='Pip'&&s.outfit.hair_style===3&&s.outfit.top_color===3,'Collection loading preserves the saved name, outfit, and secret reward');
   await page.evaluate(()=>localStorage.setItem('lily-pad-escape.fireflies.v1','not valid JSON'));await page.reload();await ready();s=await read();
   check(s.firefly_masks.every(x=>x===0)&&s.secret_unlocked&&s.player_name==='Pip','Malformed collection JSON falls back without damaging older saves');
-  await click(1110,578);await click(220,565);await state('playing');await sleep(3000);
+  await click(1110,506);await click(220,565);await state('playing');await sleep(3000);
   await jump([0,-4.85]);
   await page.waitForFunction(()=>window.lilyPadState?.frogs[0].behavior==='crouching',null,{timeout:5000});
   check((await read()).frogs[0].telegraph,'The browser shows a landing marker during the frog crouch');

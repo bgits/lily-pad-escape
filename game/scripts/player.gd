@@ -2,6 +2,7 @@ class_name LilyPlayer
 extends CharacterBody3D
 
 signal jumped
+signal launched
 signal landed
 signal stepped(delta: float)
 signal swung
@@ -17,6 +18,12 @@ signal bat_impact
 @export var buffer_duration := 0.12
 @export var mouse_sensitivity := 0.0026
 
+var rapids: RiverRapids
+var ride: HoverRide
+var launch_cooldown := 0.0
+var launch_count := 0
+var camera_manual := 0.0
+var camera_height := 0.0
 var active := false
 var look_delay := 0.0
 var avatar: LilyAvatar
@@ -121,6 +128,9 @@ func _ready() -> void:
 	shadow.material_override = shadow_mat
 	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	get_parent().add_child.call_deferred(shadow)
+	ride = HoverRide.new()
+	add_child(ride)
+	ride.setup(self)
 	reset_camera()
 
 func reset_camera() -> void:
@@ -130,11 +140,15 @@ func reset_camera() -> void:
 
 func clear_input() -> void:
 	buffered = 0.0
-	for action in ["move_left", "move_right", "move_forward", "move_back", "jump", "attack"]:
+	for action in ["move_left", "move_right", "move_forward", "move_back", "jump", "attack", "boost"]:
 		Input.action_release(action)
 
 func respawn(spawn: Vector3) -> void:
 	falling_through = false
+	launch_cooldown = 0
+	launch_count = 0
+	camera_manual = 0
+	camera_height = spawn.y
 	global_position = spawn
 	velocity = Vector3.ZERO
 	coyote = 0.0
@@ -146,6 +160,7 @@ func respawn(spawn: Vector3) -> void:
 	cancel_swing()
 	clear_input()
 	reset_camera()
+	if is_instance_valid(ride): ride.reset(rapids)
 	reset_physics_interpolation()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -154,6 +169,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and look_delay <= 0.0:
 		if event.relative.length() > 180.0:
 			return
+		camera_manual = 2.5
 		yaw -= event.relative.x * mouse_sensitivity
 		pitch = clampf(pitch - event.relative.y * mouse_sensitivity, -0.95, -0.16)
 		pivot.rotation = Vector3(pitch, yaw, 0)
@@ -166,6 +182,12 @@ func _physics_process(delta: float) -> void:
 	if not active:
 		return
 	look_delay = maxf(0.0, look_delay - delta)
+	launch_cooldown = maxf(0,launch_cooldown-delta)
+	camera_manual = maxf(0,camera_manual-delta)
+	if is_instance_valid(rapids):
+		ride.step(delta)
+		stepped.emit(delta)
+		return
 	if poison_cloud.visible:
 		poison_clock += delta
 		for i in poison_cloud.get_child_count():
@@ -182,14 +204,13 @@ func _physics_process(delta: float) -> void:
 	if falling_through:
 		input = Vector2.ZERO
 	var direction := Vector3(input.x, 0, input.y).rotated(Vector3.UP, yaw)
+	floor_snap_length = 0.15
 	var target := direction * move_speed
 	var rate := acceleration if direction.length() > 0.0 else braking
-	if not grounded:
-		rate = air_acceleration
-	velocity.x = move_toward(velocity.x, target.x, rate * delta)
-	velocity.z = move_toward(velocity.z, target.z, rate * delta)
-	if not grounded:
-		velocity.y -= gravity * delta
+	if not grounded: rate = air_acceleration
+	velocity.x = move_toward(velocity.x,target.x,rate*delta)
+	velocity.z = move_toward(velocity.z,target.z,rate*delta)
+	if not grounded: velocity.y -= gravity*delta
 	if buffered > 0 and coyote > 0 and not jump_consumed:
 		velocity.y = jump_speed
 		buffered = 0.0
@@ -209,6 +230,7 @@ func _physics_process(delta: float) -> void:
 		avatar.landing = 1.0
 		landed.emit()
 	avatar.animate(delta, Vector2(velocity.x, velocity.z).length(), is_on_floor(), velocity.y)
+	update_flow_camera(delta)
 	update_shadow()
 	stepped.emit(delta)
 
@@ -219,6 +241,18 @@ func update_shadow() -> void:
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
 	shadow.visible = not hit.is_empty()
 	if not hit.is_empty():
-		shadow.global_position = hit.position + Vector3.UP * 0.014
+		shadow.global_position = hit.position + hit.normal * 0.014
+		if is_instance_valid(rapids):
+			var normal: Vector3 = hit.normal
+			shadow.quaternion = Quaternion(Vector3.UP,normal)
+		else:
+			shadow.rotation = Vector3.ZERO
 		var size := clampf(1.0 - (global_position.y - hit.position.y) * 0.10, 0.55, 1.0)
 		shadow.scale = Vector3(size, 1, size)
+
+func update_flow_camera(delta: float) -> void:
+	if not is_instance_valid(rapids):
+		pivot.position = Vector3(0,1.1,0)
+		camera.fov = 65
+		arm.spring_length = 7.6
+		return

@@ -2,6 +2,7 @@ class_name LilyWorld
 extends Node3D
 
 var level: LilyLevel
+var rapids: RiverRapids
 var flag: Node3D
 var elapsed := 0.0
 var scenery := SurfaceTool.new()
@@ -160,14 +161,19 @@ func build(data: LilyLevel) -> void:
 	add_child(sun)
 	var water := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(350, 350)
+	plane.size = Vector2(2200, 2200) if level.river_rapids else Vector2(350, 350)
 	water.mesh = plane
 	var water_mat := ShaderMaterial.new()
 	water_mat.shader = load("res://shaders/water.gdshader")
 	water.material_override = water_mat
-	water.position = Vector3(0, level.water_height, -30)
+	water.position = Vector3(0, level.water_height, -650 if level.river_rapids else -30)
 	water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(water)
+	if level.river_rapids:
+		rapids = RiverRapids.new()
+		add_child(rapids)
+		rapids.build(self)
+		return
 	for i in level.pads.size():
 		var p := level.pads[i]
 		if i in level.chance_pad_indices:
@@ -191,8 +197,11 @@ func build(data: LilyLevel) -> void:
 			var center := Vector3(side * rng.randf_range(18, 27), 0, 12 - i * 9)
 			make_scenic_island(center, rng.randf_range(3, 6), rng.randf_range(2, 5))
 	for i in 10:
-		var center := Vector3(-44 + i * 10, 0, -82 - rng.randf_range(0, 12))
+		var center := Vector3(-44 + i * 10, 0, minf(-82, level.island_center.z - 30) - rng.randf_range(0, 12))
 		make_scenic_island(center, rng.randf_range(5, 9), rng.randf_range(5, 11))
+	# Foreground collision must not shift when route pads are added or resized.
+	var scenery_state := rng.state
+	rng.seed = 8142
 	# Foreground rock/reed groups frame the starting pad without blocking it.
 	for center in [Vector3(-8, 0, 0), Vector3(8, 0, 3), Vector3(-8, 0, -12), Vector3(12, 0, -23)]:
 		for j in 5:
@@ -206,6 +215,7 @@ func build(data: LilyLevel) -> void:
 			else:
 				block(scenery,rock_center,rock_size,rock_color)
 			reeds(pos + Vector3(0.5, 0, 0.5), 4)
+	rng.state = scenery_state
 	for i in 20:
 		var center := Vector3(rng.randf_range(-80,80), rng.randf_range(22,32), rng.randf_range(-100,-20))
 		for j in 4:

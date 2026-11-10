@@ -38,6 +38,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_swing_facing.cfg"
 	DirAccess.remove_absolute(game.profile.storage_path)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	game.select_level(1)

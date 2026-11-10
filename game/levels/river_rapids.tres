@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LilyLevel" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/level_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+title = "River rapids"
+river_rapids = true
+pads = Array[Vector3]([])
+spawn = Vector3(0,18.55,8)
+island_center = Vector3(-100,4.4,-1300)
+flag_position = Vector3(-100,5,-1300)
+fireflies = Array[Vector3]([Vector3(32.6,7.4,-320),Vector3(45,18.4,-620),Vector3(-102.6,6.4,-1210)])

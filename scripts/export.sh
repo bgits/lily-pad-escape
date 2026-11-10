@@ -10,3 +10,9 @@ mkdir -p build/web
 "$LILY_GODOT_BIN" --headless --path game --editor --import --quit
 "$LILY_GODOT_BIN" --headless --path game --export-release Web ../build/web/index.html
 cp docs/GODOT_LICENSE.txt docs/GODOT_COPYRIGHT.txt build/web/
+
+# Keep the downloadable build manifest in sync with each export.
+(
+  cd build/web
+  shasum -a 256 GODOT_COPYRIGHT.txt GODOT_LICENSE.txt index.* > SHA256SUMS.txt
+)

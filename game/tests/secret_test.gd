@@ -24,6 +24,7 @@ func check(condition: bool, message: String) -> void:
 func new_game() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = TEST_SAVE
+	game.tide_enabled = false
 	root.add_child(game)
 	await frames(3)
 

@@ -1,3 +1,4 @@
+const loadLevel=require('./level_routes.cjs');
 /* Level 2 acceptance: read-only telemetry, normal mouse/keyboard input. */
 const { chromium } = require('playwright');
 const fs = require('node:fs/promises');
@@ -6,7 +7,7 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
- const browser = await chromium.launch({headless:true,channel:'chrome',args:['--use-angle=metal']});
+ const browser = await chromium.launch({headless:process.env.PLAYWRIGHT_HEADLESS !== "false",channel:process.env.PLAYWRIGHT_CHANNEL || 'chrome',args:['--use-angle=metal']});
  const context = await browser.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});
  const page = await context.newPage();
  const errors=[],checks=[],landings=[];
@@ -31,9 +32,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
  };
  try {
   await page.goto(process.env.GAME_URL || 'http://127.0.0.1:8765/?qa');
-  await page.waitForSelector('#loading',{state:'detached'});await state('title');
+  await page.waitForSelector('#loading',{state:'detached'});await state('title');await page.bringToFront();
   await shot('11-level-select.png');
-  await click(1110,578);let s=await read();
+  await click(1110,506);let s=await read();
   check(s.level===2&&s.has_bat&&s.frogs_remaining===6,'Title shortcut selects Frog river with six frogs and a bat');
   await shot('12-frog-title.png');
   await click(220,565);await state('playing');await sleep(550);
@@ -90,12 +91,14 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await shot('26-poison-defeat.png');
   await page.keyboard.press('f');await sleep(180);s=await read();check(s.health===0&&s.frogs_remaining===5,'A dead character cannot heal with a late attack');
   await state('playing');await sleep(250);s=await read();
-  check(s.health===100&&!s.poisoned&&s.grounded&&s.frogs_remaining===5,'Poison retry restores full health and preserves defeated frogs');
+  check(s.health===100&&!s.poisoned&&s.grounded&&s.frogs_remaining===6,'Poison retry restores full health and all frogs');
   await shot('27-healthy-retry.png');
   await page.keyboard.press('r');await sleep(500);
   // Cross via normal jumps, land near each frog, face it, and swing.
-  const route=[[0,-5.95],[-1.8,-10.95],[.8,-15.95],[3.6,-20.95],[1.5,-25.95],[-1,-30.95]];
+  const level=loadLevel('frog_river');
+  const route=level.frogs.map(index=>[level.pads[index][0],level.pads[index][1]-.25]);
   for(let i=0;i<route.length;i++){
+   for(let pad=(i===0?1:level.frogs[i-1]+1);pad<level.frogs[i];pad++)await jumpTo(level.pads[pad]);
    const frog=route[i];s=await read();
    const dx=frog[0]-s.position[0],dz=frog[1]-s.position[2],distance=Math.hypot(dx,dz);
    const landing=[frog[0]-dx/distance*1.1,frog[1]-dz/distance*1.1];
@@ -114,15 +117,15 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
    if(i===2)await shot('16-frog-mid-course.png');
   }
   await shot('17-river-clear.png');
-  await jumpTo([0,-37.4]);await state('won');s=await read();
+  await jumpTo(level.flag);await state('won');s=await read();
   check(s.level===2&&s.victories===1&&s.frogs_remaining===0&&s.falls===0,'Complete river crossing defeats all six frogs without falling');
   check(s.decoy_trips===0&&s.decoys.length===4&&s.decoys.every(p=>!p.collapsed),'The safe route wins with every red warning frog left alone');
   check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Level 2 victory releases the mouse');
   await shot('18-frog-victory.png');
   await click(640,350);await state('playing');await sleep(400);s=await read();
-  check(s.level===3&&s.chance_pads.length===2&&!s.has_bat&&s.health===100&&!s.poisoned,'Next level advances from Frog river into Lucky lagoon');
-  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');
-  await click(1110,518);s=await read();check(s.level===1&&!s.has_bat&&s.frogs_remaining===0,'Title can return to the original lagoon without combat');
+  check(s.level===3&&s.chance_pads.length===7&&!s.has_bat&&s.health===100&&!s.poisoned,'Next level advances from Frog river into Lucky lagoon');
+  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.bringToFront();
+  await click(1110,454);s=await read();check(s.level===1&&!s.has_bat&&s.frogs_remaining===0,'Title can return to the original lagoon without combat');
   await page.setViewportSize({width:1024,height:640});await sleep(300);await shot('19-level-select-small.png');
   const fit=await page.evaluate(()=>[innerWidth===document.documentElement.scrollWidth,innerHeight===document.documentElement.scrollHeight]);
   check(fit.every(Boolean),'Level selection fits a small desktop viewport');

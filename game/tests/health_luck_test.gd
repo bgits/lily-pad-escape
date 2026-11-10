@@ -51,6 +51,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_health_luck.cfg"
 	DirAccess.remove_absolute(game.profile.storage_path)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	game.start_run()
@@ -126,9 +127,9 @@ func run() -> void:
 	game.resume()
 	await frames(85)
 	check(game.state == "playing" and game.health == 100 and not game.poisoned and player.is_on_floor(),"Poison retry returns to the practice pad at full health")
-	check(game.world.frogs_remaining() == 5 and game.hit_count == 1,"Poison retry preserves previously defeated green frogs")
+	check(game.world.frogs_remaining() == 6 and game.hit_count == 0,"Poison retry restores all green frogs and clears hits")
 	check(player.avatar.rotation.is_equal_approx(Vector3.ZERO),"Retry clears the poison-defeat pose")
-	await stand_by(frog)
+	await stand_by(game.world.frogs[1])
 	key(KEY_R)
 	await frames(8)
 	key(KEY_R,false)
@@ -146,7 +147,7 @@ func run() -> void:
 	game.select_level(2)
 	game.start_run()
 	await frames(8)
-	check(game.world.chance_pads.size() == 2 and game.world.frogs.is_empty() and not player.has_bat,"Level 3 starts with two yellow chance markers and no combat enemies")
+	check(game.world.chance_pads.size() == 7 and game.world.frogs.is_empty() and not player.has_bat,"Level 3 starts with seven yellow chance markers and no combat enemies")
 	check(not game.ui.health_box.visible and game.health == 100 and not game.poisoned,"Entering Level 3 clears poison and hides combat-only health UI")
 	var pad: LilyDecoyPad = game.world.chance_pads[0]
 	check(pad.marker.is_chance and pad.marker.collision_layer == 0,"Yellow frogs are visible chance markers without solid footholds")
@@ -188,7 +189,7 @@ func run() -> void:
 	game.start_run()
 	await frames(8)
 	game.win()
-	check(game.state == "won" and not game.ui.next_button.visible,"Level 3 victory offers replay without a nonexistent fourth level")
+	check(game.state == "won" and game.ui.next_button.visible and "River glide" in game.ui.next_button.text,"Level 3 victory offers the new River Glide crossing")
 	game.show_title()
 	game.select_level(1)
 	game.start_run()
@@ -197,7 +198,7 @@ func run() -> void:
 	game.win()
 	game.next_level()
 	await frames(8)
-	check(game.level_index == 2 and game.state == "playing" and game.world.chance_pads.size() == 2,"Level 2 victory transitions into a fresh Level 3")
+	check(game.level_index == 2 and game.state == "playing" and game.world.chance_pads.size() == 7,"Level 2 victory transitions into a fresh Level 3")
 	print("RESULT: %d passed, %d failed" % [passed,failures.size()])
 	game.stop_sounds()
 	await frames(8)

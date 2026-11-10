@@ -1,7 +1,7 @@
 {
   "name": "lily-pad-escape-qa",
   "private": true,
-  "version": "0.8.0",
+  "version": "0.11.0",
   "description": "Development-only browser acceptance tests. The game runs in Godot, with no JavaScript packages required at runtime.",
   "scripts": {
     "test:browser": "node tests/browser_test.cjs && node tests/combat_browser_test.cjs && node tests/lucky_browser_test.cjs && node tests/secret_browser_test.cjs && node tests/swing_facing_browser_test.cjs && node tests/wardrobe_browser_test.cjs && node tests/exploration_browser_test.cjs && node tests/collection_storage_browser_test.cjs",
@@ -14,7 +14,9 @@
     "test:facing": "node tests/swing_facing_browser_test.cjs",
     "test:wardrobe": "node tests/wardrobe_browser_test.cjs",
     "test:exploration": "node tests/exploration_browser_test.cjs",
-    "test:collection-storage": "node tests/collection_storage_browser_test.cjs"
+    "test:collection-storage": "node tests/collection_storage_browser_test.cjs",
+    "test:rapids": "node tests/rapids_browser_test.cjs",
+    "test:glide": "node tests/glide_browser_test.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

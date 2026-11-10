@@ -1,3 +1,4 @@
+const loadLevel=require('./level_routes.cjs');
 /* Actual Web-export tests. The only game bridge is read-only QA telemetry.
    Course traversal uses mouse motion plus W/Space; no position setters or teleports. */
 const { chromium } = require('playwright');
@@ -8,7 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const URL = process.env.GAME_URL || 'http://127.0.0.1:8765/?qa';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
- const browser = await chromium.launch({headless:true, channel:'chrome', args:['--use-angle=metal']});
+ const browser = await chromium.launch({headless:process.env.PLAYWRIGHT_HEADLESS !== "false", channel:process.env.PLAYWRIGHT_CHANNEL || 'chrome', args:['--use-angle=metal']});
  const context = await browser.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});
  const page = await context.newPage();
  const errors=[], checks=[], landings=[];
@@ -23,13 +24,11 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
  try {
   await page.goto(URL);
   await page.waitForSelector('#loading',{state:'detached'});
-  await state('title');
+  await state('title');await page.bringToFront();
   check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Title starts with the mouse released');
   await shot('01-title.png');
   await click(200,437);await page.keyboard.type('Pip',{delay:80});await sleep(180);check((await read()).player_name==='Pip','Optional name accepts ordinary typed characters');
-  await click(220,490);check((await read()).hoodie==='e58f76','Coral hoodie updates the character');await shot('07-customization.png');
-  await click(340,490);check((await read()).hoodie==='91b4d2','Sky hoodie updates the character');
-  await click(100,490);check((await read()).hoodie==='f3cc58','Sunshine hoodie restores the yellow outfit');
+  check((await read()).hoodie==='f3cc58','The default outfit is visible on the title screen');
   await click(220,565);await state('playing');await sleep(600);
   check(await page.evaluate(()=>!!document.pointerLockElement),'Play captures the mouse from a deliberate click');
   await shot('02-gameplay.png');
@@ -59,7 +58,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await restart();check((await read()).falls===0&&(await read()).pad===0,'R resets failures and progress');
   // Aim the camera at each center, then traverse using ordinary input.
   let mx=640,my=360;await page.mouse.move(mx,my);await sleep(180);
-  const route=[[0,-5.35],[1.5,-9.8],[3.8,-14.4],[4.3,-19.3],[2,-23.8],[-.2,-28.4],[1.7,-33.1],[4.3,-37.5],[5.5,-43.8]];
+  const level=loadLevel('sunlit_lagoon'),route=[...level.pads.slice(1),level.flag];
   for(let index=0;index<route.length;index++){
    const target=route[index];s=await read();assert.equal(s.state,'playing');
    const dx=target[0]-s.position[0],dz=target[1]-s.position[2],distance=Math.hypot(dx,dz),angle=Math.atan2(-dx,-dz);
@@ -67,16 +66,16 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
    for(let i=0;i<steps;i++){mx+=pixels/steps;await page.mouse.move(mx,my);await sleep(18)}
    await sleep(150);await page.keyboard.down('w');await sleep(Math.max(60,(distance-4.3)/5.4*1000));await page.keyboard.press('Space');await sleep(750);await page.keyboard.up('w');await sleep(260);
    s=await read();landings.push({target:index+1,...s});check(s.falls===0&&s.grounded,'Normal-input landing '+(index+1)+' succeeds');
-   if(index<8)check(s.pad===index+1,'HUD correctly identifies pad '+(index+1));
+   if(index<level.pads.length-1)check(s.pad===index+1,'HUD correctly identifies pad '+(index+1));
    if(index===0)await shot('03-first-landing.png');if(index===1)await shot('04-pad-two.png');if(index===4)await shot('05-mid-course.png');
   }
-  await state('won');s=await read();check(s.victories===1&&s.jumps===9&&s.falls===0,'Nine-jump course completes with zero falls');check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Victory releases the mouse');await shot('06-victory.png');
+  await state('won');s=await read();check(s.victories===1&&s.jumps===route.length&&s.falls===0,'Extended course completes with zero falls');check(!(await page.evaluate(()=>!!document.pointerLockElement)),'Victory releases the mouse');await shot('06-victory.png');
   const won=await read();await page.keyboard.press('Space');await sleep(250);s=await read();check(s.victories===1&&JSON.stringify(s.position)===JSON.stringify(won.position),'Victory fires once and freezes gameplay');
   await click(640,350);await state('playing');await sleep(350);s=await read();check(s.level===2&&s.has_bat&&s.frogs_remaining===6&&s.swings===0,'Next level button starts Frog river with the bat and six frogs');
   check(s.player_name==='Pip'&&s.hoodie==='f3cc58','Next level preserves the customized adventurer');
-  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await click(1110,518);await click(220,565);await state('playing');await sleep(350);s=await read();check(s.level===1&&s.victories===0&&s.jumps===0&&s.pad===0&&s.falls===0&&s.grounded,'Returning to the lagoon starts a fresh session');
+  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.bringToFront();await click(1110,454);await click(220,565);await state('playing');await sleep(350);s=await read();check(s.level===1&&s.victories===0&&s.jumps===0&&s.pad===0&&s.falls===0&&s.grounded,'Returning to the lagoon starts a fresh session');
   await page.keyboard.press('Escape');await state('paused');await click(640,413);await state('playing');check((await read()).pad===0,'Pause menu Start over works');
-  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');check((await read()).state==='title','Back to title works');
+  await page.keyboard.press('Escape');await state('paused');await click(640,541);await state('title');await page.bringToFront();check((await read()).state==='title','Back to title works');
   await page.setViewportSize({width:1024,height:640});await sleep(350);await shot('10-small-desktop.png');
   const fit=await page.evaluate(()=>({width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight}));check(fit.width===fit.scrollWidth&&fit.height===fit.scrollHeight,'Small desktop viewport has no page overflow');
   await page.setViewportSize({width:1280,height:720});await sleep(200);

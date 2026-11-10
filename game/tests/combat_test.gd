@@ -45,6 +45,7 @@ func run() -> void:
 	game = load("res://scenes/main.tscn").instantiate()
 	game.profile.storage_path = "user://lily_qa_combat.cfg"
 	DirAccess.remove_absolute(game.profile.storage_path)
+	game.tide_enabled = false
 	root.add_child(game)
 	player = game.player
 	await frames(2)
@@ -115,7 +116,7 @@ func run() -> void:
 	check(not frog.alive,"Resumed swing delivers its pending hit once")
 	player.position = Vector3(10,-0.3,0)
 	await frames(65)
-	check(game.state == "playing" and game.world.frogs_remaining() == 3 and player.has_bat,"Water retry keeps defeated frogs cleared and the bat equipped")
+	check(game.state == "playing" and game.world.frogs_remaining() == 6 and player.has_bat,"Water retry restores all frogs and keeps the bat equipped")
 	check(player.swing_remaining == 0 and not player.impact_pending,"Water retry clears unfinished attack state")
 	game.start_run()
 	await frames(8)

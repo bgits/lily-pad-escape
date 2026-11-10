@@ -3,6 +3,8 @@ extends Resource
 
 @export var title := "Sunlit lagoon"
 @export var has_bat := false
+@export var river_rapids := false
+@export var rapids_beginner := false
 @export var poison_damage_per_second := 20.0
 @export var frog_pads: Array[int] = []
 @export var chance_pad_indices: Array[int] = []

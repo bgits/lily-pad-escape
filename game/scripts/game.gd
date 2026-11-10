@@ -5,7 +5,9 @@ const WorldScript = preload("res://scripts/world.gd")
 const PlayerScript = preload("res://scripts/player.gd")
 const UIScript = preload("res://scripts/ui.gd")
 const ProfileScript = preload("res://scripts/profile.gd")
-const LEVELS := ["res://levels/sunlit_lagoon.tres","res://levels/frog_river.tres","res://levels/lucky_lagoon.tres"]
+const LEVELS := ["res://levels/sunlit_lagoon.tres","res://levels/frog_river.tres","res://levels/lucky_lagoon.tres","res://levels/river_glide.tres","res://levels/river_rapids.tres"]
+var tide: ChasingWater
+var tide_enabled := true
 var level_index := 0
 var level: LilyLevel
 var world: LilyWorld
@@ -21,6 +23,8 @@ var furthest_pad := 0
 var falls := 0
 var victories := 0
 var sounds: Dictionary = {}
+var level_music: AudioStreamPlayer
+var level_music_tracks: Array[AudioStreamMP3] = []
 var ready_to_pause := false
 var run_seconds := 0.0
 var telemetry_enabled := false
@@ -40,6 +44,11 @@ var secret_saved := true
 var customization_return := "title"
 var outfit_saved := true
 var fireflies_saved := true
+var rapids_record_saved := true
+var attempt_seconds := 0.0
+var prior_best := 0.0
+var best_announced := false
+var wind: AudioStreamPlayer
 # Two-player Midnight Pond. Loaded on demand; it owns its own world, players and HUD.
 var duel: Node3D
 
@@ -114,6 +123,9 @@ func _ready() -> void:
 	add_child(player)
 	player.respawn(level.spawn)
 	player.jumped.connect(func(): play_sound("jump"))
+	player.launched.connect(func(): play_sound("launch"))
+	player.landed.connect(func():
+		if level.river_rapids: play_sound("landing"))
 	player.stepped.connect(_on_player_stepped)
 	player.swung.connect(func(): play_sound("swing"))
 	player.bat_impact.connect(resolve_bat_hit)
@@ -146,14 +158,30 @@ func _ready() -> void:
 	player.avatar.apply_appearance(profile.outfit)
 	ui.sync_outfit(profile.outfit)
 	ui.name_input.text = profile.player_name
-	for sound_name in ["jump","splash","victory","swing","bonk","poison","firefly"]:
+	for sound_name in ["jump","splash","victory","swing","bonk","poison","firefly","launch","landing"]:
 		var sound := AudioStreamPlayer.new()
 		sound.stream = load("res://assets/audio/%s.wav" % sound_name)
 		sound.volume_db = -12.0
 		add_child(sound)
 		sounds[sound_name] = sound
+	level_music = AudioStreamPlayer.new()
+	for music_path in ["res://assets/audio/platformer_rush.mp3", "res://assets/audio/bouncing_beat_pt2.mp3", "res://assets/audio/lily_pad_rush.mp3", "res://assets/audio/platformer_rush.mp3","res://assets/audio/platformer_rush.mp3"]:
+		var music_stream: AudioStreamMP3 = load(music_path).duplicate()
+		music_stream.loop = true
+		level_music_tracks.append(music_stream)
+	wind = AudioStreamPlayer.new()
+	wind.stream = load("res://assets/audio/rapids_wind.wav")
+	wind.volume_db = -40
+	add_child(wind)
+	level_music.stream = level_music_tracks[0]
+	level_music.volume_db = -12.0
+	add_child(level_music)
 	if OS.has_feature("web"):
 		telemetry_enabled = bool(JavaScriptBridge.eval("new URLSearchParams(location.search).has('qa')"))
+	tide = ChasingWater.new()
+	add_child(tide)
+	tide.make_rear_view(ui.hud)
+	tide.visible = false
 	ready_to_pause = DisplayServer.get_name() != "headless"
 
 func quick_color(color: Color) -> void:
@@ -205,7 +233,7 @@ func close_customization() -> void:
 		ui.pause_customize_button.grab_focus()
 
 func configure_input() -> void:
-	var map := {"move_left":[KEY_A,KEY_LEFT],"move_right":[KEY_D,KEY_RIGHT],"move_forward":[KEY_W,KEY_UP],"move_back":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"restart":[KEY_R],"pause":[KEY_ESCAPE],"attack":[KEY_F]}
+	var map := {"move_left":[KEY_A,KEY_LEFT],"move_right":[KEY_D,KEY_RIGHT],"move_forward":[KEY_W,KEY_UP],"move_back":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"restart":[KEY_R],"pause":[KEY_ESCAPE],"attack":[KEY_F],"boost":[KEY_SHIFT]}
 	for action: String in map:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action)
@@ -232,6 +260,7 @@ func load_level(index: int) -> void:
 	world = WorldScript.new()
 	add_child(world)
 	world.build(level)
+	player.rapids = world.rapids
 	player.has_bat = level.has_bat
 	player.avatar.equip_bat(level.has_bat)
 	ui.configure_level(level_index,level)
@@ -244,9 +273,28 @@ func next_level() -> void:
 	start_run()
 
 func start_run() -> void:
+	if level.river_rapids and state in ["playing","paused","splash"]:
+		rapids_record_saved = profile.save_rapids(world.rapids.furthest,0,level.rapids_beginner)
 	profile.player_name = ui.name_input.text
 	outfit_saved = profile.save_customization()
 	stop_sounds()
+	tide.reset()
+	tide.speed = 1.35 if level_index == 1 else 1.8
+	tide.visible = tide_enabled and not level.river_rapids
+	player.rapids = world.rapids
+	attempt_seconds = 0
+	prior_best = profile.rapids_distance(level.rapids_beginner)
+	best_announced = false
+	if level.river_rapids:
+		world.rapids.wave_enabled = tide_enabled
+		world.rapids.reset()
+		world.rapids.show_best(prior_best)
+		wind.play()
+	level_music.stop()
+	level_music.stream_paused = false
+	if level_index < level_music_tracks.size():
+		level_music.stream = level_music_tracks[level_index]
+		level_music.play()
 	player.respawn(level.spawn)
 	player.jump_count = 0
 	player.swing_count = 0
@@ -283,6 +331,9 @@ func start_duel() -> void:
 	profile.player_name = ui.name_input.text
 	outfit_saved = profile.save_customization()
 	stop_sounds()
+	# The duel has its own sounds and no level music, wind or chasing water.
+	level_music.stop()
+	tide.visible = false
 	state = "duel"
 	# The single-player world steps aside (kept, not freed) so only one environment,
 	# one set of pads and one camera exist while the duel runs.
@@ -313,12 +364,19 @@ func end_duel() -> void:
 func capture_mouse() -> void:
 	lock_grace = 0.45
 	player.look_delay = 0.2
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+	if level.river_rapids:
+		# Board steering is track-relative and its camera is automatic.
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_viewport().gui_release_focus()
 
 func show_title() -> void:
+	if level.river_rapids and state in ["playing","paused","splash"]:
+		rapids_record_saved = profile.save_rapids(world.rapids.furthest,0,level.rapids_beginner)
+	tide.visible = false
 	stop_sounds()
+	level_music.stop()
 	state = "title"
 	world.set_motion_paused(false)
 	player.active = false
@@ -327,6 +385,12 @@ func show_title() -> void:
 	reset_health()
 	world.clear_particles()
 	world.reset_decoys()
+	if level.river_rapids:
+		title_camera.position = Vector3(30,32,30)
+		title_camera.look_at(Vector3(0,12,-80))
+	else:
+		title_camera.position = Vector3(8,7,11)
+		title_camera.look_at(Vector3(0,0.4,-7))
 	title_camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	ui.show_state(state)
@@ -336,6 +400,8 @@ func pause() -> void:
 		return
 	previous_state = state
 	state = "paused"
+	level_music.stream_paused = true
+	wind.stream_paused = true
 	world.set_motion_paused(true)
 	player.active = false
 	player.clear_input()
@@ -346,6 +412,8 @@ func resume() -> void:
 	if state != "paused":
 		return
 	state = previous_state
+	level_music.stream_paused = false
+	wind.stream_paused = false
 	world.set_motion_paused(false)
 	player.active = state == "playing"
 	player.clear_input()
@@ -355,6 +423,8 @@ func resume() -> void:
 func fail() -> void:
 	if state != "playing":
 		return
+	if level.river_rapids:
+		rapids_record_saved = profile.save_rapids(world.rapids.furthest,0,level.rapids_beginner)
 	state = "splash"
 	falls += 1
 	player.active = false
@@ -366,11 +436,19 @@ func fail() -> void:
 	world.splash(player.global_position)
 	play_sound("splash")
 	ui.show_state(state,player.falling_through)
+	if level.river_rapids:
+		ui.toast.text = "Splash! Reached %d%% · Another chance." % int(100*world.rapids.furthest/world.rapids.total_distance)
 
 func win() -> void:
 	if state != "playing" or world.frogs_remaining() > 0:
 		return
+	if level.river_rapids:
+		rapids_record_saved = profile.save_rapids(world.rapids.total_distance,attempt_seconds,level.rapids_beginner)
+		world.rapids.wave.visible = false
+		wind.stop()
 	state = "won"
+	tide.visible = false
+	level_music.stop()
 	world.set_motion_paused(true)
 	victories += 1
 	player.active = false
@@ -380,6 +458,8 @@ func win() -> void:
 	play_sound("victory")
 	var next_title: String = load(LEVELS[level_index+1]).title if level_index < LEVELS.size()-1 else ""
 	ui.set_victory(ui.name_input.text.strip_edges(),next_title)
+	if level.river_rapids:
+		ui.victory_detail.text = "%s crossed in %.2f s!\nPersonal best: %.2f s%s" % [level.title.capitalize(),attempt_seconds,profile.rapids_seconds(level.rapids_beginner),"" if rapids_record_saved else " · this visit"]
 	ui.show_state(state)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -390,7 +470,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			close_customization()
 			get_viewport().set_input_as_handled()
 		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and state == "playing" and not level.has_bat:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and state == "playing" and not level.has_bat and not level.river_rapids:
 		pause()
 	if event.is_action_pressed("pause") and not event.is_echo():
 		pause()
@@ -405,7 +485,43 @@ func _on_player_stepped(delta: float) -> void:
 	if state != "playing":
 		return
 	run_seconds += delta
-	if player.global_position.y < level.water_height - 0.18 or player.global_position.y < -10 or Vector2(player.position.x,player.position.z).length() > 120:
+	if level.river_rapids:
+		attempt_seconds += delta
+		world.rapids.wave_enabled = tide_enabled
+		var caught := world.rapids.advance(delta,player.position,player.ride.course_distance)
+		tide.update_rear_view(player.position)
+		# Rear view follows the elevated course, including the split route.
+		if is_instance_valid(tide.rear_camera):
+			tide.rear_camera.position = player.position+player.ride.current_frame.f*4+Vector3.UP*4
+			tide.rear_camera.look_at(world.rapids.at_distance(maxf(0,world.rapids.progress-12))+Vector3.UP*2)
+		ui.progress_label.text = "%s\n%d%%  ·  %.1f s  ·  %d km/h  ·  Boost %d%%" % [world.rapids.section(),int(100*world.rapids.progress/world.rapids.total_distance),attempt_seconds,int(player.ride.speed*3.6),int(player.ride.energy)]
+		ui.tide_label.text = "Wave arrives in %d…" % ceili(world.rapids.wave_grace) if world.rapids.wave_grace > 0 else "Wave  ·  %d m behind" % maxi(0,ceili(world.rapids.progress-world.rapids.wave_progress))
+		ui.objective_label.visible = true
+		ui.objective_label.text = "Best: %.2f s" % profile.rapids_seconds(level.rapids_beginner) if profile.rapids_seconds(level.rapids_beginner) > 0 else "Best distance: %d%%" % int(100*profile.rapids_distance(level.rapids_beginner)/world.rapids.total_distance)
+		if not rapids_record_saved: ui.objective_label.text += " · this visit"
+		if prior_best > 1 and world.rapids.furthest > prior_best+1 and not best_announced:
+			best_announced = true
+			show_notice("New personal best! Keep flowing.")
+		if player.ride.crashed:
+			fail()
+			ui.toast.text = player.ride.reason
+			return
+		if player.ride.completed and player.ride.attached:
+			win()
+			return
+		if caught:
+			fail()
+			ui.toast.text = "The wave caught you! Reached %d%% · Try a smoother line." % int(100*world.rapids.furthest/world.rapids.total_distance)
+			return
+	elif tide_enabled:
+		tide.advance(delta,player.position)
+		tide.update_rear_view(player.position)
+		ui.tide_label.text = "Water moves in %d…" % ceili(tide.grace) if tide.grace > 0 else "Chasing water  ·  %d m behind" % maxi(0,ceili(tide.front_z-player.position.z))
+		if tide.has_caught(player.position):
+			fail()
+			ui.toast.text = "The water caught you! Keep moving."
+			return
+	if player.global_position.y < level.water_height - 0.18 or player.global_position.y < -10 or Vector2(player.position.x,player.position.z).length() > (2200 if level.river_rapids else 120):
 		fail()
 		return
 	if player.is_on_floor():
@@ -438,7 +554,7 @@ func _on_player_stepped(delta: float) -> void:
 			if body.has_meta("pad_index"):
 				var pad_index := int(body.get_meta("pad_index"))
 				furthest_pad = maxi(furthest_pad,pad_index)
-				ui.set_progress(furthest_pad)
+				if not level.river_rapids: ui.set_progress(furthest_pad)
 				poison_from_pad(pad_index)
 			elif body is LilyFrog and body.alive and not body.is_decoy and not body.is_chance:
 				poison_from_pad(body.pad_index)
@@ -524,6 +640,15 @@ func _physics_process(delta: float) -> void:
 	if state in ["splash","poison_defeat"]:
 		retry_timer -= delta
 		if retry_timer <= 0:
+			world.reset_frogs()
+			hit_count = 0
+			tide.reset()
+			if level.river_rapids:
+				world.rapids.reset()
+				prior_best = profile.rapids_distance(level.rapids_beginner)
+				world.rapids.show_best(prior_best)
+				attempt_seconds = 0
+				best_announced = false
 			world.reset_decoys()
 			world.reset_motion()
 			player.respawn(level.spawn)
@@ -537,6 +662,11 @@ func _physics_process(delta: float) -> void:
 			ui.show_state(state)
 
 func _process(delta: float) -> void:
+	if is_instance_valid(wind):
+		wind.stream_paused = state != "playing"
+		if level.river_rapids and state == "playing":
+			var speed := Vector2(player.velocity.x,player.velocity.z).length()
+			wind.volume_db = lerpf(wind.volume_db,lerpf(-42,-20,clampf((speed-10)/24,0,1)),minf(delta*4,1))
 	ui.secret_popup.visible = state == "playing" and secret_notice_time > 0
 	if state not in ["paused","customizing","duel"]:
 		world.animate(delta)
@@ -548,12 +678,12 @@ func _process(delta: float) -> void:
 		telemetry_timer = 0.0
 		if OS.has_feature("web"):
 			if state in ["playing","splash","poison_defeat"] and lock_grace <= 0:
-				var locked: bool = bool(JavaScriptBridge.eval("document.pointerLockElement !== null && document.hasFocus()"))
+				var locked: bool = bool(JavaScriptBridge.eval("document.hasFocus()" if level.river_rapids else "document.pointerLockElement !== null && document.hasFocus()"))
 				if not locked:
 					pause()
 			if telemetry_enabled:
 				JavaScriptBridge.eval("window.lilyPadState = " + JSON.stringify(debug_snapshot()) + ";")
-		elif DisplayServer.get_name() != "headless" and state in ["playing","splash","poison_defeat"] and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and lock_grace <= 0:
+		elif DisplayServer.get_name() != "headless" and state in ["playing","splash","poison_defeat"] and not level.river_rapids and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and lock_grace <= 0:
 			pause()
 
 func play_sound(sound_name: String) -> void:
@@ -561,6 +691,9 @@ func play_sound(sound_name: String) -> void:
 		sounds[sound_name].play()
 
 func stop_sounds() -> void:
+	if is_instance_valid(wind):
+		wind.stop()
+		wind.stream_paused = false
 	for sound in sounds.values():
 		sound.stop()
 
@@ -588,4 +721,4 @@ func debug_snapshot() -> Dictionary:
 		decoy_data.append({"position":[pad.position.x,pad.position.y,pad.position.z],"collapsed":pad.collapsed,"red_frog":pad.marker.is_decoy})
 	for frog in world.frogs:
 		frog_data.append({"pad":frog.pad_index,"alive":frog.alive,"behavior":frog.behavior,"clock":frog.clock,"telegraph":is_instance_valid(frog.landing_marker) and frog.landing_marker.visible,"position":[frog.position.x,frog.position.y,frog.position.z]})
-	return {"fireflies":firefly_data,"firefly_masks":profile.firefly_masks,"fireflies_saved":fireflies_saved,"drifting_pads":drift_data,"bypass_pads":bypass_data,"outfit":profile.outfit,"outfit_saved":outfit_saved,"wardrobe":ui.wardrobe.debug_snapshot(),"secret_unlocked":profile.secret_perch,"secret_unlock_count":secret_unlock_count,"secret_saved":secret_saved,"secret_notice_time":secret_notice_time,"secret_perches":perch_data,"state":state,"chance_pads":chance_data,"chance_rolls":chance_rolls,"chance_sinks":chance_sinks,"health":health,"poisoned":poisoned,"poison_source_pad":poison_source_pad,"poison_deaths":poison_deaths,"level":level_index+1,"has_bat":player.has_bat,"swings":player.swing_count,"hits":hit_count,"frogs_remaining":world.frogs_remaining(),"frogs":frog_data,"decoys":decoy_data,"decoy_trips":decoy_trips,"falling_through":player.falling_through,"swing_remaining":player.swing_remaining,"position":[player.position.x,player.position.y,player.position.z],"velocity":[player.velocity.x,player.velocity.y,player.velocity.z],"grounded":player.is_on_floor(),"pad":furthest_pad,"falls":falls,"victories":victories,"jumps":player.jump_count,"yaw":player.yaw,"avatar_yaw":player.avatar.rotation.y,"attack_direction":[player.attack_direction.x,player.attack_direction.y,player.attack_direction.z],"pitch":player.pitch,"camera":[player.camera.global_position.x,player.camera.global_position.y,player.camera.global_position.z],"arm_length":player.arm.get_hit_length(),"fps":Engine.get_frames_per_second(),"seconds":run_seconds,"muted":AudioServer.is_bus_mute(0),"player_name":ui.name_input.text,"name_focused":ui.name_input.has_focus(),"hoodie":player.avatar.hoodie.albedo_color.to_html(false)}
+	return {"rapids_beginner":level.rapids_beginner,"board_lateral_velocity":player.ride.lateral_velocity,"board_leg_length":world.rapids.path_length(player.ride.leg,player.ride.shortcut) if level.river_rapids else 0,"board_leg":player.ride.leg,"board_distance":player.ride.distance,"board_lateral":player.ride.lateral,"board_speed":player.ride.speed,"board_energy":player.ride.energy,"board_route":player.ride.route_taken,"board_inverted":player.ride.loop_inverted,"board_spiral":player.ride.spiral_completed,"board_up":[player.ride.current_frame.up.x,player.ride.current_frame.up.y,player.ride.current_frame.up.z] if level.river_rapids else [0,1,0],"rapids":level.river_rapids,"rapids_progress":world.rapids.progress if level.river_rapids else 0,"rapids_total":world.rapids.total_distance if level.river_rapids else 0,"rapids_wave":world.rapids.wave_progress if level.river_rapids else 0,"rapids_grace":world.rapids.wave_grace if level.river_rapids else 0,"rapids_time":attempt_seconds,"rapids_best":profile.rapids_distance(level.rapids_beginner),"rapids_best_time":profile.rapids_seconds(level.rapids_beginner),"rapids_saved":rapids_record_saved,"launches":player.launch_count,"tide_front":tide.front_z,"tide_grace":tide.grace,"fireflies":firefly_data,"firefly_masks":profile.firefly_masks,"fireflies_saved":fireflies_saved,"drifting_pads":drift_data,"bypass_pads":bypass_data,"outfit":profile.outfit,"outfit_saved":outfit_saved,"wardrobe":ui.wardrobe.debug_snapshot(),"secret_unlocked":profile.secret_perch,"secret_unlock_count":secret_unlock_count,"secret_saved":secret_saved,"secret_notice_time":secret_notice_time,"secret_perches":perch_data,"state":state,"chance_pads":chance_data,"chance_rolls":chance_rolls,"chance_sinks":chance_sinks,"health":health,"poisoned":poisoned,"poison_source_pad":poison_source_pad,"poison_deaths":poison_deaths,"level":level_index+1,"has_bat":player.has_bat,"swings":player.swing_count,"hits":hit_count,"frogs_remaining":world.frogs_remaining(),"frogs":frog_data,"decoys":decoy_data,"decoy_trips":decoy_trips,"falling_through":player.falling_through,"swing_remaining":player.swing_remaining,"position":[player.position.x,player.position.y,player.position.z],"velocity":[player.velocity.x,player.velocity.y,player.velocity.z],"grounded":player.ride.attached if level.river_rapids else player.is_on_floor(),"pad":furthest_pad,"falls":falls,"victories":victories,"jumps":player.jump_count,"yaw":player.yaw,"avatar_yaw":player.avatar.rotation.y,"attack_direction":[player.attack_direction.x,player.attack_direction.y,player.attack_direction.z],"pitch":player.pitch,"camera":[player.camera.global_position.x,player.camera.global_position.y,player.camera.global_position.z],"arm_length":player.arm.get_hit_length(),"fps":Engine.get_frames_per_second(),"seconds":run_seconds,"muted":AudioServer.is_bus_mute(0),"player_name":ui.name_input.text,"name_focused":ui.name_input.has_focus(),"hoodie":player.avatar.hoodie.albedo_color.to_html(false)}
