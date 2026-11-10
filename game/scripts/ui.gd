@@ -11,6 +11,7 @@ signal mute_changed(muted: bool)
 signal level_selected(index: int)
 signal next_requested
 signal customize_requested
+signal duel_requested
 
 const INK := Color("183f3b")
 const CREAM := Color("fff6de")
@@ -61,6 +62,7 @@ var pause_customize_button: Button
 var profile_note: Label
 var pause_detail: Label
 var firefly_label: Label
+var duel_button: Button
 
 func _ready() -> void:
 	root = Control.new()
@@ -230,6 +232,20 @@ func make_start() -> void:
 		var choice := button(choices,["1  ·  Sunlit lagoon","2  ·  Frog river","3  ·  Lucky lagoon"][i],func():level_selected.emit(i))
 		choice.add_theme_font_size_override("font_size",15)
 		level_buttons.append(choice)
+	# Sits above the crossings list so the existing buttons keep their positions.
+	duel_button = button(start_screen,"Midnight Pond  ·  2 players",func():duel_requested.emit())
+	duel_button.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	duel_button.offset_left = -290
+	duel_button.offset_right = -28
+	duel_button.offset_top = -321
+	duel_button.offset_bottom = -269
+	duel_button.add_theme_font_size_override("font_size",15)
+	for state_name in ["font_color","font_hover_color","font_pressed_color","font_focus_color"]:
+		duel_button.add_theme_color_override(state_name,CREAM)
+	duel_button.add_theme_stylebox_override("normal",style(Color("1b3152"),12,Color("ffd75e")))
+	duel_button.add_theme_stylebox_override("hover",style(Color("27456f"),12,Color("ffd75e")))
+	duel_button.add_theme_stylebox_override("pressed",style(Color("14233b"),12,Color("ffd75e")))
+	duel_button.tooltip_text = "A three-minute firefly duel for two players on one keyboard."
 	var collection := PanelContainer.new()
 	start_screen.add_child(collection)
 	collection.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)

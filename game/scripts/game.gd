@@ -40,6 +40,8 @@ var secret_saved := true
 var customization_return := "title"
 var outfit_saved := true
 var fireflies_saved := true
+# Two-player Midnight Pond. Loaded on demand; it owns its own world, players and HUD.
+var duel: Node3D
 
 func sync_fireflies() -> void:
 	for fly in world.fireflies:
@@ -133,6 +135,7 @@ func _ready() -> void:
 	ui.next_requested.connect(next_level)
 	ui.color_changed.connect(quick_color)
 	ui.customize_requested.connect(open_customization)
+	ui.duel_requested.connect(start_duel)
 	ui.wardrobe.saved.connect(save_outfit)
 	ui.wardrobe.canceled.connect(close_customization)
 	ui.mute_changed.connect(func(muted: bool): AudioServer.set_bus_mute(0,muted))
@@ -274,6 +277,39 @@ func start_run() -> void:
 	ui.show_state(state)
 	capture_mouse()
 
+func start_duel() -> void:
+	if state != "title":
+		return
+	profile.player_name = ui.name_input.text
+	outfit_saved = profile.save_customization()
+	stop_sounds()
+	state = "duel"
+	# The single-player world steps aside (kept, not freed) so only one environment,
+	# one set of pads and one camera exist while the duel runs.
+	remove_child(world)
+	player.active = false
+	player.visible = false
+	player.shadow.visible = false
+	player.clear_input()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	ui.show_state(state)
+	# Space and Enter are jump keys in the duel; no title button may keep focus.
+	get_viewport().gui_release_focus()
+	duel = load("res://scripts/duel/duel.gd").new()
+	add_child(duel)
+	duel.exit_requested.connect(end_duel)
+	duel.begin(profile.outfit,LilyProfile.clean_name(profile.player_name))
+
+func end_duel() -> void:
+	if state != "duel":
+		return
+	remove_child(duel)
+	duel.queue_free()
+	duel = null
+	add_child(world)
+	player.shadow.visible = true
+	show_title()
+
 func capture_mouse() -> void:
 	lock_grace = 0.45
 	player.look_delay = 0.2
@@ -347,6 +383,8 @@ func win() -> void:
 	ui.show_state(state)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if state == "duel":
+		return
 	if state == "customizing":
 		if event.is_action_pressed("pause"):
 			close_customization()
@@ -500,7 +538,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	ui.secret_popup.visible = state == "playing" and secret_notice_time > 0
-	if state not in ["paused","customizing"]:
+	if state not in ["paused","customizing","duel"]:
 		world.animate(delta)
 	if state == "title":
 		player.avatar.animate(delta,0,true,0)
@@ -527,6 +565,8 @@ func stop_sounds() -> void:
 		sound.stop()
 
 func debug_snapshot() -> Dictionary:
+	if state == "duel":
+		return duel.debug_snapshot()
 	var firefly_data: Array[Dictionary] = []
 	for fly in world.fireflies:
 		firefly_data.append({"id":fly.index,"collected":fly.collected,"position":[fly.global_position.x,fly.global_position.y,fly.global_position.z]})
